@@ -64,8 +64,13 @@
                 </div>
             @endif
 
-            <form action="{{ route('contact.send') }}" method="POST" class="space-y-5">
+            <form id="contact-form" action="{{ route('contact.send') }}" method="POST" class="space-y-5">
                 @csrf
+
+                {{-- Honeypot: hidden from humans, bots fill it in --}}
+                <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+                    <input type="text" name="_hp" id="_hp" tabindex="-1" autocomplete="off" value="">
+                </div>
 
                 <div class="grid gap-5 sm:grid-cols-2">
                     <div>
@@ -75,8 +80,8 @@
                             value="{{ old('name') }}"
                             class="w-full rounded-xl border border-white/8 bg-white/5 px-4 py-3.5 text-sm text-white outline-none placeholder:text-white/20 focus:border-teal-500/50 focus:bg-white/8 focus:ring-0 @error('name') border-red-500/50 @enderror"
                             placeholder="Ana Kovač"
-                            required
                         />
+                        <p id="err-name" class="mt-1.5 hidden text-xs text-red-400" aria-live="polite"></p>
                         @error('name')
                             <p class="mt-1.5 text-xs text-red-400">{{ $message }}</p>
                         @enderror
@@ -89,8 +94,8 @@
                             value="{{ old('email') }}"
                             class="w-full rounded-xl border border-white/8 bg-white/5 px-4 py-3.5 text-sm text-white outline-none placeholder:text-white/20 focus:border-teal-500/50 focus:bg-white/8 focus:ring-0 @error('email') border-red-500/50 @enderror"
                             placeholder="ana@example.com"
-                            required
                         />
+                        <p id="err-email" class="mt-1.5 hidden text-xs text-red-400" aria-live="polite"></p>
                         @error('email')
                             <p class="mt-1.5 text-xs text-red-400">{{ $message }}</p>
                         @enderror
@@ -103,21 +108,24 @@
                         id="subject" name="subject" type="text"
                         value="{{ old('subject') }}"
                         class="w-full rounded-xl border border-white/8 bg-white/5 px-4 py-3.5 text-sm text-white outline-none placeholder:text-white/20 focus:border-teal-500/50 focus:bg-white/8 focus:ring-0 @error('subject') border-red-500/50 @enderror"
-                        required
                     />
+                    <p id="err-subject" class="mt-1.5 hidden text-xs text-red-400" aria-live="polite"></p>
                     @error('subject')
                         <p class="mt-1.5 text-xs text-red-400">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div>
-                    <label for="message" class="mb-2 block text-xs font-medium uppercase tracking-wider text-white/35">{{ __('contact.form_message') }}</label>
+                    <div class="mb-2 flex items-center justify-between">
+                        <label for="message" class="block text-xs font-medium uppercase tracking-wider text-white/35">{{ __('contact.form_message') }}</label>
+                        <span id="message-counter" class="text-xs text-white/20">0 / 2000</span>
+                    </div>
                     <textarea
                         id="message" name="message" rows="6"
                         class="w-full resize-none rounded-xl border border-white/8 bg-white/5 px-4 py-3.5 text-sm text-white outline-none placeholder:text-white/20 focus:border-teal-500/50 focus:bg-white/8 focus:ring-0 @error('message') border-red-500/50 @enderror"
                         placeholder="{{ __('contact.form_message_placeholder') }}"
-                        required
                     >{{ old('message') }}</textarea>
+                    <p id="err-message" class="mt-1.5 hidden text-xs text-red-400" aria-live="polite"></p>
                     @error('message')
                         <p class="mt-1.5 text-xs text-red-400">{{ $message }}</p>
                     @enderror
@@ -136,4 +144,85 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('contact-form');
+        if (!form) { return; }
+
+        const validators = {
+            name:    (v) => v.trim().length < 2    ? 'Name must be at least 2 characters.'    : null,
+            email:   (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? null : 'Enter a valid email address.',
+            subject: (v) => v.trim().length < 3    ? 'Subject must be at least 3 characters.' : null,
+            message: (v) => v.trim().length < 10   ? 'Message must be at least 10 characters.' : null,
+        };
+
+        function setError(name, message) {
+            const el = document.getElementById(name);
+            const errEl = document.getElementById('err-' + name);
+            if (!el || !errEl) { return; }
+            el.classList.add('border-red-500/50');
+            el.classList.remove('border-white/8');
+            errEl.textContent = message;
+            errEl.classList.remove('hidden');
+        }
+
+        function clearError(name) {
+            const el = document.getElementById(name);
+            const errEl = document.getElementById('err-' + name);
+            if (!el || !errEl) { return; }
+            el.classList.remove('border-red-500/50');
+            el.classList.add('border-white/8');
+            errEl.textContent = '';
+            errEl.classList.add('hidden');
+        }
+
+        Object.keys(validators).forEach(function (name) {
+            const el = document.getElementById(name);
+            if (!el) { return; }
+
+            el.addEventListener('blur', function () {
+                const error = validators[name](this.value);
+                error ? setError(name, error) : clearError(name);
+            });
+
+            el.addEventListener('input', function () {
+                const errEl = document.getElementById('err-' + name);
+                if (errEl && !errEl.classList.contains('hidden')) {
+                    if (!validators[name](this.value)) { clearError(name); }
+                }
+            });
+        });
+
+        // Character counter for message
+        const messageEl = document.getElementById('message');
+        const counterEl = document.getElementById('message-counter');
+        if (messageEl && counterEl) {
+            messageEl.addEventListener('input', function () {
+                const count = this.value.length;
+                counterEl.textContent = count + ' / 2000';
+                counterEl.classList.toggle('text-red-400', count > 1800);
+                counterEl.classList.toggle('text-white/20', count <= 1800);
+            });
+        }
+
+        form.addEventListener('submit', function (e) {
+            let hasError = false;
+            Object.keys(validators).forEach(function (name) {
+                const el = document.getElementById(name);
+                if (!el) { return; }
+                const error = validators[name](el.value);
+                if (error) { setError(name, error); hasError = true; }
+            });
+
+            if (hasError) {
+                e.preventDefault();
+                const firstInvalid = form.querySelector('[class*="border-red-500"]');
+                if (firstInvalid) { firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+            }
+        });
+    });
+</script>
 @endsection

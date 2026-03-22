@@ -31,7 +31,7 @@ Route::view('terms', 'terms')->name('terms');
 Route::view('privacy', 'privacy')->name('privacy');
 Route::view('about', 'about')->name('about');
 Route::get('contact', [ContactController::class, 'show'])->name('contact');
-Route::post('contact', [ContactController::class, 'send'])->name('contact.send');
+Route::post('contact', [ContactController::class, 'send'])->name('contact.send')->middleware('throttle:5,1');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

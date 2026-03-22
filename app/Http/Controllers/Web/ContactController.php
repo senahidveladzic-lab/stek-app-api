@@ -16,6 +16,11 @@ class ContactController extends Controller
 
     public function send(Request $request): RedirectResponse
     {
+        // Honeypot: bots fill hidden fields humans never see
+        if ($request->filled('_hp')) {
+            return redirect()->route('contact')->with('success', true);
+        }
+
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'email', 'max:150'],

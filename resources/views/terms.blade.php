@@ -1,0 +1,116 @@
+@extends('layouts.public')
+
+@section('title', __('landing.footer.terms') . ' — Štek')
+
+@section('content')
+<div class="bg-white py-20 pt-32">
+    <div class="mx-auto max-w-3xl px-6">
+
+        <div class="mb-12">
+            <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-sm text-gray-400 transition hover:text-gray-600">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                Nazad na početnu
+            </a>
+        </div>
+
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Uslovi korištenja</h1>
+        <p class="mt-3 text-sm text-gray-400">Zadnje ažuriranje: {{ date('d. m. Y.') }}</p>
+
+        <div class="mt-10 space-y-10 text-gray-600 leading-relaxed">
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">1. Prihvatanje uslova</h2>
+                <p class="mt-3">Korištenjem aplikacije Štek („Aplikacija") prihvatate ove Uslove korištenja. Ako se ne slažete s njima, molimo vas da prestanete koristiti Aplikaciju. Ovi uslovi primjenjuju se na sve korisnike, uključujući goste i registrovane korisnike.</p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">2. Opis usluge</h2>
+                <p class="mt-3">Štek je aplikacija za praćenje ličnih i porodičnih finansija. Aplikacija omogućuje korisnicima da:</p>
+                <ul class="mt-3 space-y-1.5 list-disc list-inside">
+                    <li>prate prihode i troškove glasovnim ili ručnim unosom,</li>
+                    <li>postavljaju budžete po kategorijama,</li>
+                    <li>dijele domaćinstvo i troškove s drugim korisnicima,</li>
+                    <li>pregledaju izvještaje i analitiku potrošnje.</li>
+                </ul>
+                <p class="mt-3">Štek ne pruža finansijske savjete. Sve informacije u Aplikaciji služe isključivo informativne svrhe.</p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">3. Korisnički nalog</h2>
+                <p class="mt-3">Da biste koristili sve funkcionalnosti Aplikacije, morate kreirati nalog. Odgovorni ste za:</p>
+                <ul class="mt-3 space-y-1.5 list-disc list-inside">
+                    <li>tačnost podataka koje unosite pri registraciji,</li>
+                    <li>čuvanje lozinke i sigurnost naloga,</li>
+                    <li>sve aktivnosti koje se odvijaju putem vašeg naloga.</li>
+                </ul>
+                <p class="mt-3">Ako posumnjate da je vaš nalog kompromitovan, odmah nas obavijestite putem kontakt forme ili e-maila koji ste koristili pri registraciji.</p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">4. Dopuštena upotreba</h2>
+                <p class="mt-3">Saglasni ste da Aplikaciju nećete koristiti za:</p>
+                <ul class="mt-3 space-y-1.5 list-disc list-inside">
+                    <li>ilegalne aktivnosti ili aktivnosti koje krše važeće propise,</li>
+                    <li>uznemiravanje, zlostavljanje ili ugrožavanje privatnosti drugih korisnika,</li>
+                    <li>dijeljenje lažnih, obmanjujućih ili štetnih sadržaja,</li>
+                    <li>pokušaje neovlaštenog pristupa sistemima ili podacima Aplikacije,</li>
+                    <li>slanje neželjenih poruka ili spam sadržaja.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">5. Funkcionalnost domaćinstva</h2>
+                <p class="mt-3">Aplikacija omogućuje kreiranje zajedničkih domaćinstava u koja možete pozivati druge korisnike. Slanjem pozivnice potvrđujete da imate saglasnost te osobe da joj šaljete pozivnicu. Administratori domaćinstva mogu ukloniti članove, a svaki član može napustiti domaćinstvo u bilo kojem trenutku.</p>
+                <p class="mt-3">Podaci koji se dijele unutar domaćinstva vidljivi su svim članovima tog domaćinstva. Pazite šta dijelite.</p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">6. Plaćanje i pretplate</h2>
+                <p class="mt-3">Štek nudi besplatni plan kao i plaćene planove (Pro i Porodični). Detalji o cijenama dostupni su na stranici za cijene. Pretplate se automatski obnavljaju na kraju svakog obračunskog perioda. Možete otkazati pretplatu u bilo kojem trenutku; otkazivanje stupa na snagu na kraju tekućeg perioda.</p>
+                <p class="mt-3">Nema povrata novca za djelimično iskorištene periode pretplate, osim u slučajevima koji su zakonom propisani.</p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">7. Intelektualno vlasništvo</h2>
+                <p class="mt-3">Sav sadržaj Aplikacije — uključujući dizajn, kod, logotip i tekst — zaštićen je autorskim pravima i vlasništvo je Štek tima. Nije dopušteno kopiranje, distribucija ni stvaranje izvedenih djela bez pisane saglasnosti.</p>
+                <p class="mt-3">Podaci koje vi unosite ostaju vaše vlasništvo. Štek-u dajete ograničenu licencu za obradu tih podataka isključivo u svrhu pružanja usluge.</p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">8. Odricanje od odgovornosti</h2>
+                <p class="mt-3">Aplikacija se pruža „kakva jeste" bez ikakvih garancija, izričitih ili podrazumijevanih. Ne garantujemo da će Aplikacija uvijek biti dostupna, bez grešaka ili prikladna za posebne namjene. Koristite je na vlastitu odgovornost.</p>
+                <p class="mt-3">U najvećoj mjeri dopuštenoj važećim zakonom, Štek tim nije odgovoran za direktne, indirektne, slučajne, posebne ili posljedične štete nastale korištenjem Aplikacije.</p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">9. Raskid</h2>
+                <p class="mt-3">Možete izbrisati nalog u bilo kojem trenutku iz postavki profila. Nakon brisanja, vaši podaci bit će trajno uklonjeni u roku od 30 dana, osim ako zakon ne zahtijeva duže čuvanje.</p>
+                <p class="mt-3">Zadržavamo pravo privremenog ili trajnog ukidanja naloga koji krše ove Uslove, bez prethodne najave.</p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">10. Izmjene uslova</h2>
+                <p class="mt-3">Ove Uslove možemo povremeno mijenjati. O bitnim izmjenama obavijestit ćemo vas putem e-maila ili obavještenja unutar Aplikacije. Nastavak korištenja Aplikacije nakon izmjena znači da prihvatate nove Uslove.</p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">11. Mjerodavno pravo</h2>
+                <p class="mt-3">Ovi Uslovi tumače se i primjenjuju u skladu s pravom Bosne i Hercegovine. Za sve sporove nadležan je sud u Sarajevu.</p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">12. Kontakt</h2>
+                <p class="mt-3">Pitanja u vezi s ovim Uslovima možete uputiti na adresu: <a href="mailto:podrska@stek.app" class="text-teal-600 hover:text-teal-500 transition">podrska@stek.app</a></p>
+            </section>
+
+        </div>
+
+        <div class="mt-16 border-t border-gray-100 pt-8 flex flex-wrap gap-4 text-sm text-gray-400">
+            <a href="{{ route('privacy') }}" class="transition hover:text-gray-600">Politika privatnosti</a>
+            <span>·</span>
+            <a href="{{ route('home') }}" class="transition hover:text-gray-600">Početna stranica</a>
+        </div>
+
+    </div>
+</div>
+@endsection

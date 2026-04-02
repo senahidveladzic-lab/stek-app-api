@@ -18,7 +18,6 @@ class ExpenseResource extends JsonResource
             'currency' => $this->currency,
             'original_amount' => $this->original_amount,
             'original_currency' => $this->original_currency,
-            'merchant' => $this->merchant,
             'description' => $this->description,
             'original_text' => $this->original_text,
             'expense_date' => $this->expense_date->format('Y-m-d'),

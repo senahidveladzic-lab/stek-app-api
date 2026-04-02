@@ -13,7 +13,7 @@ class ExpenseAIService
     ];
 
     /**
-     * @return array{amount: float, currency: string, category_key: string, merchant: ?string, description: string, date: string}
+     * @return array{amount: float, currency: string, category_key: string, description: string, date: string}
      */
     public function parse(string $userText, string $locale, string $defaultCurrency): array
     {
@@ -56,7 +56,7 @@ class ExpenseAIService
     }
 
     /**
-     * @return array{amount: float, currency: string, category_key: string, merchant: ?string, description: string, date: string}
+     * @return array{amount: float, currency: string, category_key: string, description: string, date: string}
      */
     public function parseResponse(string $text): array
     {
@@ -94,7 +94,6 @@ class ExpenseAIService
             'amount' => $amount,
             'currency' => $currency,
             'category_key' => $categoryKey,
-            'merchant' => $data['merchant'] ?? null,
             'description' => $data['description'] ?? '',
             'date' => $date,
         ];

@@ -33,7 +33,6 @@ it('can store an expense', function () {
         ->post('/expenses', [
             'amount' => 25.50,
             'category_id' => $this->category->id,
-            'merchant' => 'Bingo',
             'description' => 'Groceries',
             'expense_date' => '2026-03-06',
         ])
@@ -43,7 +42,6 @@ it('can store an expense', function () {
         'user_id' => $this->user->id,
         'household_id' => $this->user->household_id,
         'amount' => 25.50,
-        'merchant' => 'Bingo',
     ]);
 });
 
@@ -63,13 +61,11 @@ it('can update an expense', function () {
     $this->actingAs($this->user)
         ->put("/expenses/{$expense->id}", [
             'amount' => 99.99,
-            'merchant' => 'Updated Merchant',
         ])
         ->assertRedirect();
 
     $expense->refresh();
-    expect($expense->amount)->toBe('99.99')
-        ->and($expense->merchant)->toBe('Updated Merchant');
+    expect($expense->amount)->toBe('99.99');
 });
 
 it('can delete an expense', function () {

@@ -25,7 +25,6 @@ class ExpenseFactory extends Factory
             'category_id' => Category::factory(),
             'amount' => fake()->randomFloat(2, 1, 500),
             'currency' => 'BAM',
-            'merchant' => fake()->optional()->company(),
             'description' => fake()->sentence(),
             'original_text' => null,
             'expense_date' => fake()->dateTimeBetween('-3 months', 'now')->format('Y-m-d'),

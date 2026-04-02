@@ -12,7 +12,6 @@ it('parses a valid JSON response', function () {
         'amount' => 15.50,
         'currency' => 'BAM',
         'category_key' => 'restaurant',
-        'merchant' => 'McDonalds',
         'description' => 'Lunch',
         'date' => '2026-03-06',
     ]);
@@ -23,7 +22,6 @@ it('parses a valid JSON response', function () {
         ->amount->toBe(15.50)
         ->currency->toBe('BAM')
         ->category_key->toBe('restaurant')
-        ->merchant->toBe('McDonalds')
         ->description->toBe('Lunch')
         ->date->toBe('2026-03-06');
 });
@@ -33,7 +31,6 @@ it('strips code fences from response', function () {
         'amount' => 10,
         'currency' => 'EUR',
         'category_key' => 'cafe',
-        'merchant' => null,
         'description' => 'Coffee',
         'date' => '2026-03-06',
     ])."\n```";
@@ -49,7 +46,7 @@ it('defaults to other for unknown category', function () {
         'amount' => 5,
         'currency' => 'BAM',
         'category_key' => 'unknown_category',
-        'merchant' => null,
+
         'description' => 'Something',
         'date' => '2026-03-06',
     ]);
@@ -64,7 +61,7 @@ it('defaults negative amount to zero', function () {
         'amount' => -5,
         'currency' => 'BAM',
         'category_key' => 'restaurant',
-        'merchant' => null,
+
         'description' => 'Test',
         'date' => '2026-03-06',
     ]);
@@ -83,7 +80,7 @@ it('defaults invalid date to today', function () {
         'amount' => 10,
         'currency' => 'BAM',
         'category_key' => 'restaurant',
-        'merchant' => null,
+
         'description' => 'Test',
         'date' => 'not-a-date',
     ]);
@@ -98,7 +95,7 @@ it('defaults invalid currency length to BAM', function () {
         'amount' => 10,
         'currency' => 'INVALID',
         'category_key' => 'restaurant',
-        'merchant' => null,
+
         'description' => 'Test',
         'date' => '2026-03-06',
     ]);

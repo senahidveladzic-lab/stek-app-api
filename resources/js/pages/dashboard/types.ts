@@ -19,7 +19,6 @@ export type ExpenseData = {
     currency: string;
     original_amount: string | null;
     original_currency: string | null;
-    merchant: string | null;
     description: string | null;
     expense_date: string;
     category: { name: string; icon: string; color: string } | null;

@@ -112,7 +112,7 @@
             </div>
 
             {{-- Phone screenshot overlay with iPhone frame --}}
-            <div class="animate-float absolute -right-4 -top-8 z-50 block w-[100px] overflow-hidden lg:-right-6 lg:-top-10 lg:w-[150px]" style="filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); animation-delay: 0.5s;">
+            <div class="animate-float absolute -right-4 -top-8 z-20 block w-[100px] overflow-hidden lg:-right-6 lg:-top-10 lg:w-[150px]" style="filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); animation-delay: 0.5s;">
                 {{-- iPhone bezel --}}
                 <div class="rounded-[1rem] bg-black p-[5px] lg:rounded-[1.25rem] lg:p-[6px]" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.08);">
                     {{-- Dynamic Island --}}

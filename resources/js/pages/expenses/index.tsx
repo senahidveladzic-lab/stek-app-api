@@ -47,7 +47,6 @@ type Expense = {
     currency: string;
     original_amount: string | null;
     original_currency: string | null;
-    merchant: string | null;
     description: string | null;
     original_text: string | null;
     expense_date: string;
@@ -226,7 +225,6 @@ export default function ExpensesIndex() {
                                             <th className="px-4 py-3 text-left font-medium">{t('expenses.date')}</th>
                                             <th className="px-4 py-3 text-left font-medium">{t('expenses.category')}</th>
                                             <th className="px-4 py-3 text-left font-medium">{t('expenses.description')}</th>
-                                            <th className="px-4 py-3 text-left font-medium">{t('expenses.merchant')}</th>
                                             <th className="px-4 py-3 text-right font-medium">{t('expenses.amount')}</th>
                                             <th className="px-4 py-3 text-left font-medium">{t('expenses.added_by')}</th>
                                             <th className="px-4 py-3 text-right font-medium"></th>
@@ -247,7 +245,6 @@ export default function ExpensesIndex() {
                                                     )}
                                                 </td>
                                                 <td className="px-4 py-3">{expense.description ?? '-'}</td>
-                                                <td className="px-4 py-3">{expense.merchant ?? '-'}</td>
                                                 <td className="px-4 py-3 text-right font-medium">
                                                     <span>{formatMoney(parseFloat(expense.amount))}</span>
                                                     {expense.original_amount && expense.original_currency && (
@@ -364,7 +361,6 @@ function AddExpenseModal({
         amount: '',
         currency: household?.default_currency ?? 'BAM',
         category_id: '',
-        merchant: '',
         description: '',
         expense_date: new Date().toISOString().slice(0, 10),
     });
@@ -390,7 +386,6 @@ function AddExpenseModal({
                         amount: String(json.data.amount ?? ''),
                         currency: json.data.currency ?? household?.default_currency ?? 'BAM',
                         category_id: String(json.data.category_id ?? ''),
-                        merchant: json.data.merchant ?? '',
                         description: json.data.description ?? '',
                         expense_date: json.data.date ?? new Date().toISOString().slice(0, 10),
                     });
@@ -484,7 +479,6 @@ function EditExpenseModal({
         amount: expense.original_amount ?? expense.amount,
         currency: expense.original_currency ?? expense.currency,
         category_id: String(expense.category?.id ?? ''),
-        merchant: expense.merchant ?? '',
         description: expense.description ?? '',
         expense_date: expense.expense_date,
     });
@@ -518,7 +512,6 @@ function ExpenseForm({
         amount: string;
         currency: string;
         category_id: string;
-        merchant: string;
         description: string;
         expense_date: string;
     }>>;
@@ -579,13 +572,6 @@ function ExpenseForm({
                         <p className="text-destructive mt-1 text-xs">{form.errors.category_id}</p>
                     )}
                 </div>
-            </div>
-            <div>
-                <Label>{t('expenses.merchant')}</Label>
-                <Input
-                    value={form.data.merchant}
-                    onChange={(e) => form.setData('merchant', e.target.value)}
-                />
             </div>
             <div>
                 <Label>{t('expenses.description')}</Label>

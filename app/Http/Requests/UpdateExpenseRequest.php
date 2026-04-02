@@ -20,7 +20,6 @@ class UpdateExpenseRequest extends FormRequest
             'amount' => ['sometimes', 'numeric', 'min:0.01'],
             'currency' => ['sometimes', 'string', 'size:3'],
             'category_id' => ['sometimes', 'exists:categories,id'],
-            'merchant' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:255'],
             'expense_date' => ['sometimes', 'date'],
         ];

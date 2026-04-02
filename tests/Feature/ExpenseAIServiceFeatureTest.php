@@ -33,7 +33,6 @@ it('voice endpoint calls AI and returns parsed data', function () {
                         'amount' => 3,
                         'currency' => 'BAM',
                         'category_key' => 'cafe',
-                        'merchant' => null,
                         'description' => 'Kafa',
                         'date' => '2026-03-06',
                     ]),

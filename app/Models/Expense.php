@@ -19,7 +19,6 @@ class Expense extends Model
         'category_id',
         'amount',
         'currency',
-        'merchant',
         'description',
         'original_text',
         'expense_date',

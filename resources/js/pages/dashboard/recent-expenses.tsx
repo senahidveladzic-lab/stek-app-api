@@ -86,8 +86,7 @@ export function RecentExpenses({ expenses }: RecentExpensesProps) {
                                                 </div>
                                                 <div className="min-w-0">
                                                     <p className="truncate text-sm font-medium">
-                                                        {expense.merchant ??
-                                                            expense.description ??
+                                                        {expense.description ??
                                                             (expense.category
                                                                 ? t('categories.' + expense.category.name)
                                                                 : '')}

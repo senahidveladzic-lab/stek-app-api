@@ -35,10 +35,7 @@ class ExpenseController extends Controller
             ->inDateRange($from, $to)
             ->when($request->filled('search'), function ($q) use ($request) {
                 $search = $request->string('search');
-                $q->where(function ($q) use ($search) {
-                    $q->where('merchant', 'like', "%{$search}%")
-                        ->orWhere('description', 'like', "%{$search}%");
-                });
+                $q->where('description', 'like', "%{$search}%");
             })
             ->orderByDesc('expense_date')
             ->orderByDesc('created_at')

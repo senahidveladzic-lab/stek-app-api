@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(composer install:*)",
+      "Bash(php:*)",
+      "Bash(where php:*)",
+      "Bash(powershell -Command \"[Environment]::GetEnvironmentVariable\\('PATH', 'Machine'\\)\")",
+      "Bash(powershell -Command \"[Environment]::GetEnvironmentVariable\\('PATH', 'User'\\)\")",
+      "Bash(/c/laragon/bin/php/php-8.4.13-Win32-vs17-x64/php.exe:*)",
+      "Bash(pnpm install:*)",
+      "Bash(touch /c/laragon/www/savings-api/database/database.sqlite)",
+      "Bash(/c/laragon/www/savings-api/vendor/bin/pint --version)",
+      "Bash(pnpm run:*)",
+      "Bash(composer require:*)",
+      "mcp__laravel-boost__search-docs",
+      "Bash(vendor/bin/pint:*)",
+      "mcp__laravel-boost__application-info",
+      "mcp__laravel-boost__list-routes",
+      "mcp__laravel-boost__get-config",
+      "mcp__laravel-boost__last-error",
+      "WebFetch(domain:www.paddle.com)",
+      "WebSearch",
+      "WebFetch(domain:developer.paddle.com)",
+      "WebFetch(domain:msalinas92.medium.com)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "laravel-boost"
+  ]
+}

@@ -242,7 +242,7 @@
     "landing.hero.badge": "Now available on iOS & Android",
     "landing.hero.headline_1": "Spend smarter.",
     "landing.hero.headline_2": "Save together.",
-    "landing.hero.subtitle": "Most spending in the Balkans happens in cash. Just say what you spent and Štek logs it instantly with AI. No spreadsheets, no forms, no guessing.",
+    "landing.hero.subtitle": "Cash does not leave a trail. Štek does. Just say what you spent and it is logged instantly — no forms, no spreadsheets, no guessing. Built for how households in the Balkans actually spend.",
     "landing.hero.cta_primary": "Try Free for 14 Days",
     "landing.hero.cta_secondary": "See How It Works",
     "landing.hero.trust_no_card": "No credit card required",
@@ -262,17 +262,17 @@
     "landing.stats.uptime": "Uptime",
 
     "landing.features.label": "Features",
-    "landing.features.title": "Everything you need to",
-    "landing.features.title_highlight": "master your money",
-    "landing.features.subtitle": "Voice input, household budgets, income tracking and savings goals. All in one app built for the way people actually spend.",
+    "landing.features.title": "Built for how your",
+    "landing.features.title_highlight": "household actually spends",
+    "landing.features.subtitle": "Built for the way people actually spend — especially when that spending is in cash.",
     "landing.features.voice_title": "Voice and Text Input",
     "landing.features.voice_desc": "Speak or type naturally in your own language. Say 'coffee 3 KM' and Štek parses it, picks the category, and logs it in seconds. Works whether you are at the market or on the bus.",
     "landing.features.budget_title": "Category Budgets",
     "landing.features.budget_desc": "Set monthly limits per category, track your burn rate in real time, and see exactly where money is going before you run out.",
     "landing.features.household_title": "Household Hub",
     "landing.features.household_desc": "Invite up to 10 family members. Everyone logs their own spending. You all see the combined picture and work toward shared savings goals together.",
-    "landing.features.analytics_title": "Clear Analytics",
-    "landing.features.analytics_desc": "Monthly comparisons, category breakdowns, daily averages and income versus expense tracking. Know your numbers without opening a single spreadsheet.",
+    "landing.features.analytics_title": "Know Your Numbers",
+    "landing.features.analytics_desc": "Monthly comparisons, category breakdowns, daily averages, and income versus expense tracking. All visible at a glance — no spreadsheet needed.",
     "landing.features.members": "members",
 
     "landing.steps.label": "How it works",
@@ -305,8 +305,10 @@
     "landing.pricing.f1": "Voice & text expense input",
     "landing.pricing.f2": "Budgets & spending analytics",
     "landing.pricing.f3": "Unlimited expense tracking",
-    "landing.pricing.f4": "Shared household tracking",
+    "landing.pricing.f4": "Shared household tracking (up to 5 members)",
     "landing.pricing.f5": "iOS & Android app",
+    "landing.pricing.f4_max": "Shared household tracking (up to 10 members)",
+    "landing.pricing.f6_max": "Priority support",
 
     "landing.testimonials.label": "Testimonials",
     "landing.testimonials.title": "Loved by households everywhere",
@@ -334,7 +336,7 @@
 
     "landing.download.label": "Download",
     "landing.download.title": "Your finances, everywhere",
-    "landing.download.subtitle": "Seamlessly sync between your phone and desktop. Never miss an expense, no matter where you are.",
+    "landing.download.subtitle": "Log a coffee from your phone, check the budget on your laptop. Everything stays in sync, always.",
     "landing.download.app_store": "App Store",
     "landing.download.google_play": "Google Play",
     "landing.download.app_store_prefix": "Download on the",
@@ -346,9 +348,9 @@
     "landing.download.dashboard": "Dashboard",
     "landing.download.this_month": "This month",
 
-    "landing.cta.title_1": "Ready to take control of",
-    "landing.cta.title_2": "your finances?",
-    "landing.cta.subtitle": "Join thousands of households already saving smarter with Štek.",
+    "landing.cta.title_1": "Stop guessing where",
+    "landing.cta.title_2": "your money went.",
+    "landing.cta.subtitle": "14-day free trial. No credit card required. Cancel anytime.",
     "landing.cta.button": "Start Free Today",
     "landing.cta.footnote": "Free forever plan available. No credit card required.",
 
@@ -408,5 +410,18 @@
     "contact.success_body": "Thanks for reaching out. We'll reply to your email shortly.",
     "contact.info_title": "Other ways to reach us",
     "contact.info_email_label": "Email",
-    "contact.info_response": "We typically respond within 24 hours."
+    "contact.info_response": "We typically respond within 24 hours.",
+    "contact.info_phone_label": "Phone",
+
+    "contact.validation.name_min": "Name must be at least 2 characters.",
+    "contact.validation.email_invalid": "Enter a valid email address.",
+    "contact.validation.subject_min": "Subject must be at least 3 characters.",
+    "contact.validation.message_min": "Message must be at least 10 characters.",
+
+    "contact.email.title": "New contact form message",
+    "contact.email.from": "From",
+    "contact.email.subject_label": "Subject",
+    "contact.email.reply_hint": "Hit reply to respond directly to :name.",
+
+    "common.back_to_home": "Back to home"
 }

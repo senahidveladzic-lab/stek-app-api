@@ -9,7 +9,7 @@
         <div class="mb-12">
             <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-sm text-gray-400 transition hover:text-gray-600">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-                Nazad na početnu
+                {{ __('common.back_to_home') }}
             </a>
         </div>
 
@@ -66,41 +66,60 @@
 
             <section>
                 <h2 class="text-lg font-semibold text-gray-900">6. Plaćanje i pretplate</h2>
-                <p class="mt-3">Štek nudi besplatni plan kao i plaćene planove (Pro i Porodični). Detalji o cijenama dostupni su na stranici za cijene. Pretplate se automatski obnavljaju na kraju svakog obračunskog perioda. Možete otkazati pretplatu u bilo kojem trenutku; otkazivanje stupa na snagu na kraju tekućeg perioda.</p>
-                <p class="mt-3">Nema povrata novca za djelimično iskorištene periode pretplate, osim u slučajevima koji su zakonom propisani.</p>
+                <p class="mt-3">Štek nudi besplatni plan kao i plaćene planove (Starter i Max). Detalji o cijenama dostupni su na <a href="{{ route('home') }}#pricing" class="text-teal-600 hover:text-teal-500 transition">stranici za cijene</a>. Plaćanje se vrši putem Paddle.com, koji nastupa kao naš ovlašteni preprodavač i Merchant of Record. Sve transakcije obrađuje Paddle; naziv „Paddle.com" ili „Paddle" može se pojaviti na vašem bankovnom izvodu.</p>
+                <p class="mt-3">Pretplate se automatski obnavljaju na kraju svakog obračunskog perioda (mjesečno ili godišnje, ovisno o odabranom planu). Možete otkazati pretplatu u bilo kojem trenutku iz postavki naloga; otkazivanje stupa na snagu na kraju tekućeg obračunskog perioda i nećete biti naplaćeni za naredni period.</p>
+                <p class="mt-3">Pretplatom izričito prihvatate uvjete pretplate, uključujući iznos, učestalost naplate i uvjete otkazivanja, koji su prikazani prije potvrde kupovine.</p>
+            </section>
+
+            <section id="refund-policy">
+                <h2 class="text-lg font-semibold text-gray-900">7. Politika povrata</h2>
+                <p class="mt-3">Nudimo <strong class="font-medium text-gray-800">garanciju povrata novca u trajanju od 30 dana</strong> od dana prve naplate za svaku novu pretplatu. Ako niste zadovoljni uslugom, kontaktirajte nas na <a href="mailto:{{ config('support.email') }}" class="text-teal-600 hover:text-teal-500 transition">{{ config('support.email') }}</a> unutar 30 dana od naplate i u potpunosti ćemo vam refundirati iznos bez dodatnih pitanja.</p>
+                <p class="mt-3">Nakon isteka roka od 30 dana, povrat novca za djelimično iskorištene periode pretplate nije dostupan, osim u slučajevima koji su zakonom propisani ili prema nahođenju Štek tima.</p>
+                <p class="mt-3">Povrat novca se obrađuje putem Paddle.com u roku od 5–10 radnih dana, ovisno o vašem načinu plaćanja i banci.</p>
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">7. Intelektualno vlasništvo</h2>
+                <h2 class="text-lg font-semibold text-gray-900">8. Reklamacije i pritužbe</h2>
+                <p class="mt-3">Ako imate pritužbu u vezi s našom uslugom, molimo vas da nas kontaktirate na jedan od sljedećih načina:</p>
+                <ul class="mt-3 space-y-1.5 list-disc list-inside">
+                    <li>E-mail: <a href="mailto:{{ config('support.email') }}" class="text-teal-600 hover:text-teal-500 transition">{{ config('support.email') }}</a></li>
+                    <li>Telefon: <a href="tel:{{ config('support.phone') }}" class="text-teal-600 hover:text-teal-500 transition">{{ config('support.phone') }}</a></li>
+                    <li>Putem <a href="{{ route('contact') }}" class="text-teal-600 hover:text-teal-500 transition">kontakt forme</a> na našoj web stranici</li>
+                </ul>
+                <p class="mt-3">Na sve pritužbe odgovaramo u roku od <strong class="font-medium text-gray-800">2 radna dana</strong>. Nastojimo riješiti svaki problem u roku od 7 radnih dana od primitka pritužbe. U slučaju složenijih situacija, obavijestit ćemo vas o napretku i očekivanom roku rješavanja.</p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">9. Intelektualno vlasništvo</h2>
                 <p class="mt-3">Sav sadržaj Aplikacije — uključujući dizajn, kod, logotip i tekst — zaštićen je autorskim pravima i vlasništvo je Štek tima. Nije dopušteno kopiranje, distribucija ni stvaranje izvedenih djela bez pisane saglasnosti.</p>
                 <p class="mt-3">Podaci koje vi unosite ostaju vaše vlasništvo. Štek-u dajete ograničenu licencu za obradu tih podataka isključivo u svrhu pružanja usluge.</p>
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">8. Odricanje od odgovornosti</h2>
+                <h2 class="text-lg font-semibold text-gray-900">10. Odricanje od odgovornosti</h2>
                 <p class="mt-3">Aplikacija se pruža „kakva jeste" bez ikakvih garancija, izričitih ili podrazumijevanih. Ne garantujemo da će Aplikacija uvijek biti dostupna, bez grešaka ili prikladna za posebne namjene. Koristite je na vlastitu odgovornost.</p>
                 <p class="mt-3">U najvećoj mjeri dopuštenoj važećim zakonom, Štek tim nije odgovoran za direktne, indirektne, slučajne, posebne ili posljedične štete nastale korištenjem Aplikacije.</p>
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">9. Raskid</h2>
+                <h2 class="text-lg font-semibold text-gray-900">11. Raskid</h2>
                 <p class="mt-3">Možete izbrisati nalog u bilo kojem trenutku iz postavki profila. Nakon brisanja, vaši podaci bit će trajno uklonjeni u roku od 30 dana, osim ako zakon ne zahtijeva duže čuvanje.</p>
                 <p class="mt-3">Zadržavamo pravo privremenog ili trajnog ukidanja naloga koji krše ove Uslove, bez prethodne najave.</p>
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">10. Izmjene uslova</h2>
+                <h2 class="text-lg font-semibold text-gray-900">12. Izmjene uslova</h2>
                 <p class="mt-3">Ove Uslove možemo povremeno mijenjati. O bitnim izmjenama obavijestit ćemo vas putem e-maila ili obavještenja unutar Aplikacije. Nastavak korištenja Aplikacije nakon izmjena znači da prihvatate nove Uslove.</p>
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">11. Mjerodavno pravo</h2>
+                <h2 class="text-lg font-semibold text-gray-900">13. Mjerodavno pravo</h2>
                 <p class="mt-3">Ovi Uslovi tumače se i primjenjuju u skladu s pravom Bosne i Hercegovine. Za sve sporove nadležan je sud u Sarajevu.</p>
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">12. Kontakt</h2>
-                <p class="mt-3">Pitanja u vezi s ovim Uslovima možete uputiti na adresu: <a href="mailto:podrska@stek.app" class="text-teal-600 hover:text-teal-500 transition">podrska@stek.app</a></p>
+                <h2 class="text-lg font-semibold text-gray-900">14. Kontakt</h2>
+                <p class="mt-3">Pitanja u vezi s ovim Uslovima možete uputiti na adresu: <a href="mailto:{{ config('support.email') }}" class="text-teal-600 hover:text-teal-500 transition">{{ config('support.email') }}</a></p>
             </section>
 
         </div>

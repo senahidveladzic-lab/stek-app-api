@@ -139,10 +139,6 @@
 
     <div class="mx-auto max-w-7xl px-6">
         <div class="reveal mx-auto max-w-2xl text-center">
-            <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-teal-100 bg-teal-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-teal-700">
-                <span class="size-1.5 rounded-full bg-teal-500"></span>
-                {{ __('landing.features.label') }}
-            </div>
             <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 {{ __('landing.features.title') }}<br class="hidden sm:block">
                 <span class="text-teal-600">{{ __('landing.features.title_highlight') }}</span>
@@ -458,7 +454,7 @@
                 <div class="my-7 h-px bg-teal-100"></div>
 
                 <ul class="flex-1 space-y-3.5">
-                    @foreach (['f1', 'f2', 'f3', 'f4', 'f5'] as $fk)
+                    @foreach (['f1', 'f2', 'f3', 'f4_max', 'f5', 'f6_max'] as $fk)
                         <li class="flex items-center gap-3 text-sm text-gray-600">
                             <svg class="h-4 w-4 shrink-0 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                             {{ __('landing.pricing.' . $fk) }}

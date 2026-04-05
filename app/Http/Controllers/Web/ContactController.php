@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactFormReceived;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class ContactController extends Controller
@@ -21,14 +23,20 @@ class ContactController extends Controller
             return redirect()->route('contact')->with('success', true);
         }
 
-        $request->validate([
+        $validated = $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'email', 'max:150'],
             'subject' => ['required', 'string', 'max:200'],
             'message' => ['required', 'string', 'max:2000'],
         ]);
 
-        // TODO: dispatch a mail job once mail is configured
+        Mail::to(config('mail.contact_recipient'))
+            ->send(new ContactFormReceived(
+                senderName: $validated['name'],
+                senderEmail: $validated['email'],
+                contactSubject: $validated['subject'],
+                messageBody: $validated['message'],
+            ));
 
         return redirect()->route('contact')->with('success', true);
     }

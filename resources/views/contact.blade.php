@@ -32,10 +32,18 @@
             {{-- Email block --}}
             <div class="mt-14 border-t border-white/8 pt-10">
                 <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/25">{{ __('contact.info_email_label') }}</p>
-                <a href="mailto:podrska@stek-app.com" class="mt-2 block text-lg font-medium text-white transition hover:text-teal-400">
-                    podrska@stek-app.com
+                <a href="mailto:{{ config('support.email') }}" class="mt-2 block text-lg font-medium text-white transition hover:text-teal-400">
+                    {{ config('support.email') }}
                 </a>
                 <p class="mt-2 text-sm text-white/30">{{ __('contact.info_response') }}</p>
+            </div>
+
+            {{-- Phone block --}}
+            <div class="mt-8">
+                <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/25">{{ __('contact.info_phone_label') }}</p>
+                <a href="tel:{{ config('support.phone') }}" class="mt-2 block text-lg font-medium text-white transition hover:text-teal-400">
+                    {{ config('support.phone') }}
+                </a>
             </div>
 
             {{-- Privacy note --}}
@@ -152,11 +160,18 @@
         const form = document.getElementById('contact-form');
         if (!form) { return; }
 
+        const validationMessages = @json([
+            'name'    => __('contact.validation.name_min'),
+            'email'   => __('contact.validation.email_invalid'),
+            'subject' => __('contact.validation.subject_min'),
+            'message' => __('contact.validation.message_min'),
+        ]);
+
         const validators = {
-            name:    (v) => v.trim().length < 2    ? 'Name must be at least 2 characters.'    : null,
-            email:   (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? null : 'Enter a valid email address.',
-            subject: (v) => v.trim().length < 3    ? 'Subject must be at least 3 characters.' : null,
-            message: (v) => v.trim().length < 10   ? 'Message must be at least 10 characters.' : null,
+            name:    (v) => v.trim().length < 2    ? validationMessages.name    : null,
+            email:   (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? null : validationMessages.email,
+            subject: (v) => v.trim().length < 3    ? validationMessages.subject : null,
+            message: (v) => v.trim().length < 10   ? validationMessages.message : null,
         };
 
         function setError(name, message) {

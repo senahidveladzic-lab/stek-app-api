@@ -242,7 +242,7 @@
     "landing.hero.badge": "Sada dostupno na iOS & Android",
     "landing.hero.headline_1": "Troši pametnije.",
     "landing.hero.headline_2": "Štedite zajedno.",
-    "landing.hero.subtitle": "Na Balkanu većina svakodnevnih plaćanja je gotovinom. Recite šta ste potrošili i Štek to evidentira odmah uz pomoć AI. Bez Excela, bez formi, bez nagađanja.",
+    "landing.hero.subtitle": "Gotovina ne ostavlja trag. Štek da. Recite šta ste potrošili i to je zabilježeno odmah — bez formi, bez Excela, bez nagađanja. Napravljeno za način na koji domaćinstva na Balkanu zaista troše.",
     "landing.hero.cta_primary": "Isprobajte besplatno 14 dana",
     "landing.hero.cta_secondary": "Pogledajte kako radi",
     "landing.hero.trust_no_card": "Bez kreditne kartice",
@@ -262,17 +262,17 @@
     "landing.stats.uptime": "Dostupnost",
 
     "landing.features.label": "Funkcije",
-    "landing.features.title": "Sve što vam treba da",
-    "landing.features.title_highlight": "ovladate finansijama",
-    "landing.features.subtitle": "Glasovni unos, budžeti domaćinstva, praćenje prihoda i ciljevi štednje. Sve u jednoj aplikaciji prilagođenoj načinu na koji ljudi zaista troše.",
+    "landing.features.title": "Napravljeno za način na koji vaše",
+    "landing.features.title_highlight": "domaćinstvo zaista troši",
+    "landing.features.subtitle": "Napravljeno za način na koji ljudi zaista troše — posebno kad je to gotovina.",
     "landing.features.voice_title": "Glasovni i tekstualni unos",
     "landing.features.voice_desc": "Govorite ili pišite prirodno na svom jeziku. Recite 'kafa 3 KM' i Štek to parsira, odabere kategoriju i evidentira za nekoliko sekundi.",
     "landing.features.budget_title": "Budžeti po kategorijama",
     "landing.features.budget_desc": "Postavite mjesečne limite po kategoriji, pratite stopu potrošnje u stvarnom vremenu i vidite tačno kamo odlazi novac prije nego što ga potrošite.",
     "landing.features.household_title": "Centar domaćinstva",
     "landing.features.household_desc": "Pozovite do 10 članova porodice. Svako evidentira svoju potrošnju. Svi zajedno vidite ukupnu sliku i radite ka zajedničkim ciljevima štednje.",
-    "landing.features.analytics_title": "Jasna analitika",
-    "landing.features.analytics_desc": "Mjesečne usporedbe, pregled kategorija, dnevni prosjeci i praćenje prihoda nasuprot troškova. Znajte svoje brojeve bez otvaranja ijedne tabele.",
+    "landing.features.analytics_title": "Znajte svoje brojeve",
+    "landing.features.analytics_desc": "Mjesečne usporedbe, pregled kategorija, dnevni prosjeci i praćenje prihoda nasuprot troškova. Sve vidljivo na jednom pogledu — bez tabela.",
     "landing.features.members": "članova",
 
     "landing.steps.label": "Kako funkcioniše",
@@ -305,8 +305,10 @@
     "landing.pricing.f1": "Glasovni i tekstualni unos troškova",
     "landing.pricing.f2": "Budžeti i analitika potrošnje",
     "landing.pricing.f3": "Neograničeno praćenje troškova",
-    "landing.pricing.f4": "Zajedničko praćenje domaćinstva",
+    "landing.pricing.f4": "Zajedničko praćenje domaćinstva (do 5 članova)",
     "landing.pricing.f5": "iOS i Android aplikacija",
+    "landing.pricing.f4_max": "Zajedničko praćenje domaćinstva (do 10 članova)",
+    "landing.pricing.f6_max": "Prioritetna podrška",
 
     "landing.testimonials.label": "Iskustva korisnika",
     "landing.testimonials.title": "Vole nas domaćinstva svuda",
@@ -334,7 +336,7 @@
 
     "landing.download.label": "Preuzmi",
     "landing.download.title": "Vaše finansije, svugdje",
-    "landing.download.subtitle": "Besprijekorna sinhronizacija između telefona i desktopa. Ne propustite nijedan trošak, bez obzira gdje ste.",
+    "landing.download.subtitle": "Evidentirali kafu s telefona, provjerite budžet na laptopu. Sve ostaje sinhronizovano, uvijek.",
     "landing.download.app_store": "App Store",
     "landing.download.google_play": "Google Play",
     "landing.download.app_store_prefix": "Preuzmite na",
@@ -346,9 +348,9 @@
     "landing.download.dashboard": "Kontrolna tabla",
     "landing.download.this_month": "Ovaj mjesec",
 
-    "landing.cta.title_1": "Spremni da preuzmete kontrolu nad",
-    "landing.cta.title_2": "vašim finansijama?",
-    "landing.cta.subtitle": "Pridružite se hiljadama domaćinstava koja već pametnije štede sa Štekom.",
+    "landing.cta.title_1": "Prestanite nagađati gdje je",
+    "landing.cta.title_2": "novac otišao.",
+    "landing.cta.subtitle": "14-dnevno besplatno testiranje. Bez kreditne kartice. Otkažite bilo kad.",
     "landing.cta.button": "Započnite besplatno danas",
     "landing.cta.footnote": "Zauvijek besplatan plan dostupan. Kreditna kartica nije potrebna.",
 
@@ -408,5 +410,18 @@
     "contact.success_body": "Hvala što ste nam se javili. Odgovorit ćemo na vaš email uskoro.",
     "contact.info_title": "Drugi načini kontakta",
     "contact.info_email_label": "Email",
-    "contact.info_response": "Obično odgovaramo u roku od 24 sata."
+    "contact.info_response": "Obično odgovaramo u roku od 24 sata.",
+    "contact.info_phone_label": "Telefon",
+
+    "contact.validation.name_min": "Ime mora imati najmanje 2 znaka.",
+    "contact.validation.email_invalid": "Unesite ispravnu email adresu.",
+    "contact.validation.subject_min": "Tema mora imati najmanje 3 znaka.",
+    "contact.validation.message_min": "Poruka mora imati najmanje 10 znakova.",
+
+    "contact.email.title": "Nova poruka s kontakt forme",
+    "contact.email.from": "Od",
+    "contact.email.subject_label": "Tema",
+    "contact.email.reply_hint": "Odgovorite direktno na ovu e-poruku da stupite u kontakt s :name.",
+
+    "common.back_to_home": "Nazad na početnu"
 }

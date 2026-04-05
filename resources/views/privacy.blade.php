@@ -9,7 +9,7 @@
         <div class="mb-12">
             <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-sm text-gray-400 transition hover:text-gray-600">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-                Nazad na početnu
+                {{ __('common.back_to_home') }}
             </a>
         </div>
 
@@ -102,7 +102,7 @@
                     <li><strong class="font-medium text-gray-800">Prenosivost</strong> — možete zatražiti izvoz podataka u mašinski čitljivom formatu,</li>
                     <li><strong class="font-medium text-gray-800">Prigovor</strong> — možete prigovoriti određenim načinima obrade podataka.</li>
                 </ul>
-                <p class="mt-3">Zahtjeve možete uputiti na <a href="mailto:privatnost@stek.app" class="text-teal-600 hover:text-teal-500 transition">privatnost@stek.app</a>. Odgovorit ćemo u roku od 30 dana.</p>
+                <p class="mt-3">Zahtjeve možete uputiti na <a href="mailto:{{ config('support.privacy_email') }}" class="text-teal-600 hover:text-teal-500 transition">{{ config('support.privacy_email') }}</a>. Odgovorit ćemo u roku od 30 dana.</p>
                 <p class="mt-3">Nalog i sve podatke možete obrisati direktno iz postavki profila unutar Aplikacije. Podaci se trajno brišu u roku od 30 dana od zahtjeva za brisanje.</p>
             </section>
 
@@ -126,7 +126,7 @@
                 <p class="mt-3">Za sva pitanja u vezi s privatnošću obratite se na:</p>
                 <p class="mt-2">
                     <strong class="font-medium text-gray-800">Štek</strong><br>
-                    E-mail: <a href="mailto:privatnost@stek.app" class="text-teal-600 hover:text-teal-500 transition">privatnost@stek.app</a>
+                    E-mail: <a href="mailto:{{ config('support.privacy_email') }}" class="text-teal-600 hover:text-teal-500 transition">{{ config('support.privacy_email') }}</a>
                 </p>
             </section>
 

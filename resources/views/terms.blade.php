@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', __('landing.footer.terms') . ' — Štek')
+@section('title', __('landing.footer.terms') . ' — Stek')
 
 @section('content')
 <div class="bg-white py-20 pt-32">
@@ -20,19 +20,19 @@
 
             <section>
                 <h2 class="text-lg font-semibold text-gray-900">1. Prihvatanje uslova</h2>
-                <p class="mt-3">Korištenjem aplikacije Štek („Aplikacija") prihvatate ove Uslove korištenja. Ako se ne slažete s njima, molimo vas da prestanete koristiti Aplikaciju. Ovi uslovi primjenjuju se na sve korisnike, uključujući goste i registrovane korisnike.</p>
+                <p class="mt-3">Korištenjem aplikacije Stek („Aplikacija") prihvatate ove Uslove korištenja. Ako se ne slažete s njima, molimo vas da prestanete koristiti Aplikaciju. Ovi uslovi primjenjuju se na sve korisnike, uključujući goste i registrovane korisnike.</p>
             </section>
 
             <section>
                 <h2 class="text-lg font-semibold text-gray-900">2. Opis usluge</h2>
-                <p class="mt-3">Štek je aplikacija za praćenje ličnih i porodičnih finansija. Aplikacija omogućuje korisnicima da:</p>
+                <p class="mt-3">Stek je aplikacija za praćenje ličnih i porodičnih finansija. Aplikacija omogućuje korisnicima da:</p>
                 <ul class="mt-3 space-y-1.5 list-disc list-inside">
                     <li>prate prihode i troškove glasovnim ili ručnim unosom,</li>
                     <li>postavljaju budžete po kategorijama,</li>
                     <li>dijele domaćinstvo i troškove s drugim korisnicima,</li>
                     <li>pregledaju izvještaje i analitiku potrošnje.</li>
                 </ul>
-                <p class="mt-3">Štek ne pruža finansijske savjete. Sve informacije u Aplikaciji služe isključivo informativne svrhe.</p>
+                <p class="mt-3">Stek ne pruža finansijske savjete. Sve informacije u Aplikaciji služe isključivo informativne svrhe.</p>
             </section>
 
             <section>
@@ -66,7 +66,7 @@
 
             <section>
                 <h2 class="text-lg font-semibold text-gray-900">6. Plaćanje i pretplate</h2>
-                <p class="mt-3">Štek nudi besplatni plan kao i plaćene planove (Starter i Max). Detalji o cijenama dostupni su na <a href="{{ route('home') }}#pricing" class="text-teal-600 hover:text-teal-500 transition">stranici za cijene</a>. Plaćanje se vrši putem Paddle.com, koji nastupa kao naš ovlašteni preprodavač i Merchant of Record. Sve transakcije obrađuje Paddle; naziv „Paddle.com" ili „Paddle" može se pojaviti na vašem bankovnom izvodu.</p>
+                <p class="mt-3">Stek nudi besplatni plan kao i plaćene planove (Starter i Max). Detalji o cijenama dostupni su na <a href="{{ route('home') }}#pricing" class="text-teal-600 hover:text-teal-500 transition">stranici za cijene</a>. Plaćanje se vrši putem Paddle.com, koji nastupa kao naš ovlašteni preprodavač i Merchant of Record. Sve transakcije obrađuje Paddle; naziv „Paddle.com" ili „Paddle" može se pojaviti na vašem bankovnom izvodu.</p>
                 <p class="mt-3">Pretplate se automatski obnavljaju na kraju svakog obračunskog perioda (mjesečno ili godišnje, ovisno o odabranom planu). Možete otkazati pretplatu u bilo kojem trenutku iz postavki naloga; otkazivanje stupa na snagu na kraju tekućeg obračunskog perioda i nećete biti naplaćeni za naredni period.</p>
                 <p class="mt-3">Pretplatom izričito prihvatate uvjete pretplate, uključujući iznos, učestalost naplate i uvjete otkazivanja, koji su prikazani prije potvrde kupovine.</p>
             </section>
@@ -74,7 +74,7 @@
             <section id="refund-policy">
                 <h2 class="text-lg font-semibold text-gray-900">7. Politika povrata</h2>
                 <p class="mt-3">Nudimo <strong class="font-medium text-gray-800">garanciju povrata novca u trajanju od 30 dana</strong> od dana prve naplate za svaku novu pretplatu. Ako niste zadovoljni uslugom, kontaktirajte nas na <a href="mailto:{{ config('support.email') }}" class="text-teal-600 hover:text-teal-500 transition">{{ config('support.email') }}</a> unutar 30 dana od naplate i u potpunosti ćemo vam refundirati iznos bez dodatnih pitanja.</p>
-                <p class="mt-3">Nakon isteka roka od 30 dana, povrat novca za djelimično iskorištene periode pretplate nije dostupan, osim u slučajevima koji su zakonom propisani ili prema nahođenju Štek tima.</p>
+                <p class="mt-3">Nakon isteka roka od 30 dana, povrat novca za djelimično iskorištene periode pretplate nije dostupan, osim u slučajevima koji su zakonom propisani ili prema nahođenju Stek tima.</p>
                 <p class="mt-3">Povrat novca se obrađuje putem Paddle.com u roku od 5–10 radnih dana, ovisno o vašem načinu plaćanja i banci.</p>
             </section>
 
@@ -91,14 +91,14 @@
 
             <section>
                 <h2 class="text-lg font-semibold text-gray-900">9. Intelektualno vlasništvo</h2>
-                <p class="mt-3">Sav sadržaj Aplikacije — uključujući dizajn, kod, logotip i tekst — zaštićen je autorskim pravima i vlasništvo je Štek tima. Nije dopušteno kopiranje, distribucija ni stvaranje izvedenih djela bez pisane saglasnosti.</p>
-                <p class="mt-3">Podaci koje vi unosite ostaju vaše vlasništvo. Štek-u dajete ograničenu licencu za obradu tih podataka isključivo u svrhu pružanja usluge.</p>
+                <p class="mt-3">Sav sadržaj Aplikacije — uključujući dizajn, kod, logotip i tekst — zaštićen je autorskim pravima i vlasništvo je Stek tima. Nije dopušteno kopiranje, distribucija ni stvaranje izvedenih djela bez pisane saglasnosti.</p>
+                <p class="mt-3">Podaci koje vi unosite ostaju vaše vlasništvo. Stek-u dajete ograničenu licencu za obradu tih podataka isključivo u svrhu pružanja usluge.</p>
             </section>
 
             <section>
                 <h2 class="text-lg font-semibold text-gray-900">10. Odricanje od odgovornosti</h2>
                 <p class="mt-3">Aplikacija se pruža „kakva jeste" bez ikakvih garancija, izričitih ili podrazumijevanih. Ne garantujemo da će Aplikacija uvijek biti dostupna, bez grešaka ili prikladna za posebne namjene. Koristite je na vlastitu odgovornost.</p>
-                <p class="mt-3">U najvećoj mjeri dopuštenoj važećim zakonom, Štek tim nije odgovoran za direktne, indirektne, slučajne, posebne ili posljedične štete nastale korištenjem Aplikacije.</p>
+                <p class="mt-3">U najvećoj mjeri dopuštenoj važećim zakonom, Stek tim nije odgovoran za direktne, indirektne, slučajne, posebne ili posljedične štete nastale korištenjem Aplikacije.</p>
             </section>
 
             <section>

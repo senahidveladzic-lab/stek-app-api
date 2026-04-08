@@ -21,7 +21,8 @@
       "WebFetch(domain:www.paddle.com)",
       "WebSearch",
       "WebFetch(domain:developer.paddle.com)",
-      "WebFetch(domain:msalinas92.medium.com)"
+      "WebFetch(domain:msalinas92.medium.com)",
+      "WebFetch(domain:help.boathouse.co)"
     ]
   },
   "enableAllProjectMcpServers": true,

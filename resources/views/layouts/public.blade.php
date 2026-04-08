@@ -107,7 +107,7 @@
 {{-- ===================================================================== --}}
 {{--  NAV                                                                   --}}
 {{-- ===================================================================== --}}
-<nav id="main-nav" class="fixed top-0 right-0 left-0 z-50" data-scrolled="false" data-menu-open="false">
+<nav id="main-nav" class="fixed top-0 right-0 left-0 z-50" data-scrolled="{{ request()->routeIs('terms', 'privacy') ? 'true' : 'false' }}" data-menu-open="false">
     <div id="nav-wrapper">
         <div id="nav-pill" class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
             <a href="/" class="flex items-center gap-1">
@@ -234,11 +234,12 @@
     }, { passive: true });
 
     // Scroll detection with rAF throttle
+    const alwaysScrolled = nav.dataset.scrolled === 'true';
     let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
             requestAnimationFrame(() => {
-                nav.dataset.scrolled = window.scrollY > 100;
+                nav.dataset.scrolled = alwaysScrolled || window.scrollY > 100;
                 ticking = false;
             });
             ticking = true;

@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', __('landing.footer.privacy') . ' — Štek')
+@section('title', __('landing.footer.privacy') . ' — Stek')
 
 @section('content')
 <div class="bg-white py-20 pt-32">
@@ -16,7 +16,7 @@
         <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Politika privatnosti</h1>
         <p class="mt-3 text-sm text-gray-400">Zadnje ažuriranje: {{ date('d. m. Y.') }}</p>
 
-        <p class="mt-6 text-gray-600 leading-relaxed">Vaša privatnost nam je važna. Ova Politika privatnosti objašnjava koje podatke prikupljamo, kako ih koristimo i kako ih štitimo kada koristite aplikaciju Štek.</p>
+        <p class="mt-6 text-gray-600 leading-relaxed">Vaša privatnost nam je važna. Ova Politika privatnosti objašnjava koje podatke prikupljamo, kako ih koristimo i kako ih štitimo kada koristite aplikaciju Stek.</p>
 
         <div class="mt-10 space-y-10 text-gray-600 leading-relaxed">
 
@@ -125,7 +125,7 @@
                 <h2 class="text-lg font-semibold text-gray-900">10. Kontakt</h2>
                 <p class="mt-3">Za sva pitanja u vezi s privatnošću obratite se na:</p>
                 <p class="mt-2">
-                    <strong class="font-medium text-gray-800">Štek</strong><br>
+                    <strong class="font-medium text-gray-800">Stek</strong><br>
                     E-mail: <a href="mailto:{{ config('support.privacy_email') }}" class="text-teal-600 hover:text-teal-500 transition">{{ config('support.privacy_email') }}</a>
                 </p>
             </section>

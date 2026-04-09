@@ -22,7 +22,13 @@
       "WebSearch",
       "WebFetch(domain:developer.paddle.com)",
       "WebFetch(domain:msalinas92.medium.com)",
-      "WebFetch(domain:help.boathouse.co)"
+      "WebFetch(domain:help.boathouse.co)",
+      "mcp__laravel-boost__read-log-entries",
+      "Bash(2>&1)",
+      "mcp__laravel-boost__tinker",
+      "Read(//c/Users/velad/**)",
+      "Read(//c//**)",
+      "Read(//c/Users/velad/Documents/**)"
     ]
   },
   "enableAllProjectMcpServers": true,

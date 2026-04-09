@@ -26,8 +26,8 @@ class ExpenseController extends Controller
                 fn ($q) => $q->inDateRange($request->string('from'), $request->string('to')),
             )
             ->orderByDesc('expense_date')
-            ->orderByDesc('created_at')
-            ->paginate(20);
+            ->orderByDesc('id')
+            ->cursorPaginate(20);
 
         return ExpenseResource::collection($expenses);
     }

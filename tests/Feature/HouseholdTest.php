@@ -36,7 +36,7 @@ it('creates a household on api registration', function () {
 });
 
 it('shows household settings page', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
 
     $this->actingAs($user)
         ->get('/household')
@@ -44,7 +44,7 @@ it('shows household settings page', function () {
 });
 
 it('allows owner to update household', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
 
     $this->actingAs($user)
         ->patch('/household', [
@@ -59,8 +59,8 @@ it('allows owner to update household', function () {
 });
 
 it('prevents non-owner from updating household', function () {
-    $owner = User::factory()->withHousehold()->create();
-    $member = User::factory()->create(['household_id' => $owner->household_id]);
+    $owner = User::factory()->withHousehold()->withInternalAccess()->create();
+    $member = User::factory()->withInternalAccess()->create(['household_id' => $owner->household_id]);
 
     $this->actingAs($member)
         ->patch('/household', ['name' => 'Hacked'])
@@ -68,7 +68,7 @@ it('prevents non-owner from updating household', function () {
 });
 
 it('allows owner to invite a member', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
 
     $this->actingAs($user)
         ->post('/household/invite', ['email' => 'newmember@example.com'])
@@ -81,7 +81,7 @@ it('allows owner to invite a member', function () {
 });
 
 it('prevents duplicate pending invitations', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
 
     HouseholdInvitation::factory()->create([
         'household_id' => $user->household_id,
@@ -94,13 +94,13 @@ it('prevents duplicate pending invitations', function () {
 });
 
 it('allows accepting an invitation', function () {
-    $owner = User::factory()->withHousehold()->create();
+    $owner = User::factory()->withHousehold()->withInternalAccess()->create();
     $invitation = HouseholdInvitation::factory()->create([
         'household_id' => $owner->household_id,
         'email' => 'invited@example.com',
     ]);
 
-    $invitedUser = User::factory()->withHousehold()->create(['email' => 'invited@example.com']);
+    $invitedUser = User::factory()->withHousehold()->withInternalAccess()->create(['email' => 'invited@example.com']);
 
     $this->actingAs($invitedUser)
         ->get("/household/invite/{$invitation->token}")
@@ -112,8 +112,8 @@ it('allows accepting an invitation', function () {
 });
 
 it('allows owner to remove a member', function () {
-    $owner = User::factory()->withHousehold()->create();
-    $member = User::factory()->create(['household_id' => $owner->household_id]);
+    $owner = User::factory()->withHousehold()->withInternalAccess()->create();
+    $member = User::factory()->withInternalAccess()->create(['household_id' => $owner->household_id]);
 
     $this->actingAs($owner)
         ->delete("/household/members/{$member->id}")
@@ -124,7 +124,7 @@ it('allows owner to remove a member', function () {
 });
 
 it('prevents owner from removing themselves', function () {
-    $owner = User::factory()->withHousehold()->create();
+    $owner = User::factory()->withHousehold()->withInternalAccess()->create();
 
     $this->actingAs($owner)
         ->delete("/household/members/{$owner->id}")
@@ -132,9 +132,9 @@ it('prevents owner from removing themselves', function () {
 });
 
 it('prevents non-owner from removing members', function () {
-    $owner = User::factory()->withHousehold()->create();
-    $member = User::factory()->create(['household_id' => $owner->household_id]);
-    $anotherMember = User::factory()->create(['household_id' => $owner->household_id]);
+    $owner = User::factory()->withHousehold()->withInternalAccess()->create();
+    $member = User::factory()->withInternalAccess()->create(['household_id' => $owner->household_id]);
+    $anotherMember = User::factory()->withInternalAccess()->create(['household_id' => $owner->household_id]);
 
     $this->actingAs($member)
         ->delete("/household/members/{$anotherMember->id}")
@@ -142,7 +142,7 @@ it('prevents non-owner from removing members', function () {
 });
 
 it('enforces member limit on invitations', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $household = $user->household;
     $household->update(['max_members' => 2]);
 

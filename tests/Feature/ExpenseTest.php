@@ -5,7 +5,7 @@ use App\Models\Expense;
 use App\Models\User;
 
 beforeEach(function () {
-    $this->user = User::factory()->withHousehold()->create();
+    $this->user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->category = Category::factory()->create(['name' => 'restaurant']);
 });
 

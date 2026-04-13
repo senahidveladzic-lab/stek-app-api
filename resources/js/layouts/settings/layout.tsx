@@ -6,6 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import { useTranslation } from '@/hooks/use-translation';
 import { cn, toUrl } from '@/lib/utils';
+import { show as showBilling } from '@/routes/billing';
 import { edit as editAppearance } from '@/routes/appearance';
 import { edit } from '@/routes/profile';
 import { show } from '@/routes/two-factor';
@@ -40,6 +41,11 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
         {
             title: t('settings.household'),
             href: '/household',
+            icon: null,
+        },
+        {
+            title: t('settings.billing'),
+            href: showBilling(),
             icon: null,
         },
     ];

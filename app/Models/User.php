@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Paddle\Billable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable;
+    use Billable, HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable;
 
     protected $fillable = [
         'name',
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'locale',
         'default_currency',
         'household_id',
+        'has_internal_access',
     ];
 
     protected $attributes = [
@@ -49,6 +51,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
+            'has_internal_access' => 'bool',
         ];
     }
 
@@ -71,5 +74,10 @@ class User extends Authenticatable
     public function isHouseholdOwner(): bool
     {
         return $this->household?->owner_id === $this->id;
+    }
+
+    public function hasBillingAccess(): bool
+    {
+        return $this->has_internal_access || $this->subscribed(config('billing.subscription_type'));
     }
 }

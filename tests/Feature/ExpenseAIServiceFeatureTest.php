@@ -41,7 +41,7 @@ it('voice endpoint calls AI and returns parsed data', function () {
         ]),
     ]);
 
-    $user = User::factory()->create();
+    $user = User::factory()->withInternalAccess()->create();
 
     $response = $this->actingAs($user)
         ->postJson('/expenses/voice', ['text' => 'kafa 3 marke']);
@@ -56,7 +56,7 @@ it('voice endpoint returns error on AI failure', function () {
         'api.anthropic.com/*' => Http::response([], 500),
     ]);
 
-    $user = User::factory()->create();
+    $user = User::factory()->withInternalAccess()->create();
 
     $response = $this->actingAs($user)
         ->postJson('/expenses/voice', ['text' => 'something']);

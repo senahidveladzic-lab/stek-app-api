@@ -11,7 +11,7 @@ test('guests are redirected to the login page', function () {
 });
 
 test('authenticated users can visit the dashboard', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $response = $this->get(route('dashboard'));
@@ -19,7 +19,7 @@ test('authenticated users can visit the dashboard', function () {
 });
 
 test('dashboard summary includes member_spending', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $category = Category::factory()->create();
@@ -41,7 +41,7 @@ test('dashboard summary includes member_spending', function () {
 });
 
 test('dashboard summary includes previous_month_same_period_total', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $category = Category::factory()->create();
@@ -62,7 +62,7 @@ test('dashboard summary includes previous_month_same_period_total', function () 
 });
 
 test('by_category items include previous_total', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $category = Category::factory()->create();
@@ -93,7 +93,7 @@ test('by_category items include previous_total', function () {
 });
 
 test('recent expenses returns up to 10 items', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $category = Category::factory()->create();

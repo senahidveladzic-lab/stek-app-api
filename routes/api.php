@@ -24,20 +24,23 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('auth/logout', [AuthController::class, 'logout']);
 
-        Route::post('expenses/voice', [ExpenseVoiceController::class, 'store']);
-        Route::apiResource('expenses', ExpenseController::class)->except(['show'])->names('api.expenses');
-        Route::get('dashboard/summary', [DashboardController::class, 'summary']);
-        Route::get('categories', [CategoryController::class, 'index']);
         Route::patch('user/locale', [UserSettingsController::class, 'updateLocale']);
         Route::patch('user/currency', [UserSettingsController::class, 'updateCurrency']);
 
-        Route::get('budgets', [BudgetController::class, 'index']);
-        Route::post('budgets', [BudgetController::class, 'store']);
+        Route::middleware('subscribed')->group(function () {
+            Route::post('expenses/voice', [ExpenseVoiceController::class, 'store']);
+            Route::apiResource('expenses', ExpenseController::class)->except(['show'])->names('api.expenses');
+            Route::get('dashboard/summary', [DashboardController::class, 'summary']);
+            Route::get('categories', [CategoryController::class, 'index']);
 
-        Route::get('household', [HouseholdController::class, 'show']);
-        Route::patch('household', [HouseholdController::class, 'update']);
-        Route::post('household/invite', [HouseholdController::class, 'invite']);
-        Route::delete('household/members/{user}', [HouseholdController::class, 'removeMember']);
-        Route::post('household/invite/{token}/accept', [HouseholdController::class, 'acceptInvitation']);
+            Route::get('budgets', [BudgetController::class, 'index']);
+            Route::post('budgets', [BudgetController::class, 'store']);
+
+            Route::get('household', [HouseholdController::class, 'show']);
+            Route::patch('household', [HouseholdController::class, 'update']);
+            Route::post('household/invite', [HouseholdController::class, 'invite']);
+            Route::delete('household/members/{user}', [HouseholdController::class, 'removeMember']);
+            Route::post('household/invite/{token}/accept', [HouseholdController::class, 'acceptInvitation']);
+        });
     });
 });

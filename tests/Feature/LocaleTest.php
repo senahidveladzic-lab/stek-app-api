@@ -3,7 +3,7 @@
 use App\Models\User;
 
 it('uses user locale when authenticated', function () {
-    $user = User::factory()->create(['locale' => 'en']);
+    $user = User::factory()->withInternalAccess()->create(['locale' => 'en']);
 
     $response = $this->actingAs($user)->get('/dashboard');
 
@@ -12,7 +12,7 @@ it('uses user locale when authenticated', function () {
 });
 
 it('defaults to bosnian locale', function () {
-    $user = User::factory()->create(['locale' => 'bs']);
+    $user = User::factory()->withInternalAccess()->create(['locale' => 'bs']);
 
     $this->actingAs($user)->get('/dashboard');
 
@@ -50,7 +50,7 @@ it('can update user currency', function () {
 });
 
 it('shares translations with inertia', function () {
-    $user = User::factory()->create(['locale' => 'bs']);
+    $user = User::factory()->withInternalAccess()->create(['locale' => 'bs']);
 
     $response = $this->actingAs($user)->get('/dashboard');
 
@@ -63,7 +63,7 @@ it('shares translations with inertia', function () {
 });
 
 it('shares available locales with inertia', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->withInternalAccess()->create();
 
     $response = $this->actingAs($user)->get('/dashboard');
 

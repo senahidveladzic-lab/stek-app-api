@@ -21,3 +21,13 @@ declare module '@inertiajs/core' {
         };
     }
 }
+
+declare global {
+    interface Window {
+        Paddle?: {
+            Checkout: {
+                open: (options: Record<string, unknown>) => void;
+            };
+        };
+    }
+}

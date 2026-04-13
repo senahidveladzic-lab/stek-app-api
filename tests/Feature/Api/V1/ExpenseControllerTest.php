@@ -6,7 +6,7 @@ use App\Models\User;
 use Laravel\Sanctum\Sanctum;
 
 beforeEach(function () {
-    $this->user = User::factory()->withHousehold()->create();
+    $this->user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->category = Category::factory()->create(['name' => 'restaurant']);
 });
 

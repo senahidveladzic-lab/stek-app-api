@@ -10,7 +10,7 @@ test('guests cannot access budgets', function () {
 });
 
 test('authenticated users can view the budgets page', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $response = $this->get(route('budgets.index'));
@@ -19,7 +19,7 @@ test('authenticated users can view the budgets page', function () {
 });
 
 test('users can save an overall budget', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $month = Carbon::now()->startOfMonth()->format('Y-m-d');
@@ -40,7 +40,7 @@ test('users can save an overall budget', function () {
 });
 
 test('users can save category budgets', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $category = Category::factory()->create();
@@ -64,7 +64,7 @@ test('users can save category budgets', function () {
 });
 
 test('saving budgets updates existing entries via upsert', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $month = Carbon::now()->startOfMonth()->format('Y-m-d');
@@ -92,7 +92,7 @@ test('saving budgets updates existing entries via upsert', function () {
 });
 
 test('removing a category budget deletes it', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $category = Category::factory()->create();
@@ -120,7 +120,7 @@ test('removing a category budget deletes it', function () {
 });
 
 test('budgets are auto-copied from previous month when none exist', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $prevMonth = Carbon::now()->subMonth()->startOfMonth()->format('Y-m-d');
@@ -161,7 +161,7 @@ test('budgets are auto-copied from previous month when none exist', function () 
 });
 
 test('auto-copy does not happen when current month already has budgets', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $prevMonth = Carbon::now()->subMonth()->startOfMonth()->format('Y-m-d');
@@ -189,7 +189,7 @@ test('auto-copy does not happen when current month already has budgets', functio
 });
 
 test('dashboard includes budget data', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $month = Carbon::now()->startOfMonth()->format('Y-m-d');
@@ -210,7 +210,7 @@ test('dashboard includes budget data', function () {
 });
 
 test('dashboard returns null budget when none set', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $response = $this->get(route('dashboard'));
@@ -222,7 +222,7 @@ test('dashboard returns null budget when none set', function () {
 });
 
 test('dashboard by_category includes budget per category', function () {
-    $user = User::factory()->withHousehold()->create();
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
     $this->actingAs($user);
 
     $category = Category::factory()->create();

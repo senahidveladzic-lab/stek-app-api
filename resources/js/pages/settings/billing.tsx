@@ -209,6 +209,7 @@ function PlanCard({
     planKey,
     plan,
     billing,
+    onCheckoutError,
 }: {
     planKey: string;
     plan: BillingPlan;
@@ -262,6 +263,7 @@ function IntervalButton({
     interval,
     plan,
     planKey,
+    onCheckoutError,
 }: {
     billing: BillingProps;
     interval: 'monthly' | 'yearly';

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Exceptions\AiUsageLimitExceededException;
 use App\Exceptions\ExpenseParseException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExpenseRequest;
@@ -11,6 +12,7 @@ use App\Models\Category;
 use App\Models\Expense;
 use App\Services\CurrencyConversionService;
 use App\Services\ExpenseAIService;
+use App\Services\HouseholdAiUsageService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -144,9 +146,15 @@ class ExpenseController extends Controller
         return back()->with('success', __('common.success'));
     }
 
-    public function voice(VoiceExpenseRequest $request, ExpenseAIService $aiService): JsonResponse
+    public function voice(
+        VoiceExpenseRequest $request,
+        ExpenseAIService $aiService,
+        HouseholdAiUsageService $householdAiUsageService
+    ): JsonResponse
     {
         try {
+            $householdAiUsageService->consume($request->user());
+
             $parsed = $aiService->parse(
                 $request->validated('text'),
                 app()->getLocale(),
@@ -165,6 +173,10 @@ class ExpenseController extends Controller
             return response()->json([
                 'message' => __('errors.ai_parse_failed'),
             ], 422);
+        } catch (AiUsageLimitExceededException) {
+            return response()->json([
+                'message' => __('errors.ai_usage_limit_reached'),
+            ], 429);
         }
     }
 }

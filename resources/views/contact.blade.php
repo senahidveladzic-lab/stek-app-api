@@ -160,12 +160,16 @@
         const form = document.getElementById('contact-form');
         if (!form) { return; }
 
-        const validationMessages = @json([
-            'name'    => __('contact.validation.name_min'),
-            'email'   => __('contact.validation.email_invalid'),
-            'subject' => __('contact.validation.subject_min'),
-            'message' => __('contact.validation.message_min'),
-        ]);
+        @php
+            $validationMessages = [
+                'name' => __('contact.validation.name_min'),
+                'email' => __('contact.validation.email_invalid'),
+                'subject' => __('contact.validation.subject_min'),
+                'message' => __('contact.validation.message_min'),
+            ];
+        @endphp
+
+        const validationMessages = @js($validationMessages);
 
         const validators = {
             name:    (v) => v.trim().length < 2    ? validationMessages.name    : null,

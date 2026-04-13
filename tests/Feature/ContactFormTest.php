@@ -3,6 +3,10 @@
 use App\Mail\ContactFormReceived;
 use Illuminate\Support\Facades\Mail;
 
+it('renders the contact page successfully', function () {
+    $this->get(route('contact'))->assertOk();
+});
+
 it('sends a ContactFormReceived mailable on valid submission', function () {
     Mail::fake();
 

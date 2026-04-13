@@ -259,6 +259,7 @@
     "budget.category_over": ":amount preko budžeta",
 
     "errors.ai_parse_failed": "Nije moguće prepoznati trošak iz teksta. Pokušajte ponovo ili unesite ručno.",
+    "errors.ai_usage_limit_reached": "AI parsiranje troškova je privremeno nedostupno za ovaj račun zbog trenutnih ograničenja korištenja. Pokušajte ponovo kasnije.",
     "errors.generic": "Došlo je do greške. Pokušajte ponovo.",
     "errors.unauthorized": "Nemate pristup ovom resursu.",
 
@@ -327,9 +328,9 @@
     "landing.pricing.billed_annually": "naplaćuje se godišnje",
     "landing.pricing.save_percent": "Uštedite :percent% u odnosu na mjesečno",
     "landing.pricing.get_started": "Započnite",
-    "landing.pricing.footnote": "Uključuje 14-dnevno besplatno testiranje. Bez kreditne kartice. Otkažite bilo kad.",
+    "landing.pricing.footnote": "Uključuje 14-dnevno besplatno testiranje. Bez kreditne kartice. Otkažite bilo kad. AI parsiranje troškova je uključeno u plan i podliježe razumnim ograničenjima korištenja i dostupnosti usluge.",
     "landing.pricing.members": "članova",
-    "landing.pricing.f1": "Glasovni i tekstualni unos troškova",
+    "landing.pricing.f1": "AI unos troškova glasom i tekstom",
     "landing.pricing.f2": "Budžeti i analitika potrošnje",
     "landing.pricing.f3": "Neograničeno praćenje troškova",
     "landing.pricing.f4": "Zajedničko praćenje domaćinstva (do 5 članova)",

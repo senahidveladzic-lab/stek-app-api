@@ -33,6 +33,7 @@
                     <li>pregledaju izvještaje i analitiku potrošnje.</li>
                 </ul>
                 <p class="mt-3">Stek ne pruža finansijske savjete. Sve informacije u Aplikaciji služe isključivo informativne svrhe.</p>
+                <p class="mt-3">Određene funkcionalnosti, uključujući AI parsiranje troškova iz prirodnog govora ili teksta, oslanjaju se na modele trećih strana i mogu povremeno biti ograničene, usporene ili privremeno nedostupne zbog razumnih ograničenja korištenja, zaštite od zloupotrebe, održavanja sistema ili kapaciteta pružaoca usluge.</p>
             </section>
 
             <section>
@@ -69,6 +70,7 @@
                 <p class="mt-3">Stek nudi besplatni plan kao i plaćene planove (Starter i Max). Detalji o cijenama dostupni su na <a href="{{ route('home') }}#pricing" class="text-teal-600 hover:text-teal-500 transition">stranici za cijene</a>. Plaćanje se vrši putem Paddle.com, koji nastupa kao naš ovlašteni preprodavač i Merchant of Record. Sve transakcije obrađuje Paddle; naziv „Paddle.com" ili „Paddle" može se pojaviti na vašem bankovnom izvodu.</p>
                 <p class="mt-3">Pretplate se automatski obnavljaju na kraju svakog obračunskog perioda (mjesečno ili godišnje, ovisno o odabranom planu). Možete otkazati pretplatu u bilo kojem trenutku iz postavki naloga; otkazivanje stupa na snagu na kraju tekućeg obračunskog perioda i nećete biti naplaćeni za naredni period.</p>
                 <p class="mt-3">Pretplatom izričito prihvatate uvjete pretplate, uključujući iznos, učestalost naplate i uvjete otkazivanja, koji su prikazani prije potvrde kupovine.</p>
+                <p class="mt-3">Ako vaš plan uključuje AI funkcije, takve funkcije nisu predstavljene kao neograničene i podliježu razumnim ograničenjima korištenja te dostupnosti usluge. Stek zadržava pravo primijeniti tehnička ili operativna ograničenja kada je to potrebno radi očuvanja kvaliteta usluge, sigurnosti sistema ili sprečavanja neuobičajeno velike ili zloupotrebljavajuće upotrebe.</p>
             </section>
 
             <section id="refund-policy">
@@ -98,6 +100,7 @@
             <section>
                 <h2 class="text-lg font-semibold text-gray-900">10. Odricanje od odgovornosti</h2>
                 <p class="mt-3">Aplikacija se pruža „kakva jeste" bez ikakvih garancija, izričitih ili podrazumijevanih. Ne garantujemo da će Aplikacija uvijek biti dostupna, bez grešaka ili prikladna za posebne namjene. Koristite je na vlastitu odgovornost.</p>
+                <p class="mt-3">AI funkcije služe kao pomoć pri unosu i organizaciji podataka. Iako nastojimo da rezultati budu tačni i korisni, ne garantujemo potpunu tačnost, ispravnu kategorizaciju niti prikladnost svakog AI rezultata za vašu konkretnu situaciju. Odgovorni ste da pregledate i potvrdite podatke prije nego što se na njih oslonite.</p>
                 <p class="mt-3">U najvećoj mjeri dopuštenoj važećim zakonom, Stek tim nije odgovoran za direktne, indirektne, slučajne, posebne ili posljedične štete nastale korištenjem Aplikacije.</p>
             </section>
 

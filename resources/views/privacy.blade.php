@@ -57,7 +57,14 @@
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">3. Pohrana i sigurnost podataka</h2>
+                <h2 class="text-lg font-semibold text-gray-900">3. AI obrada unosa troškova</h2>
+                <p class="mt-3">Kada koristite AI funkcije za unos troškova glasom ili tekstom, sadržaj koji pošaljete može biti obrađen od strane vanjskog pružaoca AI usluge isključivo radi parsiranja, kategorizacije i strukturiranja vašeg unosa.</p>
+                <p class="mt-3">Za ovu obradu koristimo pružaoce usluga koji djeluju kao naši izvršioci obrade podataka. Takvim pružaocima ne prodajemo vaše podatke i ne dijelimo ih za oglašavanje. Podaci se šalju samo u mjeri potrebnoj za pružanje AI funkcionalnosti koju ste zatražili.</p>
+                <p class="mt-3">AI rezultati mogu biti netačni ili nepotpuni. Preporučujemo da svaki AI prijedlog pregledate i potvrdite prije spremanja. Radi zaštite kvaliteta usluge i sprečavanja zloupotrebe, AI funkcije mogu podlijegati razumnim ograničenjima korištenja i privremenim ograničenjima dostupnosti.</p>
+            </section>
+
+            <section>
+                <h2 class="text-lg font-semibold text-gray-900">4. Pohrana i sigurnost podataka</h2>
                 <p class="mt-3">Vaši podaci pohranjuju se na sigurnim serverima unutar Evropske unije. Primjenjujemo sljedeće sigurnosne mjere:</p>
                 <ul class="mt-3 space-y-1.5 list-disc list-inside">
                     <li>enkripcija podataka u prenosu (TLS/HTTPS),</li>
@@ -69,7 +76,7 @@
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">4. Kolačići i lokalno pohranjivanje</h2>
+                <h2 class="text-lg font-semibold text-gray-900">5. Kolačići i lokalno pohranjivanje</h2>
                 <p class="mt-3">Koristimo neophodne kolačiće (cookies) za:</p>
                 <ul class="mt-3 space-y-1.5 list-disc list-inside">
                     <li>upravljanje sesijama (da ostanete prijavljeni),</li>
@@ -79,7 +86,7 @@
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">5. Dijeljenje podataka s trećim stranama</h2>
+                <h2 class="text-lg font-semibold text-gray-900">6. Dijeljenje podataka s trećim stranama</h2>
                 <p class="mt-3">Vaše podatke dijelimo samo u sljedećim slučajevima:</p>
 
                 <h3 class="mt-5 font-medium text-gray-800">Google OAuth</h3>
@@ -88,12 +95,15 @@
                 <h3 class="mt-5 font-medium text-gray-800">Infrastrukturni pružaoci usluga</h3>
                 <p class="mt-2">Koristimo pouzdane pružaoce hosting i cloud usluga za operativne svrhe. S njima su potpisani odgovarajući ugovori o obradi podataka (Data Processing Agreements) u skladu s GDPR-om.</p>
 
+                <h3 class="mt-5 font-medium text-gray-800">AI pružaoci usluga</h3>
+                <p class="mt-2">Kada koristite AI unos troškova, relevantni tekstualni ili transkribovani sadržaj može biti proslijeđen našem AI pružaocu usluge radi generisanja strukturiranog prijedloga troška. Takva obrada odvija se isključivo radi pružanja tražene funkcionalnosti.</p>
+
                 <h3 class="mt-5 font-medium text-gray-800">Zakonske obaveze</h3>
                 <p class="mt-2">Vaše podatke možemo otkriti ako je to zakonom propisano ili naloženo od strane nadležnih organa.</p>
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">6. Vaša prava</h2>
+                <h2 class="text-lg font-semibold text-gray-900">7. Vaša prava</h2>
                 <p class="mt-3">U skladu s važećim propisima o zaštiti podataka, imate pravo na:</p>
                 <ul class="mt-3 space-y-1.5 list-disc list-inside">
                     <li><strong class="font-medium text-gray-800">Pristup</strong> — možete zatražiti kopiju svih podataka koje čuvamo o vama,</li>
@@ -107,22 +117,22 @@
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">7. Čuvanje podataka</h2>
+                <h2 class="text-lg font-semibold text-gray-900">8. Čuvanje podataka</h2>
                 <p class="mt-3">Vaše podatke čuvamo dok je vaš nalog aktivan. Nakon brisanja naloga, podaci se brišu u roku od 30 dana, osim podataka koje smo po zakonu dužni duže čuvati (npr. podaci o transakcijama mogu se čuvati do 5 godina u skladu s računovodstvenim propisima).</p>
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">8. Maloljetnici</h2>
+                <h2 class="text-lg font-semibold text-gray-900">9. Maloljetnici</h2>
                 <p class="mt-3">Aplikacija nije namijenjena osobama mlađim od 16 godina. Ne prikupljamo namjerno podatke o maloljetnicima. Ako saznamo da smo prikupili podatke o djetetu mlađem od 16 godina, odmah ćemo ih obrisati.</p>
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">9. Izmjene politike</h2>
+                <h2 class="text-lg font-semibold text-gray-900">10. Izmjene politike</h2>
                 <p class="mt-3">Ovu Politiku privatnosti možemo periodično ažurirati. O bitnim izmjenama obavijestit ćemo vas e-mailom ili obavještenjem unutar Aplikacije najmanje 14 dana prije stupanja na snagu. Datum zadnjeg ažuriranja uvijek je vidljiv na vrhu ove stranice.</p>
             </section>
 
             <section>
-                <h2 class="text-lg font-semibold text-gray-900">10. Kontakt</h2>
+                <h2 class="text-lg font-semibold text-gray-900">11. Kontakt</h2>
                 <p class="mt-3">Za sva pitanja u vezi s privatnošću obratite se na:</p>
                 <p class="mt-2">
                     <strong class="font-medium text-gray-800">Stek</strong><br>

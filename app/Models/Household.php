@@ -17,7 +17,20 @@ class Household extends Model
         'owner_id',
         'default_currency',
         'max_members',
+        'ai_reports_used',
+        'ai_reports_month',
     ];
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'ai_reports_used' => 'int',
+            'ai_reports_month' => 'date',
+        ];
+    }
 
     /**
      * @return BelongsTo<User, $this>

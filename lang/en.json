@@ -259,6 +259,7 @@
     "budget.category_over": ":amount over budget",
 
     "errors.ai_parse_failed": "Could not parse expense from text. Try again or enter manually.",
+    "errors.ai_usage_limit_reached": "AI expense parsing is temporarily unavailable for this account due to current usage limits. Please try again later.",
     "errors.generic": "An error occurred. Please try again.",
     "errors.unauthorized": "You do not have access to this resource.",
 
@@ -327,9 +328,9 @@
     "landing.pricing.billed_annually": "billed annually",
     "landing.pricing.save_percent": "Save :percent% vs monthly",
     "landing.pricing.get_started": "Get Started",
-    "landing.pricing.footnote": "14-day free trial included. No credit card required. Cancel anytime.",
+    "landing.pricing.footnote": "14-day free trial included. No credit card required. Cancel anytime. AI-assisted expense parsing is included in your plan and subject to reasonable usage limits and service availability.",
     "landing.pricing.members": "members",
-    "landing.pricing.f1": "Voice & text expense input",
+    "landing.pricing.f1": "AI-assisted voice & text expense input",
     "landing.pricing.f2": "Budgets & spending analytics",
     "landing.pricing.f3": "Unlimited expense tracking",
     "landing.pricing.f4": "Shared household tracking (up to 5 members)",

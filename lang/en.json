@@ -209,6 +209,7 @@
     "billing.plan_updated": "Your subscription plan has been updated.",
     "billing.subscription_canceled": "Your subscription will end at the end of the current billing period.",
     "billing.subscription_resumed": "Your subscription has been resumed.",
+    "billing.trial_active": "Trial",
     "billing.current_plan": "Current",
     "billing.grace_period": "Grace period",
     "billing.access_until": "Access remains active until :date.",

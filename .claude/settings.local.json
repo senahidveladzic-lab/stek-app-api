@@ -28,7 +28,8 @@
       "mcp__laravel-boost__tinker",
       "Read(//c/Users/velad/**)",
       "Read(//c//**)",
-      "Read(//c/Users/velad/Documents/**)"
+      "Read(//c/Users/velad/Documents/**)",
+      "mcp__laravel-boost__database-schema"
     ]
   },
   "enableAllProjectMcpServers": true,

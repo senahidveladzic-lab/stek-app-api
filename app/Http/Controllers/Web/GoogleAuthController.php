@@ -40,6 +40,7 @@ class GoogleAuthController extends Controller
                 'email' => $googleUser->getEmail(),
                 'google_id' => $googleUser->getId(),
                 'password' => null,
+                'trial_ends_at' => now()->addDays(14),
             ]);
 
             $household = Household::create([

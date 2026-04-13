@@ -31,6 +31,8 @@ type BillingPlan = {
 type BillingProps = {
     has_internal_access: boolean;
     has_billing_access: boolean;
+    on_active_trial: boolean;
+    trial_ends_at: string | null;
     plans: Record<string, BillingPlan>;
     subscription: {
         status: string | null;
@@ -148,12 +150,22 @@ function SubscriptionStatus({ billing }: { billing: BillingProps }) {
             <CardContent className="space-y-3">
                 <div className="flex flex-wrap items-center gap-2">
                     <Badge variant={billing.has_billing_access ? 'default' : 'secondary'}>
-                        {billing.subscription.status ?? t('billing.no_subscription')}
+                        {billing.on_active_trial
+                            ? t('billing.trial_active')
+                            : (billing.subscription.status ?? t('billing.no_subscription'))}
                     </Badge>
                     {billing.subscription.on_grace_period ? (
                         <Badge variant="secondary">{t('billing.grace_period')}</Badge>
                     ) : null}
                 </div>
+
+                {billing.on_active_trial && billing.trial_ends_at ? (
+                    <p className="text-sm text-muted-foreground">
+                        {t('billing.trial_ends_at', {
+                            date: new Date(billing.trial_ends_at).toLocaleDateString(),
+                        })}
+                    </p>
+                ) : null}
 
                 {billing.subscription.trial_ends_at ? (
                     <p className="text-sm text-muted-foreground">
@@ -339,5 +351,11 @@ async function requestCheckoutOptions(
         return;
     }
 
-    window.Paddle.Checkout.open(checkout);
+    window.Paddle.Checkout.open({
+        ...checkout,
+        settings: {
+            ...checkout.settings,
+            displayMode: 'overlay',
+        },
+    });
 }

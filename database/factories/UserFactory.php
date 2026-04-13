@@ -82,4 +82,18 @@ class UserFactory extends Factory
             'has_internal_access' => true,
         ]);
     }
+
+    public function onTrial(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'trial_ends_at' => now()->addDays(14),
+        ]);
+    }
+
+    public function withExpiredTrial(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'trial_ends_at' => now()->subDay(),
+        ]);
+    }
 }

@@ -31,6 +31,8 @@ class BillingController extends Controller
                     'ends_at' => $subscription?->ends_at?->toIso8601String(),
                     'trial_ends_at' => $subscription?->trial_ends_at?->toIso8601String(),
                 ],
+                'on_active_trial' => $user->onActiveTrial(),
+                'trial_ends_at' => $user->trial_ends_at?->toIso8601String(),
             ],
         ]);
     }

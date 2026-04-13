@@ -209,6 +209,7 @@
     "billing.plan_updated": "Plan pretplate je azuriran.",
     "billing.subscription_canceled": "Pretplata ce ostati aktivna do kraja tekuceg obracunskog perioda.",
     "billing.subscription_resumed": "Pretplata je ponovo aktivirana.",
+    "billing.trial_active": "Probno",
     "billing.current_plan": "Trenutni",
     "billing.grace_period": "Prijelazni period",
     "billing.access_until": "Pristup ostaje aktivan do :date.",

@@ -29,7 +29,12 @@
       "Read(//c/Users/velad/**)",
       "Read(//c//**)",
       "Read(//c/Users/velad/Documents/**)",
-      "mcp__laravel-boost__database-schema"
+      "mcp__laravel-boost__database-schema",
+      "Bash(composer show:*)",
+      "Bash(python -c ':*)",
+      "Bash(node -e ':*)",
+      "mcp__laravel-boost__database-query",
+      "Bash(xargs ls:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

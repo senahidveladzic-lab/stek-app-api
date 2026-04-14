@@ -357,5 +357,12 @@ async function requestCheckoutOptions(
             ...checkout.settings,
             displayMode: 'overlay',
         },
+        eventCallback: (event: { name: string; error?: { type?: string; detail?: string; code?: string } }) => {
+            if (event.name === 'checkout.error') {
+                onCheckoutError(
+                    `Paddle checkout error: ${event.error?.code ?? event.error?.type ?? 'unknown'} — ${event.error?.detail ?? 'check Paddle dashboard configuration'}`,
+                );
+            }
+        },
     });
 }

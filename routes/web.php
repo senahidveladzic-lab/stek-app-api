@@ -27,6 +27,7 @@ Route::view('/', 'welcome', [
     'canRegister' => Features::enabled(Features::registration()),
 ])->name('home');
 
+Route::view('checkout', 'checkout.default')->name('checkout.default');
 Route::view('terms', 'terms')->name('terms');
 Route::view('privacy', 'privacy')->name('privacy');
 Route::view('about', 'about')->name('about');

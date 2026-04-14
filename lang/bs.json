@@ -214,6 +214,8 @@
     "billing.grace_period": "Prijelazni period",
     "billing.access_until": "Pristup ostaje aktivan do :date.",
     "billing.trial_ends_at": "Probni period traje do :date.",
+    "billing.trial_subscription_notice_title": "Besplatan pristup je i dalje aktivan",
+    "billing.trial_subscription_notice": "Vas besplatan pristup traje do :date. Ako se pretplatite prije tog datuma, naplata placenog plana pocinje odmah.",
     "billing.update_payment_method": "Azuriraj nacin placanja",
     "billing.cancel_subscription": "Otkazi pretplatu",
     "billing.resume_subscription": "Nastavi pretplatu",

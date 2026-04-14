@@ -214,6 +214,8 @@
     "billing.grace_period": "Grace period",
     "billing.access_until": "Access remains active until :date.",
     "billing.trial_ends_at": "Trial ends on :date.",
+    "billing.trial_subscription_notice_title": "Free access is still active",
+    "billing.trial_subscription_notice": "Your free access ends on :date. Subscribing before then starts paid billing immediately.",
     "billing.update_payment_method": "Update payment method",
     "billing.cancel_subscription": "Cancel subscription",
     "billing.resume_subscription": "Resume subscription",

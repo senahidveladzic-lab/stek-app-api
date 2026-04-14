@@ -119,6 +119,17 @@ export default function BillingSettings() {
 
                     <SubscriptionStatus billing={billing} />
 
+                    {billing.on_active_trial && billing.trial_ends_at && !billing.subscription.subscribed ? (
+                        <Alert>
+                            <AlertTitle>{t('billing.trial_subscription_notice_title')}</AlertTitle>
+                            <AlertDescription>
+                                {t('billing.trial_subscription_notice', {
+                                    date: new Date(billing.trial_ends_at).toLocaleDateString(),
+                                })}
+                            </AlertDescription>
+                        </Alert>
+                    ) : null}
+
                     <div className="grid gap-4 md:grid-cols-2">
                         {Object.entries(billing.plans).map(([planKey, plan]) => (
                             <PlanCard

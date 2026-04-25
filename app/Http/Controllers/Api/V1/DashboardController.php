@@ -6,12 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\DashboardSummaryResource;
 use App\Models\Budget;
 use App\Models\Expense;
+use App\Models\Household;
+use App\Services\HouseholdAiUsageService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+    public function __construct(public HouseholdAiUsageService $aiUsageService) {}
+
     public function summary(Request $request): DashboardSummaryResource
     {
         $user = $request->user();
@@ -100,6 +104,25 @@ class DashboardController extends Controller
                 : null,
         ]));
 
+        $aiUsage = null;
+
+        if (! $user->has_internal_access) {
+            $household = Household::query()->find($householdId);
+            $currentMonth = $now->copy()->startOfMonth()->toDateString();
+            $used = $household?->ai_reports_month?->toDateString() === $currentMonth
+                ? ($household->ai_reports_used ?? 0)
+                : 0;
+            $total = $this->aiUsageService->monthlyLimitFor($user);
+            $remaining = max(0, $total - $used);
+
+            $aiUsage = [
+                'used' => $used,
+                'total' => $total,
+                'remaining' => $remaining,
+                'reset_date' => $now->copy()->addMonthNoOverflow()->startOfMonth()->format('Y-m-d'),
+            ];
+        }
+
         return new DashboardSummaryResource([
             'total_this_month' => $totalThisMonth,
             'transaction_count' => $transactionCount,
@@ -110,6 +133,7 @@ class DashboardController extends Controller
             'member_spending' => $memberSpending,
             'recent_expenses' => $recentExpenses,
             'budget' => $overallBudget ? (float) $overallBudget->amount : null,
+            'ai_usage' => $aiUsage,
         ]);
     }
 }

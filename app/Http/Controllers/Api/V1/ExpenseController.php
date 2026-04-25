@@ -27,7 +27,7 @@ class ExpenseController extends Controller
             )
             ->orderByDesc('expense_date')
             ->orderByDesc('id')
-            ->cursorPaginate(20);
+            ->paginate(20);
 
         return ExpenseResource::collection($expenses);
     }
@@ -36,6 +36,11 @@ class ExpenseController extends Controller
     {
         $user = $request->user();
         $household = $user->household;
+
+        if (! $household) {
+            return response()->json(['message' => 'User is not assigned to a household.'], 422);
+        }
+
         $validated = $request->validated();
         $expenseCurrency = $validated['currency'] ?? $household->default_currency;
 

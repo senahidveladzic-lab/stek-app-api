@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTranslation } from '@/hooks/use-translation';
@@ -40,8 +40,9 @@ export function CategorySpending({ data }: CategorySpendingProps) {
             </CardHeader>
             <CardContent className="space-y-3">
                 {visible.map((cat) => {
-                    const hasBudget = cat.budget !== null && cat.budget > 0;
-                    const budgetPercent = hasBudget ? (cat.total / cat.budget) * 100 : 0;
+                    const budgetAmount = cat.budget ?? 0;
+                    const hasBudget = budgetAmount > 0;
+                    const budgetPercent = hasBudget ? (cat.total / budgetAmount) * 100 : 0;
 
                     const barPercent = hasBudget
                         ? Math.min(budgetPercent, 100)
@@ -76,7 +77,7 @@ export function CategorySpending({ data }: CategorySpendingProps) {
                                     </span>
                                     {hasBudget ? (
                                         <span className="text-muted-foreground text-xs tabular-nums">
-                                            / {formatMoney(cat.budget)}
+                                            / {formatMoney(budgetAmount)}
                                         </span>
                                     ) : cat.previous_total > 0 ? (
                                         <span className="text-muted-foreground text-xs tabular-nums">
@@ -96,7 +97,7 @@ export function CategorySpending({ data }: CategorySpendingProps) {
                             {hasBudget && budgetPercent >= 100 && (
                                 <p className="text-[11px] text-red-500">
                                     {t('budget.category_over', {
-                                        amount: formatMoney(cat.total - cat.budget),
+                                        amount: formatMoney(cat.total - budgetAmount),
                                     })}
                                 </p>
                             )}

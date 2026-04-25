@@ -10,7 +10,7 @@ beforeEach(function () {
     $this->category = Category::factory()->create(['name' => 'restaurant']);
 });
 
-it('returns cursor paginated expenses without date filter', function () {
+it('returns paginated expenses without date filter', function () {
     Expense::factory()->count(5)->create([
         'user_id' => $this->user->id,
         'household_id' => $this->user->household_id,
@@ -24,18 +24,18 @@ it('returns cursor paginated expenses without date filter', function () {
         ->assertJsonStructure([
             'data',
             'links' => ['first', 'last', 'prev', 'next'],
-            'meta' => ['path', 'per_page', 'next_cursor', 'prev_cursor'],
+            'meta' => ['current_page', 'from', 'last_page', 'path', 'per_page', 'to', 'total'],
         ]);
 
     expect($response->json('data'))->toHaveCount(5);
 });
 
-it('does not expose total count in response', function () {
+it('exposes page metadata for mobile pagination', function () {
     Sanctum::actingAs($this->user);
 
     $response = $this->getJson('/api/v1/expenses')->assertSuccessful();
 
-    expect($response->json('meta'))->not->toHaveKey('total');
+    expect($response->json('meta'))->toHaveKeys(['current_page', 'last_page', 'total']);
 });
 
 it('returns only household expenses', function () {
@@ -103,7 +103,7 @@ it('can filter by date range', function () {
     expect($response->json('data'))->toHaveCount(1);
 });
 
-it('supports cursor based navigation', function () {
+it('supports page based navigation', function () {
     Expense::factory()->count(25)->create([
         'user_id' => $this->user->id,
         'household_id' => $this->user->household_id,
@@ -115,13 +115,13 @@ it('supports cursor based navigation', function () {
     $first = $this->getJson('/api/v1/expenses')->assertSuccessful();
 
     expect($first->json('data'))->toHaveCount(20);
-    expect($first->json('meta.next_cursor'))->not->toBeNull();
+    expect($first->json('meta.current_page'))->toBe(1);
+    expect($first->json('meta.last_page'))->toBe(2);
 
-    $cursor = $first->json('meta.next_cursor');
-    $second = $this->getJson("/api/v1/expenses?cursor={$cursor}")->assertSuccessful();
+    $second = $this->getJson('/api/v1/expenses?page=2')->assertSuccessful();
 
     expect($second->json('data'))->toHaveCount(5);
-    expect($second->json('meta.next_cursor'))->toBeNull();
+    expect($second->json('meta.current_page'))->toBe(2);
 });
 
 it('requires authentication', function () {

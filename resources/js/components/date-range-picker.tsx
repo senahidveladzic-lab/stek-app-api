@@ -1,6 +1,6 @@
-import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { bs, enUS } from 'date-fns/locale';
+import { CalendarIcon } from 'lucide-react';
 import type { DateRange } from 'react-day-picker';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';

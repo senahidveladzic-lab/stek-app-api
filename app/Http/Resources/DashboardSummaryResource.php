@@ -22,6 +22,7 @@ class DashboardSummaryResource extends JsonResource
             'member_spending' => $this->resource['member_spending'],
             'recent_expenses' => ExpenseResource::collection($this->resource['recent_expenses']),
             'budget' => $this->resource['budget'],
+            'ai_usage' => $this->resource['ai_usage'],
         ];
     }
 }

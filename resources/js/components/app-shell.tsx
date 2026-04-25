@@ -1,7 +1,7 @@
 import { usePage } from '@inertiajs/react';
 import type { ReactNode } from 'react';
-import { BreadcrumbsProvider } from '@/hooks/use-breadcrumbs';
 import { SidebarProvider } from '@/components/ui/sidebar';
+import { BreadcrumbsProvider } from '@/hooks/use-breadcrumbs';
 
 type Props = {
     children: ReactNode;

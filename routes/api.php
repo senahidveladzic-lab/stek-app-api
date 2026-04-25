@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
-use App\Http\Controllers\Api\V1\GoogleAuthController;
 use App\Http\Controllers\Api\V1\BudgetController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\DashboardController;
 use App\Http\Controllers\Api\V1\ExpenseController;
 use App\Http\Controllers\Api\V1\ExpenseVoiceController;
+use App\Http\Controllers\Api\V1\GoogleAuthController;
 use App\Http\Controllers\Api\V1\HouseholdController;
 use App\Http\Controllers\Api\V1\UserSettingsController;
 use Illuminate\Http\Request;
@@ -28,7 +28,7 @@ Route::prefix('v1')->group(function () {
         Route::patch('user/currency', [UserSettingsController::class, 'updateCurrency']);
 
         Route::middleware('subscribed')->group(function () {
-            Route::post('expenses/voice', [ExpenseVoiceController::class, 'store']);
+            Route::post('expenses/voice', [ExpenseVoiceController::class, 'store'])->middleware('throttle:60,1');
             Route::apiResource('expenses', ExpenseController::class)->except(['show'])->names('api.expenses');
             Route::get('dashboard/summary', [DashboardController::class, 'summary']);
             Route::get('categories', [CategoryController::class, 'index']);

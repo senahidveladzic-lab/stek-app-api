@@ -4,7 +4,6 @@ import AppLogo from '@/components/app-logo';
 
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
-import { useTranslation } from '@/hooks/use-translation';
 import {
     Sidebar,
     SidebarContent,
@@ -14,6 +13,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { useTranslation } from '@/hooks/use-translation';
 import type { NavItem } from '@/types';
 
 export function AppSidebar() {

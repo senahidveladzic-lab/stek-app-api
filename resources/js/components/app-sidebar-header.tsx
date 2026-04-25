@@ -1,6 +1,6 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { useBreadcrumbItems } from '@/hooks/use-breadcrumbs';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import { useBreadcrumbItems } from '@/hooks/use-breadcrumbs';
 
 export function AppSidebarHeader() {
     const breadcrumbs = useBreadcrumbItems();

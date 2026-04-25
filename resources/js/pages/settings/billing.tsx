@@ -44,8 +44,16 @@ type BillingProps = {
     };
 };
 
+type AiUsage = {
+    used: number;
+    total: number;
+    remaining: number;
+    reset_date: string;
+};
+
 type PageProps = {
     billing: BillingProps;
+    ai_usage: AiUsage | null;
     flash: {
         success: string | null;
         error: string | null;
@@ -65,7 +73,7 @@ const PLAN_PRICES = {
 
 export default function BillingSettings() {
     const { t } = useTranslation();
-    const { billing, flash } = usePage<PageProps>().props;
+    const { billing, ai_usage, flash } = usePage<PageProps>().props;
     const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
     useBreadcrumbs([
@@ -141,6 +149,8 @@ export default function BillingSettings() {
                             />
                         ))}
                     </div>
+
+                    {ai_usage ? <AiUsageCard usage={ai_usage} /> : null}
                 </div>
             </SettingsLayout>
         </>
@@ -325,6 +335,37 @@ function IntervalButton({
                 ? t(`billing.switch_${interval}`)
                 : t(`billing.start_${interval}`)}
         </Button>
+    );
+}
+
+function AiUsageCard({ usage }: { usage: AiUsage }) {
+    const percent = usage.total > 0 ? Math.min(100, (usage.used / usage.total) * 100) : 0;
+    const isExhausted = usage.remaining === 0;
+    const resetDate = new Date(usage.reset_date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+
+    return (
+        <Card>
+            <CardHeader className="pb-3">
+                <CardTitle className="text-base">AI Usage</CardTitle>
+                <CardDescription>Voice requests this billing period</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-2">
+                <div className="h-2 w-full rounded-full bg-muted">
+                    <div
+                        className={isExhausted ? 'h-2 rounded-full bg-destructive' : 'h-2 rounded-full bg-primary'}
+                        style={{ width: `${percent}%` }}
+                    />
+                </div>
+                <p className="text-xs text-muted-foreground">
+                    {usage.used} of {usage.total} used · Resets {resetDate}
+                </p>
+                {isExhausted ? (
+                    <p className="text-xs text-destructive">
+                        Monthly limit reached. Usage will reset on {resetDate}.
+                    </p>
+                ) : null}
+            </CardContent>
+        </Card>
     );
 }
 

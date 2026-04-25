@@ -34,7 +34,8 @@
       "Bash(python -c ':*)",
       "Bash(node -e ':*)",
       "mcp__laravel-boost__database-query",
-      "Bash(xargs ls:*)"
+      "Bash(xargs ls:*)",
+      "Skill(update-config)"
     ]
   },
   "enableAllProjectMcpServers": true,

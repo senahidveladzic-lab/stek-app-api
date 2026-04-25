@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Billing\BillingPlanRequest;
+use App\Services\HouseholdAiUsageService;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,11 +14,32 @@ use Inertia\Response;
 
 class BillingController extends Controller
 {
+    public function __construct(public HouseholdAiUsageService $aiUsageService) {}
+
     public function show(Request $request): Response
     {
         $user = $request->user();
         $subscription = $user->subscription(config('billing.subscription_type'));
         $currentPriceId = $subscription?->items->first()?->price_id;
+
+        $aiUsage = null;
+
+        if (! $user->has_internal_access) {
+            $household = $user->household;
+            $currentMonth = Carbon::now()->startOfMonth();
+            $used = ($household?->ai_reports_month?->startOfMonth()->eq($currentMonth))
+                ? ($household->ai_reports_used ?? 0)
+                : 0;
+            $total = $this->aiUsageService->monthlyLimitFor($user);
+            $remaining = max(0, $total - $used);
+
+            $aiUsage = [
+                'used' => $used,
+                'total' => $total,
+                'remaining' => $remaining,
+                'reset_date' => Carbon::now()->startOfMonth()->addMonth()->toDateString(),
+            ];
+        }
 
         return Inertia::render('settings/billing', [
             'billing' => [
@@ -34,6 +57,7 @@ class BillingController extends Controller
                 'on_active_trial' => $user->onActiveTrial(),
                 'trial_ends_at' => $user->trial_ends_at?->toIso8601String(),
             ],
+            'ai_usage' => $aiUsage,
         ]);
     }
 

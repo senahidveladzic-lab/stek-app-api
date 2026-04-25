@@ -1,14 +1,14 @@
 import { Head, usePage } from '@inertiajs/react';
-import { useTranslation } from '@/hooks/use-translation';
 import { useBreadcrumbs } from '@/hooks/use-breadcrumbs';
+import { useTranslation } from '@/hooks/use-translation';
 import appLayout from '@/layouts/app-layout';
-import type { Summary } from './dashboard/types';
+import { CategorySpending } from './dashboard/category-spending';
+import { EmptyState } from './dashboard/empty-state';
 import { HeroStat } from './dashboard/hero-stat';
 import { HouseholdBalance } from './dashboard/household-balance';
-import { CategorySpending } from './dashboard/category-spending';
 import { MonthlyComparison } from './dashboard/monthly-comparison';
 import { RecentExpenses } from './dashboard/recent-expenses';
-import { EmptyState } from './dashboard/empty-state';
+import type { Summary } from './dashboard/types';
 
 export default function Dashboard() {
     const { t } = useTranslation();

@@ -65,6 +65,34 @@ test('unsubscribed api requests receive a payment required response', function (
         ->assertStatus(402);
 });
 
+test('billing page includes ai_usage for regular users', function () {
+    $user = User::factory()->withHousehold()->create();
+
+    $this->actingAs($user)
+        ->get(route('billing.show'))
+        ->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('settings/billing')
+            ->has('ai_usage')
+            ->where('ai_usage.used', 0)
+            ->where('ai_usage.remaining', fn ($remaining) => $remaining > 0)
+            ->whereType('ai_usage.total', 'integer')
+            ->whereType('ai_usage.reset_date', 'string')
+        );
+});
+
+test('billing page has null ai_usage for users with internal access', function () {
+    $user = User::factory()->withInternalAccess()->create();
+
+    $this->actingAs($user)
+        ->get(route('billing.show'))
+        ->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('settings/billing')
+            ->where('ai_usage', null)
+        );
+});
+
 test('subscribed users can use subscribed routes', function () {
     $user = User::factory()->withHousehold()->create();
     $subscription = $user->subscriptions()->create([

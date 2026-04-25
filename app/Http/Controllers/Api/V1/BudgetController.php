@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveBudgetRequest;
 use App\Models\Budget;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -29,23 +31,8 @@ class BudgetController extends Controller
             $budgets = $this->copyFromPreviousMonth($householdId, $monthDate);
         }
 
-        $overallBudget = $budgets->firstWhere('category_id', null);
-        $categoryBudgets = $budgets->whereNotNull('category_id')->values();
-
         return response()->json([
-            'data' => [
-                'month' => $monthDate,
-                'overall_budget' => $overallBudget ? (float) $overallBudget->amount : null,
-                'category_budgets' => $categoryBudgets->map(fn (Budget $b) => [
-                    'id' => $b->id,
-                    'category_id' => $b->category_id,
-                    'category_name' => $b->category->name,
-                    'category_icon' => $b->category->icon,
-                    'category_color' => $b->category->color,
-                    'amount' => (float) $b->amount,
-                ]),
-                'currency' => $user->household->default_currency ?? $user->default_currency,
-            ],
+            'data' => $this->budgetPayload($user, $budgets, $monthDate),
         ]);
     }
 
@@ -81,7 +68,52 @@ class BudgetController extends Controller
             ->whereNotIn('category_id', $existingCategoryIds)
             ->delete();
 
-        return response()->json(['message' => 'Budget saved successfully.']);
+        $budgets = Budget::query()
+            ->forHousehold($householdId)
+            ->forMonth($monthDate)
+            ->with('category')
+            ->get();
+
+        return response()->json([
+            'message' => 'Budget saved successfully.',
+            'data' => $this->budgetPayload($user, $budgets, $monthDate),
+        ]);
+    }
+
+    /**
+     * @param  Collection<int, Budget>  $budgets
+     * @return array{
+     *     month: string,
+     *     overall_budget: float|null,
+     *     category_budgets: \Illuminate\Support\Collection<int, array{
+     *         id: int,
+     *         category_id: int|null,
+     *         category_name: string,
+     *         category_icon: string,
+     *         category_color: string,
+     *         amount: float
+     *     }>,
+     *     currency: string
+     * }
+     */
+    private function budgetPayload(User $user, Collection $budgets, string $monthDate): array
+    {
+        $overallBudget = $budgets->firstWhere('category_id', null);
+        $categoryBudgets = $budgets->whereNotNull('category_id')->values();
+
+        return [
+            'month' => $monthDate,
+            'overall_budget' => $overallBudget ? (float) $overallBudget->amount : null,
+            'category_budgets' => $categoryBudgets->map(fn (Budget $budget) => [
+                'id' => $budget->id,
+                'category_id' => $budget->category_id,
+                'category_name' => $budget->category->name,
+                'category_icon' => $budget->category->icon,
+                'category_color' => $budget->category->color,
+                'amount' => (float) $budget->amount,
+            ]),
+            'currency' => $user->household->default_currency ?? $user->default_currency,
+        ];
     }
 
     private function upsertBudget(int $householdId, ?int $categoryId, string $month, float $amount): void
@@ -113,7 +145,7 @@ class BudgetController extends Controller
     /**
      * @return \Illuminate\Database\Eloquent\Collection<int, Budget>
      */
-    private function copyFromPreviousMonth(int $householdId, string $currentMonth): \Illuminate\Database\Eloquent\Collection
+    private function copyFromPreviousMonth(int $householdId, string $currentMonth): Collection
     {
         $previousMonth = Carbon::parse($currentMonth)->subMonth()->startOfMonth()->format('Y-m-d');
 
@@ -123,7 +155,7 @@ class BudgetController extends Controller
             ->get();
 
         if ($previousBudgets->isEmpty()) {
-            return new \Illuminate\Database\Eloquent\Collection;
+            return new Collection;
         }
 
         $copied = [];
@@ -136,6 +168,6 @@ class BudgetController extends Controller
             ]);
         }
 
-        return new \Illuminate\Database\Eloquent\Collection($copied);
+        return new Collection($copied);
     }
 }

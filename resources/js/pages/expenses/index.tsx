@@ -1,11 +1,11 @@
 import { Head, router, useForm, usePage } from '@inertiajs/react';
+import { startOfMonth, endOfMonth } from 'date-fns';
 import { CalendarRange, Pencil, Plus, Search, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-import { startOfMonth, endOfMonth } from 'date-fns';
 import { DateRangePicker } from '@/components/date-range-picker';
 import { MonthSelector } from '@/components/month-selector';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import {
     Dialog,
     DialogContent,
@@ -473,7 +473,6 @@ function EditExpenseModal({
     categories: Category[];
 }) {
     const { t } = useTranslation();
-    const { household } = usePage().props;
 
     const form = useForm({
         amount: expense.original_amount ?? expense.amount,

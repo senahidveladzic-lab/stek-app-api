@@ -239,6 +239,11 @@
     "household.invitation_already_sent": "Pozivnica je već poslana na ovu email adresu.",
     "household.invitation_email_mismatch": "Ova pozivnica nije za vaš email.",
     "household.invitation_accepted": "Uspješno ste se pridružili domaćinstvu.",
+    "household.invitation_email_subject": "Pozvani ste da se pridružite domaćinstvu :household",
+    "household.invitation_email_title": "Pozvani ste u domaćinstvo",
+    "household.invitation_email_body": "Pozvani ste da se pridružite domaćinstvu **:household** na Šteku. Kliknite na dugme ispod da prihvatite pozivnicu.",
+    "household.invitation_email_cta": "Prihvati pozivnicu",
+    "household.invitation_email_footer": "Ako niste očekivali ovu pozivnicu, možete je slobodno ignorisati.",
 
     "expenses.month_total": "Ukupno za mjesec",
     "expenses.year_total": "Ukupno za godinu",

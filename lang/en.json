@@ -239,6 +239,11 @@
     "household.invitation_already_sent": "An invitation has already been sent to this email.",
     "household.invitation_email_mismatch": "This invitation is not for your email address.",
     "household.invitation_accepted": "You have successfully joined the household.",
+    "household.invitation_email_subject": "You've been invited to join the :household household",
+    "household.invitation_email_title": "You've been invited to a household",
+    "household.invitation_email_body": "You have been invited to join the **:household** household on Štek. Click the button below to accept the invitation.",
+    "household.invitation_email_cta": "Accept Invitation",
+    "household.invitation_email_footer": "If you did not expect this invitation, you can safely ignore this email.",
 
     "expenses.month_total": "Month total",
     "expenses.year_total": "Year total",

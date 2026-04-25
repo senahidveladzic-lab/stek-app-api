@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InviteMemberRequest;
 use App\Http\Requests\UpdateHouseholdRequest;
+use App\Mail\HouseholdInvitationMail;
 use App\Models\HouseholdInvitation;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -48,10 +50,13 @@ class HouseholdController extends Controller
             return back()->withErrors(['email' => __('household.invitation_already_sent')]);
         }
 
-        $household->invitations()->create([
+        $invitation = $household->invitations()->create([
             'email' => $request->validated('email'),
             'token' => Str::random(64),
         ]);
+
+        $invitation->setRelation('household', $household);
+        Mail::to($invitation->email)->send(new HouseholdInvitationMail($invitation));
 
         return back()->with('success', __('common.success'));
     }

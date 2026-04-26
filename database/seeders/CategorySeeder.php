@@ -13,7 +13,7 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'restaurant', 'icon' => "\u{1F37D}\u{FE0F}", 'color' => '#FF6B6B', 'sort_order' => 1],
+            ['name' => 'food', 'icon' => "\u{1F37D}\u{FE0F}", 'color' => '#FF6B6B', 'sort_order' => 1],
             ['name' => 'groceries', 'icon' => "\u{1F6D2}", 'color' => '#4ECDC4', 'sort_order' => 2],
             ['name' => 'transport', 'icon' => "\u{1F697}", 'color' => '#45B7D1', 'sort_order' => 3],
             ['name' => 'entertainment', 'icon' => "\u{1F3AC}", 'color' => '#96CEB4', 'sort_order' => 4],

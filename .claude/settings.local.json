@@ -35,7 +35,19 @@
       "Bash(node -e ':*)",
       "mcp__laravel-boost__database-query",
       "Bash(xargs ls:*)",
-      "Skill(update-config)"
+      "Skill(update-config)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(k,':',v\\) for k,v in d.items\\(\\) if 'auth' in k]\")",
+      "Bash(xargs cat *)",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('/Users/senahidveladzic/Herd/savings-api/lang/en.json'\\)\\); [print\\(k,':',v\\) for k,v in d.items\\(\\) if k.startswith\\('auth.'\\)]\")",
+      "Bash(npx tsc *)",
+      "Bash(grep -i \"price\\\\|plan\\\\|month\\\\|€\\\\|\\\\$\\\\|KM\\\\|BAM\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(k,v\\) for k,v in d.get\\('dependencies',{}\\).items\\(\\) if any\\(x in k for x in ['audio','voice','sound','av','speech']\\)]\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(k,':',v\\) for k,v in {**d.get\\('dependencies',{}\\), **d.get\\('devDependencies',{}\\)}.items\\(\\) if 'expo' in k.lower\\(\\)]\")",
+      "Bash(npx expo *)",
+      "Bash(node -e \"const m = require\\('./node_modules/expo-audio'\\); console.log\\(Object.keys\\(m\\).filter\\(k => k.toLowerCase\\(\\).includes\\('record'\\) || k.toLowerCase\\(\\).includes\\('audio'\\)\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(pnpm remove *)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs"
     ]
   },
   "enableAllProjectMcpServers": true,

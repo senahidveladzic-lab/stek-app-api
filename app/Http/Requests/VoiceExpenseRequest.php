@@ -17,7 +17,8 @@ class VoiceExpenseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'text' => ['required', 'string', 'max:1000'],
+            'audio' => ['required_without:text', 'file', 'mimes:mp4,m4a,mp3,wav,webm,ogg,flac', 'max:25600'],
+            'text' => ['required_without:audio', 'string', 'max:1000'],
         ];
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Household;
 use App\Models\User;
 use Laravel\Socialite\Contracts\Factory as SocialiteFactory;
 use Laravel\Socialite\Two\GoogleProvider;
@@ -30,22 +29,13 @@ function mockSocialite(SocialiteUser $socialiteUser): void
     app()->instance(SocialiteFactory::class, $socialite);
 }
 
-it('creates a new user and household when signing in with Google for the first time', function () {
+it('returns 403 when signing in with Google for an unregistered account', function () {
     mockSocialite(makeSocialiteUser());
 
     $response = $this->postJson('/api/v1/auth/google', ['id_token' => 'valid-token']);
 
-    $response->assertSuccessful()
-        ->assertJsonStructure(['token', 'user']);
-
-    $this->assertDatabaseHas('users', [
-        'email' => 'john@example.com',
-        'google_id' => '123456',
-    ]);
-
-    $user = User::query()->where('email', 'john@example.com')->first();
-    $this->assertNotNull($user->household_id);
-    $this->assertDatabaseHas('households', ['owner_id' => $user->id]);
+    $response->assertForbidden();
+    $this->assertDatabaseMissing('users', ['email' => 'john@example.com']);
 });
 
 it('returns an existing user matched by google_id', function () {

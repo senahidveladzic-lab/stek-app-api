@@ -40,6 +40,12 @@ return [
         'model' => env('ANTHROPIC_MODEL', 'claude-haiku-4-5-20251001'),
     ],
 
+    'openai' => [
+        'api_key' => env('OPEN_AI_KEY'),
+        'whisper_model' => env('OPENAI_WHISPER_MODEL', 'whisper-1'),
+        'chat_model' => env('OPENAI_CHAT_MODEL', 'gpt-4o-mini'),
+    ],
+
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),

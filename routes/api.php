@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\ExpenseController;
 use App\Http\Controllers\Api\V1\ExpenseVoiceController;
 use App\Http\Controllers\Api\V1\GoogleAuthController;
 use App\Http\Controllers\Api\V1\HouseholdController;
+use App\Http\Controllers\Api\V1\TagController;
 use App\Http\Controllers\Api\V1\UserSettingsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,6 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::post('auth/login', [AuthController::class, 'login']);
-    Route::post('auth/register', [AuthController::class, 'register']);
     Route::post('auth/google', GoogleAuthController::class);
 
     Route::middleware('auth:sanctum')->group(function () {
@@ -32,6 +32,7 @@ Route::prefix('v1')->group(function () {
             Route::apiResource('expenses', ExpenseController::class)->except(['show'])->names('api.expenses');
             Route::get('dashboard/summary', [DashboardController::class, 'summary']);
             Route::get('categories', [CategoryController::class, 'index']);
+            Route::apiResource('tags', TagController::class)->except(['show'])->names('api.tags');
 
             Route::get('budgets', [BudgetController::class, 'index']);
             Route::post('budgets', [BudgetController::class, 'store']);

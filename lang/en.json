@@ -5,7 +5,6 @@
     "nav.logout": "Logout",
     "nav.login": "Login",
     "nav.register": "Register",
-
     "dashboard.title": "Dashboard",
     "dashboard.total_this_month": "Total this month",
     "dashboard.transaction_count": "Transaction count",
@@ -34,7 +33,6 @@
     "dashboard.burn_rate": "Burn rate",
     "dashboard.transaction_overview": "Transaction overview",
     "dashboard.percent_of_month": ":percent% of month",
-
     "expenses.title": "Expenses",
     "expenses.add": "Add expense",
     "expenses.edit": "Edit expense",
@@ -54,7 +52,6 @@
     "expenses.all_categories": "All categories",
     "expenses.voice_input_placeholder": "Enter text or expense description...",
     "expenses.custom_range": "Custom range",
-
     "categories.food": "Food",
     "categories.groceries": "Groceries",
     "categories.transport": "Transport",
@@ -69,7 +66,6 @@
     "categories.subscriptions": "Subscriptions",
     "categories.travel": "Travel",
     "categories.other": "Other",
-
     "settings.title": "Settings",
     "settings.description": "Manage your profile and account settings",
     "settings.language": "Language",
@@ -118,7 +114,6 @@
     "settings.delete_warning_text": "Please proceed with caution, this cannot be undone.",
     "settings.delete_confirm_title": "Are you sure you want to delete your account?",
     "settings.delete_confirm_description": "Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.",
-
     "settings.2fa_enabled_title": "Two-factor authentication enabled",
     "settings.2fa_enabled_description": "Two-factor authentication is now enabled. Scan the QR code or enter the setup key in your authenticator app.",
     "settings.2fa_verify_title": "Verify authentication code",
@@ -132,7 +127,6 @@
     "settings.view_recovery_codes": "View recovery codes",
     "settings.regenerate_codes": "Regenerate codes",
     "settings.recovery_codes_warning": "Each recovery code can be used once to access your account and will be removed after use. If you need more, click Regenerate codes above.",
-
     "common.save": "Save",
     "common.cancel": "Cancel",
     "common.confirm": "Confirm",
@@ -147,7 +141,6 @@
     "common.back": "Back",
     "common.close": "Close",
     "common.continue": "Continue",
-
     "auth.login": "Login",
     "auth.register": "Register",
     "auth.email": "Email address",
@@ -190,13 +183,10 @@
     "auth.login_with_recovery_code": "login using a recovery code",
     "auth.enter_recovery_code": "Enter recovery code",
     "auth.or_you_can": "or you can",
-
     "validation.required": "The :attribute field is required",
     "validation.numeric": "The :attribute field must be a number",
     "validation.min.numeric": "The :attribute field must be at least :min",
-
     "settings.household": "Household",
-
     "billing.title": "Billing",
     "billing.description": "Manage your subscription, payment method, and plan changes.",
     "billing.subscription_required": "You need an active subscription to use the app.",
@@ -225,7 +215,6 @@
     "billing.switch_yearly": "Switch to yearly",
     "billing.internal_access_title": "Internal access enabled",
     "billing.internal_access_description": "This account can use the app without an active paid subscription.",
-
     "household.name": "Household name",
     "household.members": "Members",
     "household.invite": "Invite member",
@@ -244,16 +233,13 @@
     "household.invitation_email_body": "You have been invited to join the **:household** household on Štek. Click the button below to accept the invitation.",
     "household.invitation_email_cta": "Accept Invitation",
     "household.invitation_email_footer": "If you did not expect this invitation, you can safely ignore this email.",
-
     "expenses.month_total": "Month total",
     "expenses.year_total": "Year total",
     "expenses.added_by": "Added by",
     "expenses.currency": "Currency",
-
     "nav.budgets": "Budgets",
     "nav.platform": "Platform",
     "nav.navigation_menu": "Navigation menu",
-
     "budget.title": "Budgets",
     "budget.overall": "Overall budget",
     "budget.monthly_limit": "Monthly limit",
@@ -265,16 +251,13 @@
     "budget.over": ":amount over budget",
     "budget.used": ":percent% used",
     "budget.category_over": ":amount over budget",
-
     "errors.ai_parse_failed": "Could not parse expense from text. Try again or enter manually.",
     "errors.ai_usage_limit_reached": "AI expense parsing is temporarily unavailable for this account due to current usage limits. Please try again later.",
     "errors.generic": "An error occurred. Please try again.",
     "errors.unauthorized": "You do not have access to this resource.",
-
     "landing.nav.features": "Features",
     "landing.nav.pricing": "Pricing",
     "landing.nav.download": "Download",
-
     "landing.hero.badge": "Now available on iOS & Android",
     "landing.hero.headline_1": "Spend smarter.",
     "landing.hero.headline_2": "Save together.",
@@ -284,19 +267,16 @@
     "landing.hero.trust_no_card": "No credit card required",
     "landing.hero.trust_free": "14-day free trial",
     "landing.hero.trust_setup": "2 min setup",
-
     "landing.mockup.url": "stek-app.com/dashboard",
     "landing.mockup.spending": "Spending this month",
     "landing.mockup.food": "Food & Dining",
     "landing.mockup.housing": "Housing",
     "landing.mockup.transport": "Transport",
     "landing.mockup.shopping": "Shopping",
-
     "landing.stats.users": "Active Users",
     "landing.stats.tracked": "Expenses Tracked",
     "landing.stats.rating": "App Rating",
     "landing.stats.uptime": "Uptime",
-
     "landing.features.label": "Features",
     "landing.features.title": "Built for how your",
     "landing.features.title_highlight": "household actually spends",
@@ -310,7 +290,6 @@
     "landing.features.analytics_title": "Know Your Numbers",
     "landing.features.analytics_desc": "Monthly comparisons, category breakdowns, daily averages, and income versus expense tracking. All visible at a glance — no spreadsheet needed.",
     "landing.features.members": "members",
-
     "landing.steps.label": "How it works",
     "landing.steps.title": "Up and running in minutes",
     "landing.steps.step1_title": "Create your account",
@@ -319,7 +298,6 @@
     "landing.steps.step2_desc": "Open the app, tap the mic, and say what you spent. Štek handles the rest.",
     "landing.steps.step3_title": "Watch savings grow",
     "landing.steps.step3_desc": "Set budgets, review insights, and see your financial habits improve over time.",
-
     "landing.pricing.label": "Pricing",
     "landing.pricing.title": "One app. Two plans.",
     "landing.pricing.subtitle": "Start with a 14-day free trial. Pick your plan when you are ready.",
@@ -345,7 +323,6 @@
     "landing.pricing.f5": "iOS & Android app",
     "landing.pricing.f4_max": "Shared household tracking (up to 10 members)",
     "landing.pricing.f6_max": "Priority support",
-
     "landing.testimonials.label": "Testimonials",
     "landing.testimonials.title": "Loved by households everywhere",
     "landing.testimonials.t1_quote": "Štek completely changed how our family handles money. We went from arguments about spending to actually saving for vacations.",
@@ -357,7 +334,6 @@
     "landing.testimonials.t3_quote": "Finally an app that gets household finances. My wife and I can both see where our money goes in real time.",
     "landing.testimonials.t3_name": "Emir K.",
     "landing.testimonials.t3_loc": "Tuzla",
-
     "landing.security.label": "Security",
     "landing.security.title": "Your finances are safe with us",
     "landing.security.subtitle": "We treat your financial data with the highest level of care and protection.",
@@ -369,7 +345,6 @@
     "landing.security.gdpr_desc": "Full compliance with EU data protection regulations. Export or delete your data anytime.",
     "landing.security.audit_title": "Security Audits",
     "landing.security.audit_desc": "Regular third-party penetration testing and code reviews keep your account safe.",
-
     "landing.download.label": "Download",
     "landing.download.title": "Your finances, everywhere",
     "landing.download.subtitle": "Log a coffee from your phone, check the budget on your laptop. Everything stays in sync, always.",
@@ -383,13 +358,11 @@
     "landing.download.scan": "Scan to download the app",
     "landing.download.dashboard": "Dashboard",
     "landing.download.this_month": "This month",
-
     "landing.cta.title_1": "Stop guessing where",
     "landing.cta.title_2": "your money went.",
     "landing.cta.subtitle": "14-day free trial. No credit card required. Cancel anytime.",
     "landing.cta.button": "Start Free Today",
     "landing.cta.footnote": "Free forever plan available. No credit card required.",
-
     "landing.footer.description": "Smart household finance management. Track expenses, set budgets, and save together with your family.",
     "landing.footer.product": "Product",
     "landing.footer.company": "Company",
@@ -404,7 +377,6 @@
     "landing.footer.copyright": "© :year Štek App. All rights reserved.",
     "auth.or": "or",
     "auth.continue_with_google": "Continue with Google",
-
     "about.label": "About us",
     "about.headline_1": "Finances without stress,",
     "about.headline_2": "for every household.",
@@ -432,7 +404,6 @@
     "about.cta_title": "See it for yourself",
     "about.cta_subtitle": "Try Štek free for 14 days. No credit card required.",
     "about.cta_button": "Start free trial",
-
     "contact.label": "Contact",
     "contact.headline": "How can we help?",
     "contact.subtitle": "Have a question, suggestion or issue? Send us a message and we'll get back to you as soon as possible.",
@@ -448,16 +419,14 @@
     "contact.info_email_label": "Email",
     "contact.info_response": "We typically respond within 24 hours.",
     "contact.info_phone_label": "Phone",
-
     "contact.validation.name_min": "Name must be at least 2 characters.",
     "contact.validation.email_invalid": "Enter a valid email address.",
     "contact.validation.subject_min": "Subject must be at least 3 characters.",
     "contact.validation.message_min": "Message must be at least 10 characters.",
-
     "contact.email.title": "New contact form message",
     "contact.email.from": "From",
     "contact.email.subject_label": "Subject",
     "contact.email.reply_hint": "Hit reply to respond directly to :name.",
-
-    "common.back_to_home": "Back to home"
+    "common.back_to_home": "Back to home",
+    "auth.registration_web_only": "Account registration is only available on the web. Please visit our website to create an account."
 }

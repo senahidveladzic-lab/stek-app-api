@@ -57,6 +57,14 @@ class Household extends Model
     }
 
     /**
+     * @return HasMany<Tag, $this>
+     */
+    public function tags(): HasMany
+    {
+        return $this->hasMany(Tag::class);
+    }
+
+    /**
      * @return HasMany<HouseholdInvitation, $this>
      */
     public function invitations(): HasMany

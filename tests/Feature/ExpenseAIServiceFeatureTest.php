@@ -11,7 +11,9 @@ it('builds prompt with correct locale template', function () {
     expect($prompt)
         ->toContain('kafa 3 marke')
         ->toContain('BAM')
-        ->toContain(now()->format('Y-m-d'));
+        ->toContain(now()->format('Y-m-d'))
+        ->toContain('gramatički ispravan opis troška')
+        ->toContain('Kafa i sladoled u kafiću');
 });
 
 it('falls back to english template for unknown locale', function () {
@@ -20,22 +22,24 @@ it('falls back to english template for unknown locale', function () {
 
     expect($prompt)
         ->toContain('coffee 5 dollars')
-        ->toContain('USD');
+        ->toContain('USD')
+        ->toContain('Do not copy noisy speech-to-text literally');
 });
 
 it('voice endpoint calls AI and returns parsed data', function () {
     Http::fake([
-        'api.anthropic.com/*' => Http::response([
-            'content' => [
+        'api.openai.com/v1/chat/*' => Http::response([
+            'choices' => [
                 [
-                    'type' => 'text',
-                    'text' => json_encode([
-                        'amount' => 3,
-                        'currency' => 'BAM',
-                        'category_key' => 'cafe',
-                        'description' => 'Kafa',
-                        'date' => '2026-03-06',
-                    ]),
+                    'message' => [
+                        'content' => json_encode([
+                            'amount' => 3,
+                            'currency' => 'BAM',
+                            'category_key' => 'cafe',
+                            'description' => 'Kafa',
+                            'date' => '2026-03-06',
+                        ]),
+                    ],
                 ],
             ],
         ]),
@@ -53,7 +57,7 @@ it('voice endpoint calls AI and returns parsed data', function () {
 
 it('voice endpoint returns error on AI failure', function () {
     Http::fake([
-        'api.anthropic.com/*' => Http::response([], 500),
+        'api.openai.com/v1/chat/*' => Http::response([], 500),
     ]);
 
     $user = User::factory()->withInternalAccess()->create();

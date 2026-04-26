@@ -30,9 +30,10 @@ test('starter households are blocked after reaching the monthly ai cap', functio
 
     $user = User::factory()->withHousehold()->create();
     subscribeUserToPlan($user, config('billing.plans.starter.prices.monthly'));
+    $limit = config('billing.plans.starter.ai_monthly_limit');
 
     $user->household->update([
-        'ai_reports_used' => 300,
+        'ai_reports_used' => $limit,
         'ai_reports_month' => now()->startOfMonth()->toDateString(),
     ]);
 
@@ -46,25 +47,27 @@ test('starter households are blocked after reaching the monthly ai cap', functio
 
 test('max households can consume the final allowed monthly ai report', function () {
     Http::fake([
-        'api.anthropic.com/*' => Http::response([
-            'content' => [[
-                'type' => 'text',
-                'text' => json_encode([
-                    'amount' => 3,
-                    'currency' => 'BAM',
-                    'category_key' => 'cafe',
-                    'description' => 'Kafa',
-                    'date' => '2026-03-06',
-                ]),
+        'api.openai.com/v1/chat/*' => Http::response([
+            'choices' => [[
+                'message' => [
+                    'content' => json_encode([
+                        'amount' => 3,
+                        'currency' => 'BAM',
+                        'category_key' => 'cafe',
+                        'description' => 'Kafa',
+                        'date' => '2026-03-06',
+                    ]),
+                ],
             ]],
         ]),
     ]);
 
     $user = User::factory()->withHousehold()->create();
     subscribeUserToPlan($user, config('billing.plans.max.prices.monthly'));
+    $limit = config('billing.plans.max.ai_monthly_limit');
 
     $user->household->update([
-        'ai_reports_used' => 599,
+        'ai_reports_used' => $limit - 1,
         'ai_reports_month' => now()->startOfMonth()->toDateString(),
     ]);
 
@@ -73,30 +76,32 @@ test('max households can consume the final allowed monthly ai report', function 
         ->assertOk()
         ->assertJsonPath('data.category_key', 'cafe');
 
-    expect($user->household->fresh()->ai_reports_used)->toBe(600);
+    expect($user->household->fresh()->ai_reports_used)->toBe($limit);
 });
 
 test('monthly ai usage resets when a new month starts', function () {
     Http::fake([
-        'api.anthropic.com/*' => Http::response([
-            'content' => [[
-                'type' => 'text',
-                'text' => json_encode([
-                    'amount' => 3,
-                    'currency' => 'BAM',
-                    'category_key' => 'cafe',
-                    'description' => 'Kafa',
-                    'date' => '2026-03-06',
-                ]),
+        'api.openai.com/v1/chat/*' => Http::response([
+            'choices' => [[
+                'message' => [
+                    'content' => json_encode([
+                        'amount' => 3,
+                        'currency' => 'BAM',
+                        'category_key' => 'cafe',
+                        'description' => 'Kafa',
+                        'date' => '2026-03-06',
+                    ]),
+                ],
             ]],
         ]),
     ]);
 
     $user = User::factory()->withHousehold()->create();
     subscribeUserToPlan($user, config('billing.plans.starter.prices.monthly'));
+    $limit = config('billing.plans.starter.ai_monthly_limit');
 
     $user->household->update([
-        'ai_reports_used' => 300,
+        'ai_reports_used' => $limit,
         'ai_reports_month' => now()->subMonth()->startOfMonth()->toDateString(),
     ]);
 

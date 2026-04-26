@@ -27,5 +27,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user->update(['household_id' => $household->id]);
+
+        $household->tags()->createMany([
+            ['name' => 'Family', 'color' => '#2563EB'],
+            ['name' => 'Work', 'color' => '#16A34A'],
+            ['name' => 'Personal', 'color' => '#9333EA'],
+        ]);
     }
 }

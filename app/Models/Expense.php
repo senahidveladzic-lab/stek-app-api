@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Expense extends Model
@@ -63,6 +64,14 @@ class Expense extends Model
     }
 
     /**
+     * @return BelongsToMany<Tag, $this>
+     */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    /**
      * @param  Builder<Expense>  $query
      * @return Builder<Expense>
      */
@@ -96,5 +105,14 @@ class Expense extends Model
     public function scopeInCategory(Builder $query, int $categoryId): Builder
     {
         return $query->where('category_id', $categoryId);
+    }
+
+    /**
+     * @param  Builder<Expense>  $query
+     * @return Builder<Expense>
+     */
+    public function scopeInTag(Builder $query, int $tagId): Builder
+    {
+        return $query->whereHas('tags', fn (Builder $tagQuery) => $tagQuery->whereKey($tagId));
     }
 }

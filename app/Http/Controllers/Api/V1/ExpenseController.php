@@ -19,8 +19,9 @@ class ExpenseController extends Controller
     {
         $expenses = Expense::query()
             ->forHousehold($request->user()->household_id)
-            ->with(['category', 'user:id,name'])
+            ->with(['category', 'tags', 'user:id,name'])
             ->when($request->filled('category_id'), fn ($q) => $q->inCategory($request->integer('category_id')))
+            ->when($request->filled('tag_id'), fn ($q) => $q->inTag($request->integer('tag_id')))
             ->when(
                 $request->filled('from') && $request->filled('to'),
                 fn ($q) => $q->inDateRange($request->string('from'), $request->string('to')),
@@ -42,6 +43,9 @@ class ExpenseController extends Controller
         }
 
         $validated = $request->validated();
+        $tagId = $validated['tag_id'] ?? null;
+        unset($validated['tag_id']);
+
         $expenseCurrency = $validated['currency'] ?? $household->default_currency;
 
         $data = [
@@ -62,7 +66,8 @@ class ExpenseController extends Controller
         }
 
         $expense = $user->expenses()->create($data);
-        $expense->load('category');
+        $expense->tags()->sync($tagId ? [$tagId] : []);
+        $expense->load(['category', 'tags']);
 
         return (new ExpenseResource($expense))
             ->response()
@@ -74,6 +79,10 @@ class ExpenseController extends Controller
         Gate::authorize('update', $expense);
 
         $validated = $request->validated();
+        $hasTag = array_key_exists('tag_id', $validated);
+        $tagId = $validated['tag_id'] ?? null;
+        unset($validated['tag_id']);
+
         $household = $request->user()->household;
 
         if (isset($validated['amount']) || isset($validated['currency'])) {
@@ -98,7 +107,12 @@ class ExpenseController extends Controller
         }
 
         $expense->update($validated);
-        $expense->load('category');
+
+        if ($hasTag) {
+            $expense->tags()->sync($tagId ? [$tagId] : []);
+        }
+
+        $expense->load(['category', 'tags']);
 
         return new ExpenseResource($expense);
     }

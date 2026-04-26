@@ -5,7 +5,6 @@
     "nav.logout": "Odjava",
     "nav.login": "Prijava",
     "nav.register": "Registracija",
-
     "dashboard.title": "Kontrolna tabla",
     "dashboard.total_this_month": "Ukupno ovaj mjesec",
     "dashboard.transaction_count": "Broj transakcija",
@@ -34,7 +33,6 @@
     "dashboard.transaction_overview": "Pregled transakcija",
     "dashboard.burn_rate": "Stopa potrosnje",
     "dashboard.percent_of_month": ":percent% mjeseca",
-
     "expenses.title": "Troškovi",
     "expenses.add": "Dodaj trošak",
     "expenses.edit": "Uredi trošak",
@@ -54,7 +52,6 @@
     "expenses.all_categories": "Sve kategorije",
     "expenses.voice_input_placeholder": "Unesite tekst ili opis troška...",
     "expenses.custom_range": "Prilagođeni period",
-
     "categories.food": "Hrana",
     "categories.groceries": "Namirnice",
     "categories.transport": "Prijevoz",
@@ -69,7 +66,6 @@
     "categories.subscriptions": "Pretplate",
     "categories.travel": "Putovanje",
     "categories.other": "Ostalo",
-
     "settings.title": "Postavke",
     "settings.description": "Upravljajte svojim profilom i postavkama računa",
     "settings.language": "Jezik",
@@ -118,7 +114,6 @@
     "settings.delete_warning_text": "Budite oprezni, ova radnja se ne može poništiti.",
     "settings.delete_confirm_title": "Da li ste sigurni da želite obrisati svoj račun?",
     "settings.delete_confirm_description": "Kada se vaš račun obriše, svi resursi i podaci će takođe biti trajno obrisani. Unesite svoju lozinku da potvrdite brisanje računa.",
-
     "settings.2fa_enabled_title": "Dvofaktorska autentifikacija omogućena",
     "settings.2fa_enabled_description": "Dvofaktorska autentifikacija je sada omogućena. Skenirajte QR kod ili unesite ključ u vašu autentifikatorsku aplikaciju.",
     "settings.2fa_verify_title": "Verificirajte autentifikacijski kod",
@@ -132,7 +127,6 @@
     "settings.view_recovery_codes": "Prikaži kodove za oporavak",
     "settings.regenerate_codes": "Regeneriši kodove",
     "settings.recovery_codes_warning": "Svaki kod za oporavak se može koristiti samo jednom i bit će uklonjen nakon korištenja. Ako trebate više, kliknite Regeneriši kodove iznad.",
-
     "common.save": "Sačuvaj",
     "common.cancel": "Otkaži",
     "common.confirm": "Potvrdi",
@@ -147,7 +141,6 @@
     "common.back": "Nazad",
     "common.close": "Zatvori",
     "common.continue": "Nastavi",
-
     "auth.login": "Prijava",
     "auth.register": "Registracija",
     "auth.email": "Email adresa",
@@ -190,13 +183,10 @@
     "auth.login_with_recovery_code": "prijavite se pomoću koda za oporavak",
     "auth.enter_recovery_code": "Unesite kod za oporavak",
     "auth.or_you_can": "ili možete",
-
     "validation.required": "Polje :attribute je obavezno",
     "validation.numeric": "Polje :attribute mora biti broj",
     "validation.min.numeric": "Polje :attribute mora biti najmanje :min",
-
     "settings.household": "Domaćinstvo",
-
     "billing.title": "Naplata",
     "billing.description": "Upravljajte pretplatom, nacinom placanja i promjenama plana.",
     "billing.subscription_required": "Za koristenje aplikacije potrebna je aktivna pretplata.",
@@ -225,7 +215,6 @@
     "billing.switch_yearly": "Prebaci na godisnji",
     "billing.internal_access_title": "Interni pristup je ukljucen",
     "billing.internal_access_description": "Ovaj nalog moze koristiti aplikaciju bez aktivne placene pretplate.",
-
     "household.name": "Naziv domaćinstva",
     "household.members": "Članovi",
     "household.invite": "Pozovi člana",
@@ -244,16 +233,13 @@
     "household.invitation_email_body": "Pozvani ste da se pridružite domaćinstvu **:household** na Šteku. Kliknite na dugme ispod da prihvatite pozivnicu.",
     "household.invitation_email_cta": "Prihvati pozivnicu",
     "household.invitation_email_footer": "Ako niste očekivali ovu pozivnicu, možete je slobodno ignorisati.",
-
     "expenses.month_total": "Ukupno za mjesec",
     "expenses.year_total": "Ukupno za godinu",
     "expenses.added_by": "Dodao/la",
     "expenses.currency": "Valuta",
-
     "nav.budgets": "Budžet",
     "nav.platform": "Platforma",
     "nav.navigation_menu": "Navigacioni meni",
-
     "budget.title": "Budžet",
     "budget.overall": "Ukupni budžet",
     "budget.monthly_limit": "Mjesečni limit",
@@ -265,16 +251,13 @@
     "budget.over": ":amount preko budžeta",
     "budget.used": ":percent% iskorišteno",
     "budget.category_over": ":amount preko budžeta",
-
     "errors.ai_parse_failed": "Nije moguće prepoznati trošak iz teksta. Pokušajte ponovo ili unesite ručno.",
     "errors.ai_usage_limit_reached": "AI parsiranje troškova je privremeno nedostupno za ovaj račun zbog trenutnih ograničenja korištenja. Pokušajte ponovo kasnije.",
     "errors.generic": "Došlo je do greške. Pokušajte ponovo.",
     "errors.unauthorized": "Nemate pristup ovom resursu.",
-
     "landing.nav.features": "Funkcije",
     "landing.nav.pricing": "Cijene",
     "landing.nav.download": "Preuzmi",
-
     "landing.hero.badge": "Sada dostupno na iOS & Android",
     "landing.hero.headline_1": "Troši pametnije.",
     "landing.hero.headline_2": "Štedite zajedno.",
@@ -284,19 +267,16 @@
     "landing.hero.trust_no_card": "Bez kreditne kartice",
     "landing.hero.trust_free": "14-dnevno besplatno testiranje",
     "landing.hero.trust_setup": "2 min registracija",
-
     "landing.mockup.url": "stek-app.com/kontrolna-tabla",
     "landing.mockup.spending": "Potrošnja ovog mjeseca",
     "landing.mockup.food": "Hrana i restorani",
     "landing.mockup.housing": "Stanovanje",
     "landing.mockup.transport": "Prijevoz",
     "landing.mockup.shopping": "Kupovina",
-
     "landing.stats.users": "Aktivnih korisnika",
     "landing.stats.tracked": "Praćenih troškova",
     "landing.stats.rating": "Ocjena aplikacije",
     "landing.stats.uptime": "Dostupnost",
-
     "landing.features.label": "Funkcije",
     "landing.features.title": "Napravljeno za način na koji vaše",
     "landing.features.title_highlight": "domaćinstvo zaista troši",
@@ -310,7 +290,6 @@
     "landing.features.analytics_title": "Znajte svoje brojeve",
     "landing.features.analytics_desc": "Mjesečne usporedbe, pregled kategorija, dnevni prosjeci i praćenje prihoda nasuprot troškova. Sve vidljivo na jednom pogledu — bez tabela.",
     "landing.features.members": "članova",
-
     "landing.steps.label": "Kako funkcioniše",
     "landing.steps.title": "Spremni za par minuta",
     "landing.steps.step1_title": "Kreirajte račun",
@@ -319,7 +298,6 @@
     "landing.steps.step2_desc": "Otvorite aplikaciju, pritisnite mikrofon i recite šta ste potrošili. Štek obavi ostatak.",
     "landing.steps.step3_title": "Gledajte kako štednja raste",
     "landing.steps.step3_desc": "Postavite budžete, pregledajte uvide i pratite kako se vaše finansijske navike poboljšavaju.",
-
     "landing.pricing.label": "Cijene",
     "landing.pricing.title": "Jedna aplikacija. Dva plana.",
     "landing.pricing.subtitle": "Počnite s 14-dnevnim besplatnim testiranjem. Odaberite plan kad budete spremni.",
@@ -345,7 +323,6 @@
     "landing.pricing.f5": "iOS i Android aplikacija",
     "landing.pricing.f4_max": "Zajedničko praćenje domaćinstva (do 10 članova)",
     "landing.pricing.f6_max": "Prioritetna podrška",
-
     "landing.testimonials.label": "Iskustva korisnika",
     "landing.testimonials.title": "Vole nas domaćinstva svuda",
     "landing.testimonials.t1_quote": "Štek je potpuno promijenio kako naša porodica upravlja novcem. Prešli smo od svađa oko potrošnje do štednje za odmor.",
@@ -357,7 +334,6 @@
     "landing.testimonials.t3_quote": "Konačno aplikacija koja razumije porodične finansije. Moja žena i ja možemo oboje vidjeti gdje nam novac odlazi u realnom vremenu.",
     "landing.testimonials.t3_name": "Emir K.",
     "landing.testimonials.t3_loc": "Tuzla",
-
     "landing.security.label": "Sigurnost",
     "landing.security.title": "Vaše finansije su sigurne kod nas",
     "landing.security.subtitle": "Vaše finansijske podatke tretiramo s najvišim nivoom brige i zaštite.",
@@ -369,7 +345,6 @@
     "landing.security.gdpr_desc": "Potpuna usklađenost s EU regulativom o zaštiti podataka. Izvezite ili izbrišite svoje podatke bilo kad.",
     "landing.security.audit_title": "Sigurnosne revizije",
     "landing.security.audit_desc": "Redovno testiranje od strane trećih strana i pregledi koda čuvaju vaš račun sigurnim.",
-
     "landing.download.label": "Preuzmi",
     "landing.download.title": "Vaše finansije, svugdje",
     "landing.download.subtitle": "Evidentirali kafu s telefona, provjerite budžet na laptopu. Sve ostaje sinhronizovano, uvijek.",
@@ -383,13 +358,11 @@
     "landing.download.scan": "Skenirajte za preuzimanje aplikacije",
     "landing.download.dashboard": "Kontrolna tabla",
     "landing.download.this_month": "Ovaj mjesec",
-
-    "landing.cta.title_1": "Prestanite nagađati gdje je",
-    "landing.cta.title_2": "novac otišao.",
+    "landing.cta.title_1": "Prestanite nagađati gdje",
+    "landing.cta.title_2": "je novac otišao.",
     "landing.cta.subtitle": "14-dnevno besplatno testiranje. Bez kreditne kartice. Otkažite bilo kad.",
     "landing.cta.button": "Započnite besplatno danas",
     "landing.cta.footnote": "Zauvijek besplatan plan dostupan. Kreditna kartica nije potrebna.",
-
     "landing.footer.description": "Pametno upravljanje finansijama domaćinstva. Pratite troškove, postavite budžete i štedite zajedno sa svojom porodicom.",
     "landing.footer.product": "Proizvod",
     "landing.footer.company": "Kompanija",
@@ -404,7 +377,6 @@
     "landing.footer.copyright": "© :year Štek App. Sva prava zadržana.",
     "auth.or": "ili",
     "auth.continue_with_google": "Nastavi s Googleom",
-
     "about.label": "O nama",
     "about.headline_1": "Finansije bez stresa,",
     "about.headline_2": "za svako domaćinstvo.",
@@ -432,7 +404,6 @@
     "about.cta_title": "Uvjerite se sami",
     "about.cta_subtitle": "Isprobajte Štek besplatno 14 dana. Bez kreditne kartice.",
     "about.cta_button": "Počnite besplatno",
-
     "contact.label": "Kontakt",
     "contact.headline": "Kako vam možemo pomoći?",
     "contact.subtitle": "Imate pitanje, prijedlog ili problem? Pošaljite nam poruku i javit ćemo vam se što je prije moguće.",
@@ -448,16 +419,14 @@
     "contact.info_email_label": "Email",
     "contact.info_response": "Obično odgovaramo u roku od 24 sata.",
     "contact.info_phone_label": "Telefon",
-
     "contact.validation.name_min": "Ime mora imati najmanje 2 znaka.",
     "contact.validation.email_invalid": "Unesite ispravnu email adresu.",
     "contact.validation.subject_min": "Tema mora imati najmanje 3 znaka.",
     "contact.validation.message_min": "Poruka mora imati najmanje 10 znakova.",
-
     "contact.email.title": "Nova poruka s kontakt forme",
     "contact.email.from": "Od",
     "contact.email.subject_label": "Tema",
     "contact.email.reply_hint": "Odgovorite direktno na ovu e-poruku da stupite u kontakt s :name.",
-
-    "common.back_to_home": "Nazad na početnu"
+    "common.back_to_home": "Nazad na početnu",
+    "auth.registration_web_only": "Registracija računa je dostupna samo na webu. Posjetite našu web stranicu da kreirate račun."
 }

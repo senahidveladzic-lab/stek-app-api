@@ -18,7 +18,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => fake()->unique()->randomElement([
-                'restaurant', 'groceries', 'transport', 'entertainment',
+                'food', 'groceries', 'transport', 'entertainment',
                 'bills', 'shopping', 'health', 'education', 'cafe', 'other',
             ]),
             'icon' => "\u{1F4E6}",

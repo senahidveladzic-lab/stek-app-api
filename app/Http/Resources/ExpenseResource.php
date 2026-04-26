@@ -22,6 +22,9 @@ class ExpenseResource extends JsonResource
             'original_text' => $this->original_text,
             'expense_date' => $this->expense_date->format('Y-m-d'),
             'category' => new CategoryResource($this->whenLoaded('category')),
+            'tag' => $this->whenLoaded('tags', fn () => $this->tags->first()
+                ? new TagResource($this->tags->first())
+                : null),
             'user' => $this->whenLoaded('user', fn () => [
                 'id' => $this->user->id,
                 'name' => $this->user->name,

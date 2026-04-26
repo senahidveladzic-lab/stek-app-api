@@ -32,8 +32,9 @@ class ExpenseController extends Controller
 
         $expenses = Expense::query()
             ->forHousehold($householdId)
-            ->with(['category', 'user:id,name'])
+            ->with(['category', 'tags', 'user:id,name'])
             ->when($request->filled('category_id'), fn ($q) => $q->inCategory($request->integer('category_id')))
+            ->when($request->filled('tag_id'), fn ($q) => $q->inTag($request->integer('tag_id')))
             ->inDateRange($from, $to)
             ->when($request->filled('search'), function ($q) use ($request) {
                 $search = $request->string('search');
@@ -66,6 +67,7 @@ class ExpenseController extends Controller
             'categories' => $categories,
             'filters' => [
                 'category_id' => $request->input('category_id'),
+                'tag_id' => $request->input('tag_id'),
                 'from' => $from,
                 'to' => $to,
                 'search' => $request->input('search'),
@@ -80,6 +82,9 @@ class ExpenseController extends Controller
         $user = $request->user();
         $household = $user->household;
         $validated = $request->validated();
+        $tagId = $validated['tag_id'] ?? null;
+        unset($validated['tag_id']);
+
         $expenseCurrency = $validated['currency'] ?? $household->default_currency;
 
         $data = [
@@ -99,7 +104,8 @@ class ExpenseController extends Controller
             $data['original_currency'] = $expenseCurrency;
         }
 
-        $user->expenses()->create($data);
+        $expense = $user->expenses()->create($data);
+        $expense->tags()->sync($tagId ? [$tagId] : []);
 
         return back()->with('success', __('common.success'));
     }
@@ -109,6 +115,10 @@ class ExpenseController extends Controller
         Gate::authorize('update', $expense);
 
         $validated = $request->validated();
+        $hasTag = array_key_exists('tag_id', $validated);
+        $tagId = $validated['tag_id'] ?? null;
+        unset($validated['tag_id']);
+
         $household = $request->user()->household;
 
         if (isset($validated['amount']) || isset($validated['currency'])) {
@@ -134,6 +144,10 @@ class ExpenseController extends Controller
 
         $expense->update($validated);
 
+        if ($hasTag) {
+            $expense->tags()->sync($tagId ? [$tagId] : []);
+        }
+
         return back()->with('success', __('common.success'));
     }
 
@@ -150,15 +164,28 @@ class ExpenseController extends Controller
         VoiceExpenseRequest $request,
         ExpenseAIService $aiService,
         HouseholdAiUsageService $householdAiUsageService
-    ): JsonResponse
-    {
+    ): JsonResponse {
         try {
             $householdAiUsageService->consume($request->user());
+
+            $user = $request->user();
+            $household = $user->household;
+            $tags = $household?->tags()
+                ->orderBy('name')
+                ->get(['id', 'name', 'color'])
+                ->map(fn ($tag) => [
+                    'id' => $tag->id,
+                    'name' => $tag->name,
+                    'color' => $tag->color,
+                ])
+                ->values()
+                ->all() ?? [];
 
             $parsed = $aiService->parse(
                 $request->validated('text'),
                 app()->getLocale(),
-                $request->user()->household->default_currency ?? $request->user()->default_currency,
+                $household->default_currency ?? $user->default_currency,
+                $tags,
             );
 
             $category = Category::query()->where('name', $parsed['category_key'])->first();

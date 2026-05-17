@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\Web\AppleAuthController;
 use App\Http\Controllers\Web\BudgetController;
+use App\Http\Controllers\Web\ContactController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\ExpenseController;
-use App\Http\Controllers\Web\ContactController;
 use App\Http\Controllers\Web\GoogleAuthController;
 use App\Http\Controllers\Web\HouseholdController;
 use App\Http\Controllers\Web\SettingsLocaleController;
@@ -22,6 +23,9 @@ Route::post('locale', function (\Illuminate\Http\Request $request) {
 
 Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
 Route::get('auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
+
+Route::get('auth/apple', [AppleAuthController::class, 'redirect'])->name('auth.apple.redirect');
+Route::post('auth/apple/callback', [AppleAuthController::class, 'callback'])->name('auth.apple.callback');
 
 Route::view('/', 'welcome', [
     'canRegister' => Features::enabled(Features::registration()),

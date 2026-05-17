@@ -21,6 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'google_id',
+        'apple_id',
         'locale',
         'default_currency',
         'household_id',

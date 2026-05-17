@@ -480,7 +480,7 @@
 <section class="relative overflow-hidden bg-[#0a0e1a] py-12 lg:py-24">
     <div class="absolute left-1/2 top-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2" style="background: radial-gradient(ellipse at center, oklch(0.6 0.135 175 / 0.08), transparent 60%);"></div>
 
-    <div class="relative mx-auto max-w-3xl px-6 text-center">
+    <div class="relative mx-auto max-w-4xl px-6 text-center">
         <div class="reveal">
             <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-6xl">
                 {{ __('landing.cta.title_1') }}<br>

@@ -55,4 +55,13 @@ return [
         ),
     ],
 
+    'apple' => [
+        'client_id' => env('APPLE_CLIENT_ID', 'com.stekapp.web'),
+        'client_secret' => '',
+        'redirect' => env('APPLE_REDIRECT_URI', 'https://stek-app.com/auth/apple/callback'),
+        'team_id' => env('APPLE_TEAM_ID', '785F7Z7PBC'),
+        'key_id' => env('APPLE_KEY_ID'),
+        'private_key' => "-----BEGIN PRIVATE KEY-----\n".env('APPLE_PRIVATE_KEY')."\n-----END PRIVATE KEY-----",
+    ],
+
 ];

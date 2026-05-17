@@ -47,7 +47,12 @@
       "Bash(node -e \"const m = require\\('./node_modules/expo-audio'\\); console.log\\(Object.keys\\(m\\).filter\\(k => k.toLowerCase\\(\\).includes\\('record'\\) || k.toLowerCase\\(\\).includes\\('audio'\\)\\).join\\('\\\\n'\\)\\)\")",
       "Bash(pnpm remove *)",
       "mcp__context7__resolve-library-id",
-      "mcp__context7__query-docs"
+      "mcp__context7__query-docs",
+      "Bash(git stash *)",
+      "Bash(git checkout *)",
+      "Bash(pnpm add *)",
+      "mcp__laravel-boost__get-absolute-url",
+      "Bash(node -e \"const a = require\\('./node_modules/expo-audio'\\); console.log\\(Object.keys\\(a.RecordingPresets || {}\\)\\)\")"
     ]
   },
   "enableAllProjectMcpServers": true,

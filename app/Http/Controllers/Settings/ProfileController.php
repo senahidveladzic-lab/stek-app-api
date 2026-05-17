@@ -48,6 +48,8 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
+        $user->subscriptions()->active()->each(fn ($subscription) => $subscription->cancelNow());
+
         Auth::logout();
 
         $user->delete();

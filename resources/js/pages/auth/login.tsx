@@ -1,4 +1,5 @@
 import { Form, Head } from '@inertiajs/react';
+import AppleSignInButton from '@/components/apple-sign-in-button';
 import GoogleSignInButton from '@/components/google-sign-in-button';
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
@@ -102,7 +103,17 @@ export default function Login({
                             </Button>
                         </div>
 
-                        <GoogleSignInButton />
+                        <div className="flex flex-col gap-4">
+                            <div className="relative flex items-center">
+                                <div className="flex-grow border-t border-border" />
+                                <span className="mx-3 shrink-0 text-xs text-muted-foreground">{t('auth.or')}</span>
+                                <div className="flex-grow border-t border-border" />
+                            </div>
+                            <div className="flex flex-col gap-3">
+                                <AppleSignInButton />
+                                <GoogleSignInButton />
+                            </div>
+                        </div>
 
                         {canRegister && (
                             <div className="text-center text-sm text-muted-foreground">

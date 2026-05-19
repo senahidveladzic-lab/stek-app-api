@@ -34,6 +34,7 @@ Route::view('/', 'welcome', [
 Route::view('checkout', 'checkout.default')->name('checkout.default');
 Route::view('terms', 'terms')->name('terms');
 Route::view('privacy', 'privacy')->name('privacy');
+Route::view('delete-account', 'delete-account')->name('delete-account');
 Route::view('about', 'about')->name('about');
 Route::get('contact', [ContactController::class, 'show'])->name('contact');
 Route::post('contact', [ContactController::class, 'send'])->name('contact.send')->middleware('throttle:5,1');

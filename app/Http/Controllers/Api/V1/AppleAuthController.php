@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\AppleLoginRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class AppleAuthController extends Controller
@@ -16,18 +18,32 @@ class AppleAuthController extends Controller
             ->stateless()
             ->userFromToken($request->string('identity_token'));
 
-        $user = User::query()
-            ->where('apple_id', $appleUser->getId())
-            ->orWhere('email', $appleUser->getEmail())
-            ->first();
+        $query = User::query()->where('apple_id', $appleUser->getId());
 
-        if (! $user) {
-            return response()->json([
-                'message' => __('auth.registration_web_only'),
-            ], 403);
+        if ($appleUser->getEmail()) {
+            $query->orWhere('email', $appleUser->getEmail());
         }
 
-        if (! $user->apple_id) {
+        $user = $query->first();
+
+        if (! $user) {
+            $email = $appleUser->getEmail();
+
+            if (! $email) {
+                return response()->json([
+                    'message' => 'Unable to create account: Apple did not provide an email address.',
+                ], 422);
+            }
+
+            $name = $appleUser->getName() ?? Str::before($email, '@');
+
+            $user = User::create([
+                'name' => $name,
+                'email' => $email,
+                'apple_id' => $appleUser->getId(),
+                'password' => Str::random(32),
+            ]);
+        } elseif (! $user->apple_id) {
             $user->update(['apple_id' => $appleUser->getId()]);
         }
 
@@ -35,7 +51,7 @@ class AppleAuthController extends Controller
 
         return response()->json([
             'token' => $token,
-            'user' => $user,
+            'user' => new UserResource($user),
         ]);
     }
 }

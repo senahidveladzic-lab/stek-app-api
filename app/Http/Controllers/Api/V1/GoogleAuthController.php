@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\GoogleLoginRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class GoogleAuthController extends Controller
@@ -22,12 +24,15 @@ class GoogleAuthController extends Controller
             ->first();
 
         if (! $user) {
-            return response()->json([
-                'message' => __('auth.registration_web_only'),
-            ], 403);
-        }
+            $name = $googleUser->getName() ?? Str::before($googleUser->getEmail(), '@');
 
-        if (! $user->google_id) {
+            $user = User::create([
+                'name' => $name,
+                'email' => $googleUser->getEmail(),
+                'google_id' => $googleUser->getId(),
+                'password' => Str::random(32),
+            ]);
+        } elseif (! $user->google_id) {
             $user->update(['google_id' => $googleUser->getId()]);
         }
 
@@ -35,7 +40,7 @@ class GoogleAuthController extends Controller
 
         return response()->json([
             'token' => $token,
-            'user' => $user,
+            'user' => new UserResource($user),
         ]);
     }
 }

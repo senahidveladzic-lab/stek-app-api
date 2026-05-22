@@ -12,11 +12,12 @@ use App\Http\Controllers\Api\V1\HouseholdController;
 use App\Http\Controllers\Api\V1\TagController;
 use App\Http\Controllers\Api\V1\UserAccountController;
 use App\Http\Controllers\Api\V1\UserSettingsController;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
+    return new UserResource($request->user());
 })->middleware('auth:sanctum');
 
 Route::prefix('v1')->group(function () {

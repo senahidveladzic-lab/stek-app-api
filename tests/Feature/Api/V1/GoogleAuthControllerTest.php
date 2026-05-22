@@ -5,7 +5,7 @@ use Laravel\Socialite\Contracts\Factory as SocialiteFactory;
 use Laravel\Socialite\Two\GoogleProvider;
 use Laravel\Socialite\Two\User as SocialiteUser;
 
-function makeSocialiteUser(string $id = '123456', string $email = 'john@example.com', string $name = 'John Doe'): SocialiteUser
+function makeSocialiteUser(string $id = '123456', string $email = 'john@example.com', ?string $name = 'John Doe'): SocialiteUser
 {
     $socialiteUser = new SocialiteUser;
     $socialiteUser->map([
@@ -29,13 +29,19 @@ function mockSocialite(SocialiteUser $socialiteUser): void
     app()->instance(SocialiteFactory::class, $socialite);
 }
 
-it('returns 403 when signing in with Google for an unregistered account', function () {
+it('creates a new account when signing in with Google for the first time', function () {
     mockSocialite(makeSocialiteUser());
 
-    $response = $this->postJson('/api/v1/auth/google', ['id_token' => 'valid-token']);
+    $this->postJson('/api/v1/auth/google', ['id_token' => 'valid-token'])
+        ->assertOk()
+        ->assertJsonStructure(['token', 'user'])
+        ->assertJsonPath('user.email', 'john@example.com')
+        ->assertJsonPath('user.subscription_active', false);
 
-    $response->assertForbidden();
-    $this->assertDatabaseMissing('users', ['email' => 'john@example.com']);
+    $this->assertDatabaseHas('users', [
+        'email' => 'john@example.com',
+        'google_id' => '123456',
+    ]);
 });
 
 it('returns an existing user matched by google_id', function () {
@@ -46,7 +52,8 @@ it('returns an existing user matched by google_id', function () {
     $response = $this->postJson('/api/v1/auth/google', ['id_token' => 'valid-token']);
 
     $response->assertSuccessful()
-        ->assertJsonPath('user.id', $user->id);
+        ->assertJsonPath('user.id', $user->id)
+        ->assertJsonStructure(['user' => ['subscription_active']]);
 
     $this->assertDatabaseCount('users', 1);
 });
@@ -73,4 +80,14 @@ it('returns 422 when id_token is missing', function () {
     $this->postJson('/api/v1/auth/google', [])
         ->assertUnprocessable()
         ->assertJsonValidationErrors(['id_token']);
+});
+
+it('includes subscription_active true for a user on active trial', function () {
+    $user = User::factory()->onTrial()->create(['google_id' => '123456']);
+
+    mockSocialite(makeSocialiteUser(id: '123456', email: $user->email));
+
+    $this->postJson('/api/v1/auth/google', ['id_token' => 'valid-token'])
+        ->assertOk()
+        ->assertJsonPath('user.subscription_active', true);
 });

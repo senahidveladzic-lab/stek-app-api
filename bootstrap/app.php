@@ -24,6 +24,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'subscribed' => EnsureSubscribed::class,
         ]);
 
+        $middleware->api(append: [
+            SetLocale::class,
+        ]);
+
         $middleware->web(append: [
             SetLocale::class,
             HandleAppearance::class,

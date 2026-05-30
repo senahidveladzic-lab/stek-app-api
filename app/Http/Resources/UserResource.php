@@ -18,6 +18,8 @@ class UserResource extends JsonResource
             'email_verified_at' => $this->email_verified_at,
             'household_id' => $this->household_id,
             'subscription_active' => $this->hasBillingAccess(),
+            'on_trial' => $this->onActiveTrial(),
+            'trial_ends_at' => $this->trial_ends_at?->toDateString(),
         ];
     }
 }

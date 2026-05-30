@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InviteMemberRequest;
 use App\Http\Requests\UpdateHouseholdRequest;
+use App\Mail\HouseholdInvitationMail;
 use App\Models\HouseholdInvitation;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class HouseholdController extends Controller
@@ -52,6 +55,9 @@ class HouseholdController extends Controller
             'token' => Str::random(64),
         ]);
 
+        $invitation->setRelation('household', $household);
+        Mail::to($invitation->email)->send(new HouseholdInvitationMail($invitation));
+
         return response()->json(['data' => $invitation], 201);
     }
 
@@ -64,6 +70,18 @@ class HouseholdController extends Controller
         $user->update(['household_id' => null]);
 
         return response()->json(null, 204);
+    }
+
+    public function myInvitation(Request $request): JsonResponse
+    {
+        $invitation = HouseholdInvitation::query()
+            ->where('email', $request->user()->email)
+            ->whereNull('accepted_at')
+            ->with('household:id,name')
+            ->latest()
+            ->first();
+
+        return response()->json(['data' => $invitation]);
     }
 
     public function acceptInvitation(Request $request, string $token): JsonResponse
@@ -81,8 +99,19 @@ class HouseholdController extends Controller
             ], 403);
         }
 
-        $invitation->update(['accepted_at' => now()]);
-        $user->update(['household_id' => $invitation->household_id]);
+        DB::transaction(function () use ($user, $invitation) {
+            $oldHousehold = $user->household;
+
+            $invitation->update(['accepted_at' => now()]);
+            $user->update(['household_id' => $invitation->household_id]);
+
+            if ($oldHousehold
+                && $oldHousehold->owner_id === $user->id
+                && $oldHousehold->members()->count() === 0
+            ) {
+                $oldHousehold->delete();
+            }
+        });
 
         return response()->json(['message' => __('household.invitation_accepted')]);
     }

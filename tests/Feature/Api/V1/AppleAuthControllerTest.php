@@ -36,12 +36,13 @@ it('creates a new account when signing in with Apple for the first time', functi
         ->assertOk()
         ->assertJsonStructure(['token', 'user'])
         ->assertJsonPath('user.email', 'john@example.com')
-        ->assertJsonPath('user.subscription_active', false);
+        ->assertJsonPath('user.subscription_active', true);
 
-    $this->assertDatabaseHas('users', [
-        'email' => 'john@example.com',
-        'apple_id' => 'apple.123456',
-    ]);
+    $user = \App\Models\User::where('email', 'john@example.com')->first();
+
+    $this->assertNotNull($user->trial_ends_at);
+    $this->assertNotNull($user->household_id);
+    $this->assertDatabaseHas('households', ['owner_id' => $user->id]);
 });
 
 it('returns an existing user matched by apple_id', function () {

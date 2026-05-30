@@ -10,6 +10,7 @@ use App\Models\HouseholdInvitation;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -86,8 +87,19 @@ class HouseholdController extends Controller
                 ->with('error', __('household.invitation_email_mismatch'));
         }
 
-        $invitation->update(['accepted_at' => now()]);
-        $user->update(['household_id' => $invitation->household_id]);
+        DB::transaction(function () use ($user, $invitation) {
+            $oldHousehold = $user->household;
+
+            $invitation->update(['accepted_at' => now()]);
+            $user->update(['household_id' => $invitation->household_id]);
+
+            if ($oldHousehold
+                && $oldHousehold->owner_id === $user->id
+                && $oldHousehold->members()->count() === 0
+            ) {
+                $oldHousehold->delete();
+            }
+        });
 
         return redirect()->route('household.show')
             ->with('success', __('household.invitation_accepted'));

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\AppleLoginRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Household;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -37,12 +39,25 @@ class AppleAuthController extends Controller
 
             $name = $appleUser->getName() ?? Str::before($email, '@');
 
-            $user = User::create([
-                'name' => $name,
-                'email' => $email,
-                'apple_id' => $appleUser->getId(),
-                'password' => Str::random(32),
-            ]);
+            $user = DB::transaction(function () use ($email, $name, $appleUser) {
+                $user = User::create([
+                    'name' => $name,
+                    'email' => $email,
+                    'apple_id' => $appleUser->getId(),
+                    'password' => Str::random(32),
+                    'trial_ends_at' => now()->addDays(14),
+                ]);
+
+                $household = Household::create([
+                    'name' => $user->name,
+                    'owner_id' => $user->id,
+                    'default_currency' => $user->default_currency,
+                ]);
+
+                $user->update(['household_id' => $household->id]);
+
+                return $user;
+            });
         } elseif (! $user->apple_id) {
             $user->update(['apple_id' => $appleUser->getId()]);
         }

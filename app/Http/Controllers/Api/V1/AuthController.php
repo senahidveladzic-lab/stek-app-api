@@ -50,6 +50,7 @@ class AuthController extends Controller
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'password' => $validated['password'],
+                'trial_ends_at' => now()->addDays(14),
             ]);
 
             $household = Household::create([
@@ -67,7 +68,7 @@ class AuthController extends Controller
 
         return response()->json([
             'token' => $token,
-            'user' => $user,
+            'user' => new UserResource($user),
         ], 201);
     }
 

@@ -21,6 +21,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::prefix('v1')->group(function () {
+    Route::post('auth/register', [AuthController::class, 'register']);
     Route::post('auth/login', [AuthController::class, 'login']);
     Route::post('auth/google', GoogleAuthController::class);
     Route::post('auth/apple', AppleAuthController::class);
@@ -31,6 +32,8 @@ Route::prefix('v1')->group(function () {
         Route::patch('user/locale', [UserSettingsController::class, 'updateLocale']);
         Route::patch('user/currency', [UserSettingsController::class, 'updateCurrency']);
         Route::delete('user', [UserAccountController::class, 'destroy']);
+
+        Route::get('household/invitation', [HouseholdController::class, 'myInvitation']);
 
         Route::middleware('subscribed')->group(function () {
             Route::post('expenses/voice', [ExpenseVoiceController::class, 'store'])->middleware('throttle:60,1');

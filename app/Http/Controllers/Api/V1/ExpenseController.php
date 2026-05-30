@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use App\Http\Resources\ExpenseResource;
+use App\Models\Category;
 use App\Models\Expense;
 use App\Services\CurrencyConversionService;
+use App\Services\VoiceCorrectionService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -33,7 +35,7 @@ class ExpenseController extends Controller
         return ExpenseResource::collection($expenses);
     }
 
-    public function store(StoreExpenseRequest $request, CurrencyConversionService $conversionService): JsonResponse
+    public function store(StoreExpenseRequest $request, CurrencyConversionService $conversionService, VoiceCorrectionService $correctionService): JsonResponse
     {
         $user = $request->user();
         $household = $user->household;
@@ -44,7 +46,8 @@ class ExpenseController extends Controller
 
         $validated = $request->validated();
         $tagId = $validated['tag_id'] ?? null;
-        unset($validated['tag_id']);
+        $voiceCorrection = $validated['voice_correction'] ?? null;
+        unset($validated['tag_id'], $validated['voice_correction']);
 
         $expenseCurrency = $validated['currency'] ?? $household->default_currency;
 
@@ -68,6 +71,24 @@ class ExpenseController extends Controller
         $expense = $user->expenses()->create($data);
         $expense->tags()->sync($tagId ? [$tagId] : []);
         $expense->load(['category', 'tags']);
+
+        if ($voiceCorrection && isset($voiceCorrection['original_description'])) {
+            $savedCategoryKey = Category::find($validated['category_id'])?->name ?? '';
+            $correctionService->log(
+                $user->id,
+                [
+                    'description' => $voiceCorrection['original_description'] ?? '',
+                    'category_key' => $voiceCorrection['original_category_key'] ?? '',
+                    'amount' => (float) ($voiceCorrection['original_amount'] ?? 0),
+                ],
+                [
+                    'description' => $validated['description'] ?? '',
+                    'category_key' => $savedCategoryKey,
+                    'amount' => (float) $validated['amount'],
+                ],
+                $voiceCorrection['whisper_transcript'] ?? null,
+            );
+        }
 
         return (new ExpenseResource($expense))
             ->response()

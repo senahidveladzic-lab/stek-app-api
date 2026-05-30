@@ -28,6 +28,11 @@ class StoreExpenseRequest extends FormRequest
             ],
             'description' => ['nullable', 'string', 'max:255'],
             'expense_date' => ['required', 'date'],
+            'voice_correction' => ['sometimes', 'nullable', 'array'],
+            'voice_correction.whisper_transcript' => ['sometimes', 'nullable', 'string', 'max:2000'],
+            'voice_correction.original_description' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'voice_correction.original_category_key' => ['sometimes', 'nullable', 'string', 'max:50'],
+            'voice_correction.original_amount' => ['sometimes', 'nullable', 'numeric', 'min:0'],
         ];
     }
 

@@ -15,11 +15,13 @@ class ExpenseAIService
 
     /**
      * @param  list<array{id: int, name: string, color: string}>  $tags
+     * @param  list<array{original_description: string, corrected_description: string, corrected_category_key: string}>  $userCorrections
+     * @param  list<array{corrected_description: string, corrected_category_key: string}>  $globalCorrections
      * @return array{amount: float, currency: string, category_key: string, description: string, date: string, suggested_tag_id: int|null}
      */
-    public function parse(string $userText, string $locale, string $defaultCurrency, array $tags = []): array
+    public function parse(string $userText, string $locale, string $defaultCurrency, array $tags = [], array $userCorrections = [], array $globalCorrections = []): array
     {
-        $prompt = $this->buildPrompt($userText, $locale, $defaultCurrency, $tags);
+        $prompt = $this->buildPrompt($userText, $locale, $defaultCurrency, $tags, $userCorrections, $globalCorrections);
 
         Log::debug('[ExpenseAI] raw input', ['text' => $userText, 'locale' => $locale, 'currency' => $defaultCurrency]);
         Log::debug('[ExpenseAI] prompt sent', ['prompt' => $prompt]);
@@ -47,8 +49,10 @@ class ExpenseAIService
 
     /**
      * @param  list<array{id: int, name: string, color: string}>  $tags
+     * @param  list<array{original_description: string, corrected_description: string, corrected_category_key: string}>  $userCorrections
+     * @param  list<array{corrected_description: string, corrected_category_key: string}>  $globalCorrections
      */
-    public function buildPrompt(string $userText, string $locale, string $defaultCurrency, array $tags = []): string
+    public function buildPrompt(string $userText, string $locale, string $defaultCurrency, array $tags = [], array $userCorrections = [], array $globalCorrections = []): string
     {
         $promptPath = resource_path("prompts/expense_parse/{$locale}.txt");
 
@@ -58,7 +62,7 @@ class ExpenseAIService
 
         $template = file_get_contents($promptPath);
 
-        return str_replace(
+        $prompt = str_replace(
             ['{user_text}', '{default_currency}', '{today_date}', '{tags}'],
             [
                 $userText,
@@ -68,6 +72,57 @@ class ExpenseAIService
             ],
             $template,
         );
+
+        $correctionLines = $this->buildCorrectionLines($userCorrections, $globalCorrections);
+
+        if ($correctionLines !== '') {
+            $prompt = str_replace(
+                'Korisnikov tekst:',
+                $correctionLines."\n\nKorisnikov tekst:",
+                $prompt,
+            );
+            // Fallback for English prompt
+            $prompt = str_replace(
+                "User's text:",
+                $correctionLines."\n\nUser's text:",
+                $prompt,
+            );
+        }
+
+        return $prompt;
+    }
+
+    /**
+     * @param  list<array{original_description: string, corrected_description: string, corrected_category_key: string}>  $userCorrections
+     * @param  list<array{corrected_description: string, corrected_category_key: string}>  $globalCorrections
+     */
+    private function buildCorrectionLines(array $userCorrections, array $globalCorrections): string
+    {
+        $lines = [];
+
+        foreach ($globalCorrections as $c) {
+            $lines[] = sprintf(
+                '- "%s" → description: "%s", category: %s',
+                $c['corrected_description'],
+                $c['corrected_description'],
+                $c['corrected_category_key'],
+            );
+        }
+
+        foreach ($userCorrections as $c) {
+            $lines[] = sprintf(
+                '- "%s" → description: "%s", category: %s',
+                $c['original_description'],
+                $c['corrected_description'],
+                $c['corrected_category_key'],
+            );
+        }
+
+        if (empty($lines)) {
+            return '';
+        }
+
+        return "Naučene korekcije (primijeni isti ispravak na sličan tekst):\n".implode("\n", $lines);
     }
 
     /**

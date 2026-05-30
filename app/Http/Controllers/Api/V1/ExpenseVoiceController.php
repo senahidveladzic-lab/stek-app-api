@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\VoiceExpenseRequest;
 use App\Services\ExpenseAIService;
 use App\Services\HouseholdAiUsageService;
+use App\Services\VoiceCorrectionService;
 use App\Services\WhisperService;
 use Illuminate\Http\JsonResponse;
 
@@ -18,6 +19,7 @@ class ExpenseVoiceController extends Controller
         ExpenseAIService $aiService,
         WhisperService $whisperService,
         HouseholdAiUsageService $householdAiUsageService,
+        VoiceCorrectionService $correctionService,
     ): JsonResponse {
         try {
             $householdAiUsageService->consume($request->user());
@@ -39,14 +41,19 @@ class ExpenseVoiceController extends Controller
                 ->values()
                 ->all() ?? [];
 
+            $userCorrections = $correctionService->userExamples($user->id);
+            $globalCorrections = $correctionService->globalExamples();
+
             $parsed = $aiService->parse(
                 $text,
                 app()->getLocale(),
                 $household->default_currency ?? $user->default_currency,
                 $tags,
+                $userCorrections,
+                $globalCorrections,
             );
 
-            $parsed['description'] = $text;
+            $parsed['whisper_transcript'] = $text;
 
             return response()->json(['data' => $parsed]);
         } catch (ExpenseParseException) {

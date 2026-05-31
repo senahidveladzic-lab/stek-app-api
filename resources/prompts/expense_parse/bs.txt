@@ -6,7 +6,7 @@ Dostupne kategorije i šta spada u svaku:
 - transport: gorivo, benzin, dizel, bus, tramvaj, taksi, Bolt, parking, autoput, vozačka dozvola, servis auta
 - entertainment: kino, koncert, sport, igrice, Netflix, streaming, izlasci, noćni klub, lunapark
 - bills: struja, voda, internet, telefon, stanarina, kirija, komunalije, rata, Eronet, BH Telecom, Telemach, m:tel, Elektroprivreda, EPBiH, ERS, ViK, Sarajevogas, osiguranje imovine
-- shopping: odjeća, obuća, elektronika, pokloni, kućanski aparati, kozmetika, parfem, nakit, torbe, igračke
+- shopping: odjeća, obuća, elektronika, pokloni, kućanski aparati, kozmetika, parfem, nakit, torbe, igračke, DM, Drogerie Markt
 - health: ljekarna, ljekovi, doktor, stomatolog, ordinacija, bolnica, pregled, optičar, teretana, fitness
 - education: knjige, udžbenici, kursevi, školarina, obuke, online kursevi, materijali za učenje, škola
 - cafe: kafa, čaj, sok, kolači, kafić, espresso, cappuccino
@@ -36,7 +36,7 @@ Pravila:
 - Ako tekst počinje brojem praćenim nazivom predmeta bez glagola (npr. "63 žvake", "dvadeset gorivo"), taj broj je iznos, ne količina.
 - Uobičajeni obrasci govora: "dao/dala sam X za Y", "platio/platila X za Y", "potrošio/potrošila X u Y", "otišao/otišla u Y, platilo X" — sve su valjane forme navođenja troška.
 - Nazivi prodavnica mogu biti u lokativu/genitivu: "Konzumu" = Konzum, "Binga" = Bingo, "Mercatora" = Mercator, "Lidla" = Lidl, "Studencu" = Studenac.
-- Ako ne možeš prepoznati iznos, postavi amount na 0
+- Postavi amount na 0 SAMO ako iznos nije uopće izgovoren u tekstu (korisnik nije rekao nikakav broj). Ako je bilo koji broj prisutan u tekstu, to je iznos — nikada ne vraćaj 0 kada je broj izgovoren.
 - Kategorija "other" ako nijedna druga ne odgovara
 - Za "tag_id" odaberi najbolji odgovarajući id iz dostupnih tagova domaćinstva. Ako nijedan tag jasno ne odgovara, koristi null.
 - "description" je naslov koji korisnik vidi u aplikaciji. Ne kopiraj doslovno neuredan govor-u-tekst zapis.
@@ -71,5 +71,6 @@ Primjeri (uključuju različite načine govora):
 - "bolt taksi deset" → amount: 10.00, category: transport, description: "Bolt taksi"
 - "pola marake žvake" → amount: 0.50, category: groceries, description: "Žvake"
 - "dva i po kafe" → amount: 2.50, category: cafe, description: "Kafa"
+- "šminka deset maraka iz DM-a" → amount: 10.00, category: shopping, description: "Šminka iz DM-a"
 
 Korisnikov tekst: "{user_text}"

@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Laravel\Paddle\Subscription;
 
@@ -113,4 +114,46 @@ test('monthly ai usage resets when a new month starts', function () {
 
     expect($household->ai_reports_used)->toBe(1)
         ->and($household->ai_reports_month?->toDateString())->toBe(now()->startOfMonth()->toDateString());
+});
+
+test('expired trial api users get two voice parses per day before a generic daily limit message', function () {
+    Cache::flush();
+
+    Http::fake([
+        'api.openai.com/v1/chat/*' => Http::response([
+            'choices' => [[
+                'message' => [
+                    'content' => json_encode([
+                        'amount' => 3,
+                        'currency' => 'BAM',
+                        'category_key' => 'cafe',
+                        'description' => 'Kafa',
+                        'date' => '2026-03-06',
+                    ]),
+                ],
+            ]],
+        ]),
+    ]);
+
+    $user = User::factory()
+        ->withExpiredTrial()
+        ->withHousehold()
+        ->create();
+
+    $this->actingAs($user)
+        ->postJson('/api/v1/expenses/voice', ['text' => 'kafa 3 marke'])
+        ->assertOk()
+        ->assertJsonPath('data.category_key', 'cafe');
+
+    $this->actingAs($user)
+        ->postJson('/api/v1/expenses/voice', ['text' => 'kafa 3 marke'])
+        ->assertOk()
+        ->assertJsonPath('data.category_key', 'cafe');
+
+    $this->actingAs($user)
+        ->postJson('/api/v1/expenses/voice', ['text' => 'kafa 3 marke'])
+        ->assertStatus(429)
+        ->assertJsonPath('message', __('errors.daily_voice_limit_reached'));
+
+    Http::assertSentCount(2);
 });

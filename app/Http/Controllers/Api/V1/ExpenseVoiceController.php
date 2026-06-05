@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Exceptions\AiUsageLimitExceededException;
+use App\Exceptions\DailyVoiceLimitExceededException;
 use App\Exceptions\ExpenseParseException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VoiceExpenseRequest;
 use App\Services\ExpenseAIService;
 use App\Services\HouseholdAiUsageService;
+use App\Services\MobileVoiceUsageService;
 use App\Services\VoiceCorrectionService;
 use App\Services\WhisperService;
 use Illuminate\Http\JsonResponse;
@@ -19,16 +21,22 @@ class ExpenseVoiceController extends Controller
         ExpenseAIService $aiService,
         WhisperService $whisperService,
         HouseholdAiUsageService $householdAiUsageService,
+        MobileVoiceUsageService $mobileVoiceUsageService,
         VoiceCorrectionService $correctionService,
     ): JsonResponse {
         try {
-            $householdAiUsageService->consume($request->user());
+            $user = $request->user();
+
+            if ($user->hasBillingAccess()) {
+                $householdAiUsageService->consume($user);
+            } else {
+                $mobileVoiceUsageService->consume($user);
+            }
 
             $text = $request->hasFile('audio')
                 ? $whisperService->transcribe($request->file('audio'), app()->getLocale())
                 : $request->validated('text');
 
-            $user = $request->user();
             $household = $user->household;
             $tags = $household?->tags()
                 ->orderBy('name')
@@ -63,6 +71,10 @@ class ExpenseVoiceController extends Controller
         } catch (AiUsageLimitExceededException) {
             return response()->json([
                 'message' => __('errors.ai_usage_limit_reached'),
+            ], 429);
+        } catch (DailyVoiceLimitExceededException) {
+            return response()->json([
+                'message' => __('errors.daily_voice_limit_reached'),
             ], 429);
         }
     }

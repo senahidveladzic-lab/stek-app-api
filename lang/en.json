@@ -254,6 +254,7 @@
     "budget.category_over": ":amount over budget",
     "errors.ai_parse_failed": "Could not parse expense from text. Try again or enter manually.",
     "errors.ai_usage_limit_reached": "AI expense parsing is temporarily unavailable for this account due to current usage limits. Please try again later.",
+    "errors.daily_voice_limit_reached": "Daily voice limit reached. Try again tomorrow.",
     "errors.generic": "An error occurred. Please try again.",
     "errors.unauthorized": "You do not have access to this resource.",
     "landing.nav.features": "Features",

@@ -124,6 +124,27 @@ it('supports page based navigation', function () {
     expect($second->json('meta.current_page'))->toBe(2);
 });
 
+it('allows expired trial mobile users to save expenses', function () {
+    $user = User::factory()->withHousehold()->withExpiredTrial()->create();
+
+    Sanctum::actingAs($user);
+
+    $this->postJson('/api/v1/expenses', [
+        'amount' => 12.5,
+        'category_id' => $this->category->id,
+        'expense_date' => '2026-06-05',
+        'currency' => 'BAM',
+        'description' => 'Lunch',
+    ])->assertCreated();
+
+    $this->assertDatabaseHas('expenses', [
+        'user_id' => $user->id,
+        'household_id' => $user->household_id,
+        'category_id' => $this->category->id,
+        'description' => 'Lunch',
+    ]);
+});
+
 it('requires authentication', function () {
     $this->getJson('/api/v1/expenses')->assertUnauthorized();
 });

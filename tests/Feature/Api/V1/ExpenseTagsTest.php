@@ -30,7 +30,9 @@ it('saves a tag association when creating an expense', function () {
     ])->assertCreated();
 
     $response->assertJsonPath('data.tag.id', $this->tag->id)
-        ->assertJsonPath('data.tag.name', 'Family');
+        ->assertJsonPath('data.tag.name', 'Family')
+        ->assertJsonPath('data.user.id', $this->user->id)
+        ->assertJsonPath('data.user.name', $this->user->name);
 
     $this->assertDatabaseHas('expense_tag', [
         'expense_id' => $response->json('data.id'),
@@ -50,7 +52,9 @@ it('updates and clears an expense tag association', function () {
     $this->patchJson("/api/v1/expenses/{$expense->id}", [
         'tag_id' => $this->tag->id,
     ])->assertSuccessful()
-        ->assertJsonPath('data.tag.id', $this->tag->id);
+        ->assertJsonPath('data.tag.id', $this->tag->id)
+        ->assertJsonPath('data.user.id', $this->user->id)
+        ->assertJsonPath('data.user.name', $this->user->name);
 
     $this->patchJson("/api/v1/expenses/{$expense->id}", [
         'tag_id' => null,

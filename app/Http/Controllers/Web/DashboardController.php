@@ -74,7 +74,12 @@ class DashboardController extends Controller
             ->select('users.id as user_id', 'users.name as user_name', DB::raw('SUM(expenses.amount) as total'))
             ->groupBy('users.id', 'users.name')
             ->orderByDesc('total')
-            ->get();
+            ->get()
+            ->map(fn ($member) => [
+                'user_id' => (int) $member->user_id,
+                'user_name' => $member->user_name,
+                'total' => (float) $member->total,
+            ]);
 
         $recentExpenses = Expense::query()
             ->forHousehold($householdId)

@@ -254,6 +254,7 @@
     "budget.category_over": ":amount preko budžeta",
     "errors.ai_parse_failed": "Nije moguće prepoznati trošak iz teksta. Pokušajte ponovo ili unesite ručno.",
     "errors.ai_usage_limit_reached": "AI parsiranje troškova je privremeno nedostupno za ovaj račun zbog trenutnih ograničenja korištenja. Pokušajte ponovo kasnije.",
+    "errors.daily_voice_limit_reached": "Dnevni limit za glasovni unos je dostignut. Pokušajte ponovo sutra.",
     "errors.generic": "Došlo je do greške. Pokušajte ponovo.",
     "errors.unauthorized": "Nemate pristup ovom resursu.",
     "landing.nav.features": "Funkcije",

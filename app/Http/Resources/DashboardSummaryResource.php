@@ -18,6 +18,7 @@ class DashboardSummaryResource extends JsonResource
             'daily_average' => $this->resource['daily_average'],
             'previous_month_total' => $this->resource['previous_month_total'],
             'previous_month_same_period_total' => $this->resource['previous_month_same_period_total'],
+            'currency' => $this->resource['currency'],
             'by_category' => $this->resource['by_category'],
             'member_spending' => $this->resource['member_spending'],
             'recent_expenses' => ExpenseResource::collection($this->resource['recent_expenses']),

@@ -20,6 +20,7 @@ class DashboardController extends Controller
     {
         $user = $request->user();
         $householdId = $user->household_id;
+        $currency = $user->household->default_currency ?? $user->default_currency;
         $now = Carbon::now();
         $startOfMonth = $now->copy()->startOfMonth()->format('Y-m-d');
         $endOfMonth = $now->copy()->endOfMonth()->format('Y-m-d');
@@ -77,11 +78,16 @@ class DashboardController extends Controller
             ->select('users.id as user_id', 'users.name as user_name', DB::raw('SUM(expenses.amount) as total'))
             ->groupBy('users.id', 'users.name')
             ->orderByDesc('total')
-            ->get();
+            ->get()
+            ->map(fn ($member) => [
+                'user_id' => (int) $member->user_id,
+                'user_name' => (string) $member->user_name,
+                'total' => (float) $member->total,
+            ]);
 
         $recentExpenses = Expense::query()
             ->forHousehold($householdId)
-            ->with(['category', 'user:id,name'])
+            ->with(['category', 'tags', 'user:id,name'])
             ->orderByDesc('expense_date')
             ->orderByDesc('created_at')
             ->limit(10)
@@ -129,6 +135,7 @@ class DashboardController extends Controller
             'daily_average' => $dailyAverage,
             'previous_month_total' => $previousMonthTotal,
             'previous_month_same_period_total' => $previousMonthSamePeriodTotal,
+            'currency' => $currency,
             'by_category' => $byCategory,
             'member_spending' => $memberSpending,
             'recent_expenses' => $recentExpenses,

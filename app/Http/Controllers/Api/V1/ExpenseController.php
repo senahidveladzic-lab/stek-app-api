@@ -70,7 +70,7 @@ class ExpenseController extends Controller
 
         $expense = $user->expenses()->create($data);
         $expense->tags()->sync($tagId ? [$tagId] : []);
-        $expense->load(['category', 'tags']);
+        $expense->load(['category', 'tags', 'user:id,name']);
 
         if ($voiceCorrection && isset($voiceCorrection['original_description'])) {
             $savedCategoryKey = Category::find($validated['category_id'])?->name ?? '';
@@ -133,7 +133,7 @@ class ExpenseController extends Controller
             $expense->tags()->sync($tagId ? [$tagId] : []);
         }
 
-        $expense->load(['category', 'tags']);
+        $expense->load(['category', 'tags', 'user:id,name']);
 
         return new ExpenseResource($expense);
     }

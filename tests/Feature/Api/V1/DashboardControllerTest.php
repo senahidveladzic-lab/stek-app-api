@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Household;
+use App\Models\Category;
+use App\Models\Expense;
 use App\Models\User;
 use Carbon\Carbon;
 use Laravel\Sanctum\Sanctum;
@@ -63,6 +65,17 @@ it('returns null ai_usage for users with internal access', function () {
     expect($response->json('data.ai_usage'))->toBeNull();
 });
 
+it('returns the household currency in the summary', function () {
+    $user = User::factory()->withHousehold()->withInternalAccess()->create();
+    Household::query()->find($user->household_id)->update(['default_currency' => 'EUR']);
+
+    Sanctum::actingAs($user);
+
+    $this->getJson('/api/v1/dashboard/summary')
+        ->assertSuccessful()
+        ->assertJsonPath('data.currency', 'EUR');
+});
+
 it('remaining is never negative', function () {
     $user = User::factory()->withHousehold()->onTrial()->create();
 
@@ -79,4 +92,41 @@ it('remaining is never negative', function () {
     $response = $this->getJson('/api/v1/dashboard/summary')->assertSuccessful();
 
     expect($response->json('data.ai_usage.remaining'))->toBeGreaterThanOrEqual(0);
+});
+
+it('returns numeric member spending totals for multi-member households', function () {
+    $owner = User::factory()->withHousehold()->onTrial()->create();
+    $member = User::factory()->onTrial()->create([
+        'household_id' => $owner->household_id,
+    ]);
+    $category = Category::factory()->create();
+
+    Expense::factory()->create([
+        'user_id' => $owner->id,
+        'household_id' => $owner->household_id,
+        'category_id' => $category->id,
+        'amount' => '10.50',
+        'expense_date' => now()->toDateString(),
+    ]);
+
+    Expense::factory()->create([
+        'user_id' => $member->id,
+        'household_id' => $owner->household_id,
+        'category_id' => $category->id,
+        'amount' => '7.25',
+        'expense_date' => now()->toDateString(),
+    ]);
+
+    Sanctum::actingAs($owner);
+
+    $response = $this->getJson('/api/v1/dashboard/summary')->assertSuccessful();
+    $memberSpending = $response->json('data.member_spending');
+
+    expect($memberSpending)->toHaveCount(2);
+
+    foreach ($memberSpending as $memberTotal) {
+        expect($memberTotal['user_id'])->toBeInt()
+            ->and($memberTotal['user_name'])->toBeString()
+            ->and($memberTotal['total'])->toBeFloat();
+    }
 });

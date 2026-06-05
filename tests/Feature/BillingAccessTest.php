@@ -57,12 +57,12 @@ test('users with internal access can use subscribed routes', function () {
         ->assertOk();
 });
 
-test('unsubscribed api requests receive a payment required response', function () {
-    $user = User::factory()->withHousehold()->create();
+test('expired trial api requests remain available for the companion mobile app', function () {
+    $user = User::factory()->withHousehold()->withExpiredTrial()->create();
 
     $this->actingAs($user)
         ->getJson('/api/v1/expenses')
-        ->assertStatus(402);
+        ->assertOk();
 });
 
 test('billing page includes ai_usage for regular users', function () {
